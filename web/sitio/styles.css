@@ -347,3 +347,11 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 #about-dialog .dialog-content{padding-bottom:70px}
 #about-dialog .titular{font-size:clamp(22px,2.5vw,34px)}
 .site-header .lema{top:36px;font-weight:800;font-size:clamp(13px,1.2vw,17px)}
+/* Ventanas en gris claro; sin cinta roja; lista de productos en una sola tipografía */
+.text-dialog{--paper:#e9e8e4;background:#e9e8e4;color:#1d1d1d;--ink:#1d1d1d;--muted:#55534e;--line:#cfcdc7;--red:#9A0015;--rojo:#9A0015;border-color:#d6d4cf}
+.text-dialog .antetitulo,.text-dialog .close{color:#9A0015}
+.text-dialog input,.text-dialog textarea{color:#1d1d1d;border-color:#9a988f}
+.text-dialog .promise,.text-dialog .servicios-pie,.text-dialog .text-link{color:#9A0015!important}
+.marq{display:none!important}
+.services dt,.services>div:nth-child(3n+2) dt{font-style:normal!important;font-weight:400!important}
+.titular em{background:#9A0015;color:#fff!important}

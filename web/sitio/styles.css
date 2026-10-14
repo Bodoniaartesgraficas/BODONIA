@@ -127,10 +127,12 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 
 /* Pantalla de carga */
 #loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--paper);transition:opacity .6s ease,visibility .6s}
-#loader img{width:min(420px,70vw);height:auto;animation:loader-in .9s var(--ease) both}
+.loader-logo{font:400 min(13vw,130px)/1 var(--serif);animation:loader-in .6s var(--ease) both}
+#loader .pieza{animation:levanta 1.1s ease-in-out infinite;animation-delay:calc(var(--i) * .12s)}
 #loader.hecho{opacity:0;visibility:hidden}
+@keyframes levanta{0%,60%,100%{translate:0 0}25%{translate:0 -.22em}}
 @keyframes loader-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){#loader img{animation:none}#loader{transition:none}}
+@media(prefers-reduced-motion:reduce){.loader-logo,#loader .pieza{animation:none}#loader{transition:none}}
 
 /* Qué hacemos: lista de productos a dos columnas */
 .services{display:grid;grid-template-columns:1fr 1fr;column-gap:32px;row-gap:2px;margin:24px 0 0}

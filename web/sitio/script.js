@@ -205,7 +205,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   if (!loader) return;
   const firstImgs = [...document.querySelectorAll('#proyectos .gallery img.cover')].slice(0, 3);
   const ready = Promise.all(firstImgs.map(i => i.complete ? 0 : new Promise(r => { i.addEventListener('load', r); i.addEventListener('error', r); })));
-  const minimum = new Promise(r => setTimeout(r, reducedMotion.matches ? 300 : 1400));
+  const minimum = new Promise(r => setTimeout(r, reducedMotion.matches ? 300 : 2000));
   Promise.race([Promise.all([ready, minimum]), new Promise(r => setTimeout(r, 6000))]).then(() => {
     loader.classList.add('hecho');
     setTimeout(() => loader.remove(), 700);

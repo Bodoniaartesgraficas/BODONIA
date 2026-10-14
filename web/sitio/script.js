@@ -179,38 +179,7 @@ document.querySelectorAll('dialog').forEach(dialog=>{
     if(e.target === dialog && (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom)) dialog.close();
   });
 });
-// Al pasar el ratón: el trabajo se ensancha, los de al lado se oscurecen y dentro pasan sus escenas en una ventanita.
 const puedeHover = window.matchMedia('(hover:hover) and (pointer:fine)');
-projects.forEach(project => {
-  const escenas = JSON.parse(project.dataset.escenas).slice(1);
-  if (!escenas.length) return;
-  const caja = document.createElement('span'); caja.className = 'carrusel'; caja.setAttribute('aria-hidden', 'true');
-  project.querySelector('.project-image').appendChild(caja);
-  let timer = 0, k = 0;
-  // Cada escena cae encima de la anterior como una postal, con un giro y un desplazamiento distintos.
-  function postal() {
-    const p = document.createElement('span'); p.className = 'postal';
-    p.style.setProperty('--r', (Math.random() * 14 - 7).toFixed(1) + 'deg');
-    p.style.setProperty('--x', (Math.random() * 16 - 8).toFixed(0) + '%');
-    p.style.setProperty('--y', (Math.random() * 10 - 5).toFixed(0) + '%');
-    const img = document.createElement('img'); img.alt = ''; img.draggable = false; img.src = escenas[k];
-    p.appendChild(img); caja.appendChild(p);
-    k++;
-    if (k >= escenas.length) clearInterval(timer);
-  }
-  project.addEventListener('pointerenter', e => {
-    if (e.pointerType !== 'mouse' || !puedeHover.matches || document.querySelector('.gallery.dragging')) return;
-    project.classList.add('activo'); project.parentElement.classList.add('con-activo');
-    caja.style.setProperty('--cw', caja.offsetWidth + 'px');
-    k = 0; caja.textContent = ''; postal();
-    clearInterval(timer);
-    if (escenas.length > 1 && !reducedMotion.matches) timer = setInterval(postal, 650);
-    else if (reducedMotion.matches) while (k < escenas.length) postal();
-  });
-  project.addEventListener('pointerleave', () => {
-    clearInterval(timer); project.classList.remove('activo'); project.parentElement.classList.remove('con-activo');
-  });
-});
 
 // Puntero con la B de Bodonia sobre las fotos: sigue al ratón con un poco de retraso y se inclina al moverse.
 (function () {

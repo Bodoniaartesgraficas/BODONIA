@@ -15,6 +15,8 @@ C.servicios.lista.forEach(s => {
   const row = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd');
   dt.textContent = s.nombre; row.append(dt); if (s.detalle) { dd.textContent = s.detalle; row.append(dd); } servicesList.appendChild(row);
 });
+const piePalabras = document.querySelector('#pie-palabras');
+if (piePalabras && C.pie) C.pie.palabras.forEach(t => { const li = document.createElement('li'); li.textContent = t; piePalabras.appendChild(li); });
 const filasEl = document.querySelector('#filas');
 const galleries = [];
 const projects = [];

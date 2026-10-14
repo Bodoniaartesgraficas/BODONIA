@@ -300,3 +300,15 @@ html:not(.pagina) body::before{content:"";position:fixed;left:0;right:0;top:0;he
 .intro .logo>span[aria-hidden]:last-child{color:#d8344a!important}
 /* Botones El taller / Qué hacemos / Hablemos en Bodoni */
 .site-header nav button{font-family:var(--serif)!important;font-size:15px!important;letter-spacing:0;font-weight:400}
+
+/* Diseño, maquetación e impresión: lema bajo el logo, antetítulos y franja final */
+.intro .lema{margin:6px 0 0;font:500 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#f4f2ee;opacity:.85}
+.antetitulo{margin:0 0 14px;font:500 11px/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:#9A0015}
+.pie-imprenta{color:#f4f2ee;padding:96px var(--gutter) 72px;display:grid;gap:22px;max-width:1100px}
+.pie-palabras{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-wrap:wrap;gap:0 .5em;font:italic 400 clamp(40px,7vw,104px)/1 var(--serif);color:#f4f2ee}
+.pie-palabras li:not(:last-child)::after{content:" ·";color:#c8243a}
+.pie-palabras li:last-child{color:#c8243a}
+.pie-imprenta .titular{color:#f4f2ee;margin:0}
+.pie-imprenta .titular em{display:inline;color:#c8243a}
+.pie-imprenta p{margin:0;max-width:40em;font:400 clamp(17px,1.6vw,20px)/1.6 var(--serif);color:#cfcac2}
+@media(max-width:600px){.intro .lema{font-size:9px;letter-spacing:.1em}.pie-imprenta{padding:64px var(--gutter) 110px}}

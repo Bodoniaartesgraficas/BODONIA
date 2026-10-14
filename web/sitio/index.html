@@ -19,7 +19,7 @@
 <body>
 <div id="loader" role="status" aria-label="Cargando"><div class="loader-logo" aria-hidden="true"><span aria-hidden="true" style="display: flex; align-items: flex-start; gap: .035em; line-height: 1; padding-left: 0">
 <span class="pieza" style="--i:0;transform: rotate(-2deg) translateY(0.000em)"><span class="cara"><span class="let">B</span></span><span class="pie">b</span></span><span class="pieza" style="--i:1;transform: rotate(1deg) translateY(0.063em)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="--i:2;transform: rotate(-1deg) translateY(0.114em)"><span class="cara"><span class="let">D</span></span><span class="pie">d</span></span><span class="pieza" style="--i:3;transform: rotate(2deg) translateY(0.190em)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="--i:4;transform: rotate(-1deg) translateY(0.241em)"><span class="cara"><span class="let">N</span></span><span class="pie">n</span></span><span class="pieza" style="--i:5;transform: rotate(1deg) translateY(0.316em)"><span class="cara"><span class="let">I</span></span><span class="pie">i</span></span><span class="pieza" style="--i:6;margin-left: .06em; transform: rotate(-24deg) translateY(.42em)"><span class="cara"><span class="let" style="transform: rotate(-90deg)">a</span></span><span class="pie">A</span></span>
-</span></div><div class="loader-pie" aria-hidden="true"><span>Diseño · Maquetación · Impresión</span><span class="loader-cuenta">000</span></div><div class="loader-barra" aria-hidden="true"></div></div>
+</span></div><div class="loader-pie" aria-hidden="true"><span>Imprenta · Diseño · Maquetación · Impresión</span><span class="loader-cuenta">000</span></div><div class="loader-barra" aria-hidden="true"></div></div>
 <!--
   La estructura de la página está aquí; los textos y las fotos se cambian en contenido.js.
 -->
@@ -38,14 +38,20 @@
 <span class="pieza" style="transform: rotate(-2deg) translateY(0.000em)"><span class="cara"><span class="let">B</span></span><span class="pie">b</span></span><span class="pieza" style="transform: rotate(1deg) translateY(0.063em)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="transform: rotate(-1deg) translateY(0.114em)"><span class="cara"><span class="let">D</span></span><span class="pie">d</span></span><span class="pieza" style="transform: rotate(2deg) translateY(0.190em)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="transform: rotate(-1deg) translateY(0.241em)"><span class="cara"><span class="let">N</span></span><span class="pie">n</span></span><span class="pieza" style="transform: rotate(1deg) translateY(0.316em)"><span class="cara"><span class="let">I</span></span><span class="pie">i</span></span><span class="pieza" style="margin-left: .06em; transform: rotate(-24deg) translateY(.42em)"><span class="cara"><span class="let" style="transform: rotate(-90deg)">a</span></span><span class="pie">A</span></span>
 </span>
 <span aria-hidden="true" style="display: inline-block; font-size: .406em; font-weight: 900; line-height: 1; letter-spacing: .04em; color: #9A0015; transform: scaleX(1.16); transform-origin: left center; width: max-content">artes gráficas<span style="font-weight: 400; letter-spacing: 0">, s. l.</span></span>
-</h1></a></section>
+</h1></a><p class="lema" data-texto="pagina.lema"></p></section>
   <div id="filas"></div>
+  <footer class="pie-imprenta">
+    <ul class="pie-palabras" id="pie-palabras" aria-hidden="true"></ul>
+    <h2 class="titular"><span data-texto="pie.titulo"></span> <em data-texto="pie.subtitulo"></em></h2>
+    <p data-texto="pie.texto"></p>
+  </footer>
   <img id="cursor-b" src="fotos/cursor-b.png" alt="" aria-hidden="true" width="52" height="80">
 </main>
 
 <dialog id="about-dialog" class="text-dialog" aria-labelledby="about-dialog-title">
   <button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
   <div class="dialog-content">
+    <p class="antetitulo" data-texto="taller.antetitulo"></p>
     <h2 id="about-dialog-title" class="titular"><span data-texto="taller.titulo"></span> <em data-texto="taller.subtitulo"></em></h2>
     <p data-texto="taller.texto"></p>
     <p class="promise" data-texto="taller.frase"></p>
@@ -56,6 +62,7 @@
 <dialog id="services-dialog" class="text-dialog" aria-labelledby="services-dialog-title">
   <button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
   <div class="dialog-content">
+    <p class="antetitulo" data-texto="servicios.antetitulo"></p>
     <h2 id="services-dialog-title" class="titular"><span data-texto="servicios.titulo"></span> <em data-texto="servicios.subtitulo"></em></h2>
     <dl class="services" id="services-list"></dl>
     <p class="servicios-pie" data-texto="servicios.pie"></p>
@@ -65,6 +72,7 @@
 <dialog id="contact-dialog" class="text-dialog" aria-labelledby="contact-dialog-title">
   <button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
   <div class="dialog-content">
+    <p class="antetitulo" data-texto="contacto.antetitulo"></p>
     <h2 id="contact-dialog-title" data-texto="contacto.titulo"></h2>
     <div class="contact-grid">
       <div class="contact-details">

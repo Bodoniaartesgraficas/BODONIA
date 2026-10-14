@@ -16,6 +16,15 @@ window.CONTENIDO = {
   // Pestaña del navegador y resultados de Google
   pagina: {
     titulo: "Bodonia Artes Gráficas · Imprenta en La Zubia, Granada",
+    lema: "Imprenta · Diseño, maquetación e impresión",
+  },
+
+  // Franja final de la página, debajo de las fotos
+  pie: {
+    titulo: "Somos imprenta.",
+    subtitulo: "Diseñamos, maquetamos e imprimimos.",
+    texto: "Más de 35 años en La Zubia, Granada, llevando cada trabajo del archivo al papel: diseño, maquetación e impresión en offset y digital, en el mismo taller.",
+    palabras: ["Diseño", "Maquetación", "Impresión"],
   },
 
   // Botones de arriba a la derecha
@@ -27,6 +36,7 @@ window.CONTENIDO = {
 
   // Ventana «El taller»
   taller: {
+    antetitulo: "Imprenta en Granada desde hace más de 35 años",
     titulo: "Tú traes la idea.",
     subtitulo: "Nosotros, más de 35 años de imprenta.",
     texto: "Bodonia Artes Gráficas es un taller de Granada al que se puede venir con un archivo terminado o con solo una intención. Te ayudamos a elegir formato, papel y acabado, lo diseñamos y maquetamos, y lo imprimimos en offset o en digital según lo que pida el trabajo.",
@@ -36,6 +46,7 @@ window.CONTENIDO = {
 
   // Ventana «Qué hacemos»: un producto por línea: { nombre }
   servicios: {
+    antetitulo: "Diseño · Maquetación · Impresión",
     titulo: "Todo lo que",
     subtitulo: "diseñamos e imprimimos.",
     lista: [
@@ -60,6 +71,7 @@ window.CONTENIDO = {
 
   // Ventana «Hablemos»
   contacto: {
+    antetitulo: "Te ayudamos a diseñarlo, maquetarlo e imprimirlo",
     titulo: "Hablemos de tu proyecto.",
     correo: "info@bodonia.es",
     telefono: "648 82 32 50",

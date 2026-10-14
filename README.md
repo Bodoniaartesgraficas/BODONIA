@@ -10,7 +10,17 @@ La empresa está en pleno lavado de cara: con una nueva persona al cargo, se ren
 | --- | --- | --- |
 | [`web/`](web/) | Página web y landing | Pendiente de cargar material |
 | [`redes-sociales/`](redes-sociales/) | Redes sociales: plantillas, patrones y publicaciones | Pendiente de cargar material |
+| [`maquetacion/`](maquetacion/) | Archivos de trabajos para maquetar y sus versiones maquetadas | Abierto |
 | [`futuros-proyectos/`](futuros-proyectos/) | Ideas y proyectos que vengan más adelante (p. ej. automatizaciones) | Abierto |
+
+## Uso
+
+Este repositorio lo gestiona una sola persona, la responsable de la renovación de Bodonia.
+
+- **Web**: una web sencilla. Tras crearla tendrá poco movimiento, solo actualizaciones puntuales.
+- **Redes sociales**: el uso diario. Aquí se va creando contenido poco a poco para publicar.
+- **Maquetación**: se suben los archivos de trabajos que hay que maquetar, para aligerar el trabajo de la imprenta.
+- **Resto**: tareas sencillas y puntuales.
 
 ## Cómo se organiza
 

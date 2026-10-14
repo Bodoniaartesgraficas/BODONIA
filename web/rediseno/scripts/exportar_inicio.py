@@ -1,4 +1,4 @@
-"""Exporta el tablero Inicio (Main.dc.html) a una web estática para Netlify en web/sitio/.
+"""Exporta el tablero Inicio (Main.dc.html) a una web estática para Netlify en web/sitio-inicio/ (alternativa; la web elegida es daigual).
 
 Uso: python3 web/rediseno/scripts/exportar_inicio.py <raíz del repo> <vídeo de Territorios de la mirada>
 El vídeo es el asset 053a625835bd636e747914353249fd24 del artifact del rediseño (1,8 MB)."""
@@ -10,7 +10,7 @@ from fontTools.ttLib import TTFont
 REPO = Path(sys.argv[1])
 VIDEO_TERRITORIOS = Path(sys.argv[2])
 SRC = REPO / "web/rediseno/web-canvas/project/Main.dc.html"
-OUT = REPO / "web/sitio"
+OUT = REPO / "web/sitio-inicio"  # la web publicada es daigual (web/sitio/)
 A = REPO / "web/rediseno/assets"
 FONTS = REPO / "redes-sociales/instagram/POST BANQUILLO/Fuente_Bodoni_Moda"
 

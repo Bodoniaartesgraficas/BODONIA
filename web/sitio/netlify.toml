@@ -1,7 +1,7 @@
 [build]
   publish = "."
 
-# bodonia.netlify.app y www.bodonia.es redirigen a https://bodonia.es
+# www.bodonia.es redirige a https://bodonia.es
 [[redirects]]
   from = "https://www.bodonia.es/*"
   to = "https://bodonia.es/:splat"
@@ -21,11 +21,6 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/img/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/video/*"
+  for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"

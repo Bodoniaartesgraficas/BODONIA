@@ -198,6 +198,27 @@ projects.forEach(project => {
   });
 });
 
+// Puntero con la B de Bodonia sobre las fotos: sigue al ratón con un poco de retraso y se inclina al moverse.
+(function () {
+  const b = document.querySelector('#cursor-b');
+  if (!b || !puedeHover.matches) return;
+  let x = -200, y = -200, cx = x, cy = y, dentro = false, frame = 0;
+  function pinta() {
+    const dx = x - cx; cx += dx * .22; cy += (y - cy) * .22;
+    const giro = Math.max(-25, Math.min(25, dx * .6));
+    b.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%) rotate(${giro}deg) scale(${dentro ? 1 : .2})`;
+    frame = (Math.abs(dx) > .3 || Math.abs(y - cy) > .3 || dentro) ? requestAnimationFrame(pinta) : 0;
+  }
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    x = e.clientX; y = e.clientY;
+    const sobre = !!e.target.closest('.gallery .project-image') && !document.querySelector('dialog[open]');
+    if (sobre !== dentro) { dentro = sobre; b.classList.toggle('visible', sobre); if (sobre && cx < -100) { cx = x; cy = y; } }
+    if (!frame) frame = requestAnimationFrame(pinta);
+  }, {passive: true});
+  document.addEventListener('pointerleave', () => { dentro = false; b.classList.remove('visible'); });
+})();
+
 // Vista de un trabajo: la foto pulsada crece hasta llenar la pantalla y después aparecen sus escenas en fila.
 const track = document.querySelector('#project-track');
 let origen = null;

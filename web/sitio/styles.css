@@ -282,3 +282,10 @@ html:not(.pagina),html:not(.pagina) body{background:#0b0b0b}
 .intro{left:0!important;transform:none;padding-left:var(--gutter)!important}
 .intro .brand{filter:none}
 .intro .logo>span[aria-hidden]:last-child{text-shadow:none}
+
+/* Puntero B */
+#cursor-b{position:fixed;left:0;top:0;z-index:30;width:52px;height:auto;pointer-events:none;opacity:0;transition:opacity .25s ease;filter:drop-shadow(0 8px 14px rgb(0 0 0 / 45%));will-change:transform}
+#cursor-b.visible{opacity:1;animation:b-late 1.4s ease-in-out infinite}
+@keyframes b-late{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media(hover:hover) and (pointer:fine){.gallery .project-image,.gallery.dragging,.gallery.dragging button{cursor:none}}
+@media(hover:none),(prefers-reduced-motion:reduce){#cursor-b{display:none}}

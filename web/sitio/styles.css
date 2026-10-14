@@ -113,3 +113,14 @@ body{grid-template-rows:minmax(0,1fr)}
 :root{--card:min(calc((100vw - 2 * var(--gutter) - 2 * var(--gap))/3),calc((100dvh - 2.1 * var(--logo) - 120px)*.8))}
 }
 @media(min-width:601px) and (max-width:900px){:root{--card:min(calc((100vw - 2 * var(--gutter) - var(--gap))/2),calc((100dvh - 2.1 * var(--logo) - 120px)*.8))}}
+
+/* Dos filas: la página baja con la rueda; cada fila se recorre en horizontal */
+html:not(.pagina),html:not(.pagina) body{height:auto;overflow:visible}
+html:not(.pagina) body{display:block;min-height:100dvh}
+html:not(.pagina) main{display:block;padding-bottom:56px}
+.works{align-self:auto}
+.fila-titulo{margin:0 var(--gutter) 14px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.works+.works{margin-top:64px}
+.works .gallery{padding-bottom:4px}
+@media(min-width:601px){.site-header{position:absolute}}
+@media(max-width:600px){.site-header{position:relative}}

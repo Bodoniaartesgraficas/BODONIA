@@ -10,7 +10,7 @@ Contexto completo y pendientes: [`docs/resumenes/2026-10-14-web-rediseno-y-publi
 
 | Carpeta | Qué hay | Origen |
 | --- | --- | --- |
-| [`sitio/`](sitio/) | **Web en edición** basada en la idea de daigual: una página con galería de trabajos y ventanas de El taller, Qué hacemos y Hablemos. Textos en `contenido.js`, fotos en `fotos/`, información legal en `legal.html`. Cómo editarla: [`EDITAR.md`](EDITAR.md) | Montada a partir de `../futuros-proyectos/daigual/` |
+| [`sitio/`](sitio/) | **Web en edición** basada en la idea de daigual: una página con dos filas de trabajos (catálogos y otros trabajos) y ventanas de El taller, Qué hacemos y Hablemos. Textos en `contenido.js`, fotos en `fotos/`, información legal en `legal.html`. Cómo editarla: [`EDITAR.md`](EDITAR.md) | Montada a partir de `../futuros-proyectos/daigual/` |
 | [`rediseno/web-canvas/project/`](rediseno/web-canvas/project/) | Tableros del rediseño: Inicio, Variante loca, Copia y Retro, cada uno en escritorio y móvil, más pruebas del logo | `bodonia-artifacts.zip` |
 | [`rediseno/web-canvas/project/PLAN-PUBLICACION.md`](rediseno/web-canvas/project/PLAN-PUBLICACION.md) | Plan de publicación en 6 fases (Netlify + dominio bodonia.es de OVH) | `bodonia-artifacts.zip` |
 | [`rediseno/assets/`](rediseno/assets/) | Logos sin fondo, fotos de trabajos, calendario, sobre y fuente Bodoni Moda | `bodonia-artifacts.zip` |

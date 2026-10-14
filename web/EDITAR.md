@@ -7,7 +7,7 @@ La web está en [`sitio/`](sitio/). Es una sola página basada en la idea de dai
 | Quiero cambiar… | Archivo | Qué tocar |
 | --- | --- | --- |
 | Cualquier texto de la página (titular, presentación, El taller, Qué hacemos, contacto, botones, formulario) | [`sitio/contenido.js`](sitio/contenido.js) | El texto entre comillas de cada apartado |
-| Los trabajos de la galería: añadir, quitar, reordenar, renombrar | [`sitio/contenido.js`](sitio/contenido.js), apartado `proyectos` | Un bloque `{ ... }` por trabajo, en el orden en que salen |
+| Los trabajos de las dos filas (catálogos; otros trabajos): añadir, quitar, reordenar, renombrar | [`sitio/contenido.js`](sitio/contenido.js), apartado `filas` | Cada fila tiene `titulo` y sus `proyectos`; un bloque `{ ... }` por trabajo, en el orden en que salen |
 | Las fotos | [`sitio/fotos/proyectos/`](sitio/fotos/proyectos/) | Sube la foto y escribe su nombre en `contenido.js` |
 | El logo | [`sitio/fotos/logo-bodonia.png`](sitio/fotos/logo-bodonia.png) | Sustituye el archivo con el mismo nombre |
 | Aviso legal, condiciones, cookies y privacidad | [`sitio/legal.html`](sitio/legal.html) | El texto de cada párrafo `<p>` |

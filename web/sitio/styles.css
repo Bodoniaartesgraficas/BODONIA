@@ -124,3 +124,10 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 .works .gallery{padding-bottom:4px}
 @media(min-width:601px){.site-header{position:absolute}}
 @media(max-width:600px){.site-header{position:relative}}
+
+/* Pantalla de carga */
+#loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--paper);transition:opacity .6s ease,visibility .6s}
+#loader img{width:min(420px,70vw);height:auto;animation:loader-in .9s var(--ease) both}
+#loader.hecho{opacity:0;visibility:hidden}
+@keyframes loader-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#loader img{animation:none}#loader{transition:none}}

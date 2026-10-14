@@ -87,6 +87,7 @@ window.CONTENIDO = {
   filas: [
     {
       titulo: "Catálogos, libros y revistas",
+      velocidad: 14, // píxeles por segundo: más bajo = más lento
       proyectos: [
       {
         titulo: "¡Con lo que ha sido! La Tortajada",
@@ -157,6 +158,7 @@ window.CONTENIDO = {
     },
     {
       titulo: "Otros trabajos",
+      velocidad: 26,
       proyectos: [
       {
         titulo: "En torno a Santa Fe",

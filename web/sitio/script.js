@@ -57,7 +57,7 @@ let dragged = false;
 const projectDialog = document.querySelector('#project-dialog');
 
 // Cada fila se desplaza sola: arrastrando, con las flechas del teclado o con el gesto horizontal del trackpad.
-function initGallery(gallery) {
+function initGallery(gallery, speed) {
   const cards = [...gallery.querySelectorAll('.project')];
   let drag = null, targetScroll = 0, animation = 0, paintFrame = 0;
   const photoLayers = cards.map(p => ({card:p, image:p.querySelector('.mockup')})).filter(p => p.image);
@@ -132,10 +132,30 @@ function initGallery(gallery) {
   });
   gallery.addEventListener('pointercancel',endDrag);
   gallery.addEventListener('lostpointercapture',endDrag);
+  // Deslizamiento lento y continuo (de ida y vuelta); se detiene con el ratón encima, al arrastrar o con una ventana abierta.
+  let pos = 0, dir = 1, last = 0, hold = 0, hovering = false, focused = false;
+  gallery.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
+  gallery.addEventListener('pointerleave', () => { hovering = false; });
+  gallery.addEventListener('focusin', () => { focused = true; });
+  gallery.addEventListener('focusout', () => { focused = false; });
+  function drift(now) {
+    const dt = Math.min(now - (last || now), 50) / 1000; last = now;
+    const max = gallery.scrollWidth - gallery.clientWidth;
+    if (animation || drag || hovering || focused || document.querySelector('dialog[open]') || reducedMotion.matches || max <= 0) { pos = gallery.scrollLeft; }
+    else if (hold > 0) { hold -= dt; }
+    else {
+      if (Math.abs(gallery.scrollLeft - pos) > 1.5) pos = gallery.scrollLeft;
+      pos += dir * speed * dt;
+      if (pos >= max) { pos = max; dir = -1; hold = 1.5; } else if (pos <= 0) { pos = 0; dir = 1; hold = 1.5; }
+      gallery.scrollLeft = pos;
+    }
+    requestAnimationFrame(drift);
+  }
+  requestAnimationFrame(drift);
   schedulePhotos();
-  return { stop: stopMotion, toStart: smooth => { stopMotion(); move(-gallery.scrollLeft, smooth); } };
+  return { stop: stopMotion, toStart: smooth => { stopMotion(); move(-gallery.scrollLeft, smooth); dir = 1; hold = 1.5; } };
 }
-const controls = galleries.map(initGallery);
+const controls = galleries.map((g, i) => initGallery(g, C.filas[i].velocidad || 20));
 document.querySelector('.brand').addEventListener('click',e => {
   e.preventDefault(); controls.forEach(c => c.toStart(e.detail !== 0)); window.scrollTo({top:0, behavior: reducedMotion.matches ? 'auto' : 'smooth'});
 });
@@ -178,3 +198,16 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
     .catch(() => { status.textContent = C.formulario.error; })
     .finally(() => { button.disabled = false; });
 });
+
+// Pantalla de carga con el logo: se retira cuando la página y las primeras fotos están listas.
+(function () {
+  const loader = document.querySelector('#loader');
+  if (!loader) return;
+  const firstImgs = [...document.querySelectorAll('#proyectos .gallery img.cover')].slice(0, 3);
+  const ready = Promise.all(firstImgs.map(i => i.complete ? 0 : new Promise(r => { i.addEventListener('load', r); i.addEventListener('error', r); })));
+  const minimum = new Promise(r => setTimeout(r, reducedMotion.matches ? 300 : 1400));
+  Promise.race([Promise.all([ready, minimum]), new Promise(r => setTimeout(r, 6000))]).then(() => {
+    loader.classList.add('hecho');
+    setTimeout(() => loader.remove(), 700);
+  });
+})();

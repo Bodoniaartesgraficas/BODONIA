@@ -152,9 +152,12 @@ window.CONTENIDO = {
         detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
         completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
         escenas: [
-          "fotos/proyectos/05-pedro-zamora-en-noir-abierto-1.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-abierto-2.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-abierto-3.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg",
+          "fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg",
         ],
       },
       {

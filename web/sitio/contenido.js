@@ -155,7 +155,6 @@ window.CONTENIDO = {
           "fotos/proyectos/05-pedro-zamora-en-noir-abierto-1.jpg",
           "fotos/proyectos/05-pedro-zamora-en-noir-abierto-2.jpg",
           "fotos/proyectos/05-pedro-zamora-en-noir-abierto-3.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-abierto-4.jpg",
         ],
       },
       {

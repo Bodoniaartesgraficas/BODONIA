@@ -246,7 +246,7 @@ function abrirProyecto(project) {
   origen = project.querySelector('.cover');
   projectDialog.showModal();
   if (reducedMotion.matches) return;
-  const destino = track.querySelector('.escena');
+  const destino = track.querySelector('.escena img');
   const clon = document.createElement('img'); clon.className = 'vuelo'; clon.src = origen.src; clon.alt = '';
   projectDialog.appendChild(clon);
   projectDialog.classList.add('volando');
@@ -261,7 +261,7 @@ function cerrarProyecto() {
   if (track.scrollLeft > 10 || r.bottom < 0 || r.top > innerHeight) return projectDialog.close();
   const clon = document.createElement('img'); clon.className = 'vuelo'; clon.src = primera.querySelector('img').src; clon.alt = '';
   projectDialog.appendChild(clon); projectDialog.classList.add('volando', 'cerrando');
-  clon.animate([rectDe(primera), rectDe(origen)], {duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'})
+  clon.animate([rectDe(primera.querySelector('img')), rectDe(origen)], {duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'})
     .finished.then(() => { projectDialog.close(); projectDialog.classList.remove('volando', 'cerrando'); clon.remove(); });
 }
 projectDialog.querySelector('.close').addEventListener('click', e => { e.stopImmediatePropagation(); cerrarProyecto(); }, true);

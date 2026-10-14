@@ -378,3 +378,7 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .text-dialog .antetitulo{font-weight:500}
 #contact-dialog p,#contact-dialog label,#contact-dialog small,#contact-dialog .legal-links,#contact-dialog button,#contact-dialog .map-link{font-size:15px!important}
 #contact-dialog input,#contact-dialog textarea{font-size:17px!important}
+
+/* Logo como el original: N en espejo y la a de la última pieza tumbada */
+.pieza .cara .let.let-espejo{transform:skewX(10deg) scaleX(-1)}
+.pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg)}

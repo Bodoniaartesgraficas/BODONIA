@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Bodonia Artes Gráficas — Variante loca</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;display=swap">
+<style>
+body{margin:0}
+html{scroll-behavior:smooth}
+a{color:inherit}a:hover{color:#9A0015}
+.rojo a:hover{color:#FFD9DE}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.tipo{display:inline-flex;align-items:center;justify-content:center;background:#9A0015;color:#fff;font-style:italic;font-weight:700;width:1.05em;height:1.25em;box-shadow:.06em .08em 0 #000000;transition:transform .3s ease}
+@media(hover:hover){.tipo:hover{transform:rotate(0deg) translateY(-8px)!important}}
+.pieza{display:inline-flex;flex-direction:column;width:1.02em;color:#F6F4EF;font-style:italic;font-weight:500;filter:drop-shadow(.05em .07em .05em rgba(0,0,0,.45));transition:transform .3s ease}
+@media(hover:hover){.pieza:hover{transform:rotate(0deg) translateY(-8px)!important}}
+.cara{display:flex;align-items:center;justify-content:center;height:.6em;font-size:.8em;transform:skewX(-24deg);transform-origin:bottom left;border-bottom:.04em solid #0E0F10;background:repeating-linear-gradient(118deg,rgba(255,255,255,.13) 0 1px,transparent 1px 4px),repeating-linear-gradient(28deg,rgba(0,0,0,.22) 0 1px,transparent 1px 5px),linear-gradient(150deg,#8A8D91,#55585C 60%,#6F7276)}
+.let{display:inline-block;transform:scaleX(-1) skewX(10deg)}
+.pie{position:relative;display:flex;align-items:center;justify-content:center;height:1.06em;font-size:.84em;background:repeating-linear-gradient(104deg,rgba(255,255,255,.09) 0 1px,transparent 1px 3px),repeating-linear-gradient(12deg,rgba(0,0,0,.28) 0 1px,transparent 1px 4px),linear-gradient(170deg,#4A4D51,#202124 55%,#34373A)}
+.pie::before{content:"";position:absolute;left:0;top:.2em;width:.34em;height:.05em;background:#C9CBCE;box-shadow:0 .04em 0 #0A0A0B}
+.marq{display:flex;gap:0;white-space:nowrap;overflow:hidden}
+.marq div{flex-shrink:0;animation:corre 28s linear infinite;padding-right:48px}
+@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}}
+.pila{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 24px;align-items:start}
+.carta{margin:0}
+.fila{grid-column:span 6;display:flex;flex-direction:column;gap:10px}
+.pila>.videos{grid-column:1 / -1;width:100%;gap:24px}
+.fila .foto{transition:transform .35s ease}
+@media(hover:hover){.fila:hover .foto{transform:rotate(0deg) scale(1.03)!important}}
+.fila figcaption{display:flex;flex-direction:column;gap:2px}
+.carta img,.carta video{width:100%;aspect-ratio:5/3;object-fit:cover;display:block;border:2px solid #000000;box-sizing:border-box}
+.num{font-size:clamp(84px,11vw,170px);font-weight:900;font-style:italic;line-height:.85;color:#9A0015;-webkit-text-stroke:3px #000000;paint-order:stroke fill}
+.videos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.videos video{width:100%;aspect-ratio:5/3;object-fit:cover;display:block;border:2px solid #000000;box-sizing:border-box}
+.hueco{aspect-ratio:5/3;border:2px dashed #000000;display:flex;align-items:center;justify-content:center;font-style:italic;font-size:22px;color:#000000;box-sizing:border-box}
+.tit{font-size:19px;font-weight:700;line-height:1.15}
+.tipo2{font-size:15px;font-style:italic;color:#9A0015}
+.banda{overflow:hidden;padding:8px 0 40px}
+.pista{display:flex;gap:28px;width:max-content;animation:desliza 220s linear infinite}
+@media(hover:hover){.banda:hover .pista{animation-play-state:paused}}
+@keyframes desliza{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 14px))}}
+.pista figure{margin:0;flex:0 0 min(78vw,560px)}
+.pista img{width:100%;aspect-ratio:5/3;object-fit:cover;display:block;border:2px solid #000000;box-sizing:border-box}
+.pista figcaption{display:flex;justify-content:space-between;gap:16px;padding-top:12px;font-size:16px}
+.pista figcaption span{font-style:italic;color:#9A0015;flex-shrink:0}
+@media(prefers-reduced-motion:reduce){.banda{overflow-x:auto}.pista{animation:none}}
+.field{display:flex;flex-direction:column;gap:6px;font-size:16px}
+.field input,.field textarea{font:inherit;font-size:17px;padding:13px 14px;border:2px solid #000000;background:#fff;color:#000000;border-radius:0;resize:vertical}
+.field input:focus,.field textarea:focus{outline:3px solid #9A0015;outline-offset:1px}
+.label{font-size:24px;font-style:italic;letter-spacing:0;color:inherit;margin:0}
+.legal{border-top:2px solid currentColor}
+.legal summary{cursor:pointer;font-size:24px;font-style:italic;padding:16px 0;min-height:44px;box-sizing:border-box}
+.legal-b{display:flex;flex-direction:column;gap:12px;font-size:16px;color:inherit;max-width:860px;padding:0 0 28px}
+.a6{grid-column:span 7}.b6{grid-column:span 5}.c12{grid-column:2 / span 10}
+@media(max-width:520px){.fila{grid-column:1 / -1!important}}
+@media(max-width:860px){.fila{grid-column:1 / -1!important}.videos{grid-template-columns:1fr}.fila .foto{transform:none!important}.a6,.b6,.c12{grid-column:1 / -1}.wrap{padding:0 18px}.num{font-size:96px}.carta{transform:none!important}.dos{grid-template-columns:1fr!important}}
+/*MOTION*/a,button,summary,input,textarea{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{transition:color .15s ease-out}
+button{transition:transform .16s cubic-bezier(.23,1,.32,1),opacity .15s ease-out}
+button:active{transform:scale(.97)}
+.field input,.field textarea{transition:border-color .15s ease-out,box-shadow .15s ease-out}
+details[open]>.legal-b{animation:abre .22s cubic-bezier(.23,1,.32,1)}
+@keyframes abre{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important}details[open]>.legal-b{animation:none}html{scroll-behavior:auto}}
+.pieza,.tipo,.fila .foto{transition:transform .28s cubic-bezier(.23,1,.32,1)}
+.pista{will-change:transform}
+/*FINM*/
+/*MOVIL*/@media(max-width:700px){h1,h2,section,footer,form,div[style*="height:"]{height:auto!important}h1,h2,.wrap,div[style*="width:"]{width:auto!important;max-width:100%}form{width:100%!important}
+#inicio>.wrap:first-child{flex-direction:column;align-items:flex-start!important;gap:4px!important;padding-top:12px!important}
+#inicio>.wrap:first-child img{height:52px!important}
+#inicio nav{font-size:16px!important;gap:0 18px!important}
+#inicio nav a{padding:10px 0!important}
+#inicio>.wrap+.wrap{padding-top:22px!important;padding-bottom:40px!important}
+#inicio h1{gap:26px!important}
+#catalogos>h2{margin-bottom:20px!important}
+.marq{font-size:17px!important;padding:10px 0!important}
+#catalogos{padding:44px 0 32px!important}
+#catalogos>h2,#trabajos>h2{padding:0 18px}
+.pila{gap:26px 0}
+.videos{gap:22px!important}
+.tit{font-size:17px}
+#trabajos{padding:44px 0 20px!important}
+#trabajos .wrap{padding-bottom:20px!important}
+.pista{gap:16px}
+.pista figcaption{font-size:14px;flex-direction:column;gap:2px}
+#taller{padding:20px 0 60px!important}
+#taller div[aria-hidden]{font-size:150px!important}
+#taller .wrap+.wrap{padding-top:44px!important}
+#contacto{padding:56px 0 24px!important}
+#contacto .wrap{gap:32px!important}
+#contacto [style*="font-size: 34px"]{font-size:22px!important}
+#contacto .dos{font-size:17px!important}
+#contacto form{padding:22px 18px!important;box-shadow:8px 8px 0 #000000!important;box-sizing:border-box}
+.legal summary{font-size:19px}
+}
+/*FIN*/
+</style>
+</helmet>
+<div style="font-family: 'Bodoni Moda', 'Bodoni MT', Didot, serif; color: #000000; background: #FFFFFF; line-height: 1.45; overflow-x: hidden">
+
+<section id="inicio" style="background: #FFFFFF; color: #000000; position: relative">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-top: 18px; padding-bottom: 6px">
+<img src="/_blob/0b2d9e7a5215291be84e7cc8fb5d8b90" alt="Bodonia Artes Gráficas" style="height: 76px; width: auto; display: block">
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 4px 28px; font-size: 18px; font-style: italic">
+<a href="#catalogos" style="padding: 12px 0">Catálogos</a>
+<a href="#trabajos" style="padding: 12px 0">Trabajos</a>
+<a href="#taller" style="padding: 12px 0">El taller</a>
+<a href="#contacto" style="padding: 12px 0">Contacto</a>
+</nav>
+</div>
+<div class="wrap" style="padding-top: 40px; padding-bottom: 56px">
+<h1 style="margin: 0; display: flex; flex-direction: column; gap: clamp(10px, 2.2vw, 30px); height: 260px">
+<span style="position: absolute; width: 1px; height: 1px; overflow: hidden">Bodonia Artes Gráficas S.L.</span>
+<span aria-hidden="true" style="display: flex; align-items: flex-start; gap: .035em; font-size: clamp(36px, 9vw, 124px); line-height: 1; padding-left: .3em">
+<span class="pieza" style="transform: rotate(-2deg) translateY(0px)"><span class="cara"><span class="let">B</span></span><span class="pie">b</span></span><span class="pieza" style="transform: rotate(1deg) translateY(5px)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="transform: rotate(-1deg) translateY(9px)"><span class="cara"><span class="let">D</span></span><span class="pie">d</span></span><span class="pieza" style="transform: rotate(2deg) translateY(15px)"><span class="cara"><span class="let">O</span></span><span class="pie">o</span></span><span class="pieza" style="transform: rotate(-1deg) translateY(19px)"><span class="cara"><span class="let">N</span></span><span class="pie">n</span></span><span class="pieza" style="transform: rotate(1deg) translateY(25px)"><span class="cara"><span class="let">I</span></span><span class="pie">i</span></span><span class="pieza" style="margin-left: .42em; transform: rotate(-24deg) translateY(.42em)"><span class="cara"><span class="let" style="transform: rotate(-90deg)">a</span></span><span class="pie">A</span></span>
+</span>
+<span aria-hidden="true" style="display: inline-block; font-size: clamp(24px, 6vw, 84px); font-weight: 900; line-height: 1; letter-spacing: .04em; color: #9A0015; transform: scaleX(1.16); transform-origin: left center; width: max-content">artes gráficas<span style="font-weight: 400; letter-spacing: 0">, s. l.</span></span>
+</h1>
+</div>
+<div class="marq" style="background: #9A0015; color: #FFFFFF; font-size: 26px; padding: 14px 0; letter-spacing: .04em; transform: rotate(-1.2deg) scale(1.02); transform-origin: center; height: 43px">
+
+<div aria-hidden="true">Diseño ✦ Maquetación ✦ Impresión offset y digital ✦ Más de 35 años de experiencia ✦ Catálogos ✦ Libros ✦ Revistas ✦ Cartelería ✦</div>
+<div aria-hidden="true">Diseño ✦ Maquetación ✦ Impresión offset y digital ✦ Más de 35 años de experiencia ✦ Catálogos ✦ Libros ✦ Revistas ✦ Cartelería ✦</div><div>Diseño ✦ Maquetación ✦ Impresión offset y digital ✦ Más de 35 años de experiencia ✦ Catálogos ✦ Libros ✦ Revistas ✦ Cartelería ✦</div>
+</div>
+</section>
+
+<section id="catalogos" style="background: #FFFFFF; color: #000000; padding: 60px 0 48px; margin-top: -14px; height: 2202px">
+<h2 style="margin: 0; font-size: clamp(36px, 5.4vw, 76px); font-weight: 900; line-height: .9; letter-spacing: -.03em; width: 1363px; height: 106px">&nbsp;Catálogos <span style="font-style: italic; font-weight: 400">&amp; libros</span></h2><div class="wrap" style="display: flex; flex-direction: column; gap: 28px">
+
+<div class="pila" style="position: relative; z-index: 0">
+<figure class="carta fila"><div class="foto" style="transform: rotate(-1.2deg)"><img src="/_blob/7980c1d359736909d39bd790a3e03542" alt="Libro ¡Con lo que ha sido! La Tortajada, portada y cuatro dobles páginas"></div><figcaption><span class="tit">¡Con lo que ha sido! La Tortajada</span><span class="tipo2">Libro</span></figcaption></figure>
+<figure class="carta fila"><div class="foto" style="transform: rotate(1.2deg)"><img src="/_blob/de82459fa029a805a13e2551bc980577" alt="Catálogo Territorios de la mirada, portada, dos dobles páginas y tríptico"></div><figcaption><span class="tit">Territorios de la mirada</span><span class="tipo2">Catálogo</span></figcaption></figure>
+<figure class="carta fila"><div class="foto" style="transform: rotate(-1.2deg)"><img src="/_blob/812eacbe68f1f60863baf6dcf88e89bf" alt="Catálogo Primitivismo y modernidad, portada y cuatro dobles páginas"></div><figcaption><span class="tit">Primitivismo y modernidad</span><span class="tipo2">Catálogo</span></figcaption></figure>
+<figure class="carta fila"><div class="foto" style="transform: rotate(1.2deg)"><img src="/_blob/cbb76f15537c2d3ea7c6f03edfb4fa9c" alt="Libro Santa Fe-Mauthausen-Santa Fe, portada y cuatro dobles páginas"></div><figcaption><span class="tit">Santa Fe-Mauthausen-Santa Fe</span><span class="tipo2">Libro</span></figcaption></figure>
+<figure class="carta fila"><div class="foto" style="transform: rotate(-1.2deg)"><img src="/_blob/f2bedf7d636a74e98e6965840a866ee9" alt="Catálogo Pedro Zamora. En noir, portada y cuatro dobles páginas"></div><figcaption><span class="tit">Pedro Zamora. En noir</span><span class="tipo2">Catálogo</span></figcaption></figure>
+<figure class="carta fila"><div class="foto" style="transform: rotate(1.2deg)"><img src="/_blob/74027d664552864d1ad8fb3d429d92f8" alt="Libro Iglesia y Convento de Santa María de Coín, portada y cuatro dobles páginas"></div><figcaption><span class="tit">Iglesia y Convento de Santa María de Coín</span><span class="tipo2">Libro</span></figcaption></figure>
+<figure class="carta fila" style="grid-column: 4 / span 6"><div class="foto" style="transform: rotate(-1.2deg)"><img src="/_blob/fcbc30758957f5d55498d7b0ab53fbee" alt="Libro Yauco. Esencia y patrimonio cultural, cerrado y abierto"></div><figcaption><span class="tit">Yauco. Esencia y patrimonio cultural</span><span class="tipo2">Libro</span></figcaption></figure>
+<div class="videos"><video src="/_blob/0f95cbc661a90ad79ecc9f4f119739e3" autoplay="" muted="" loop="" playsinline="" controls="" aria-label="Vídeo del catálogo Pedro Zamora. En noir"></video><video src="/_blob/053a625835bd636e747914353249fd24" autoplay="" muted="" loop="" playsinline="" controls="" aria-label="Vídeo del catálogo Territorios de la mirada"></video></div>
+</div>
+</div>
+</section>
+
+<section id="trabajos" style="padding: 96px 0 56px; height: 541px">
+<h2 style="margin: 0; font-size: clamp(48px, 9vw, 132px); font-weight: 900; line-height: .9; letter-spacing: -.03em; color: #000000; height: 121px">&nbsp;Trabajos</h2><div class="wrap" style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; padding-bottom: 36px">
+
+
+</div>
+<div class="banda" aria-label="Galería de trabajos en movimiento">
+<div class="pista">
+<figure><img src="/_blob/87c6c761f0f882f194cec5160a4518b6" alt="Revista RDG, portada y cuatro dobles páginas"><figcaption>RDG. Revista del Colegio de Dentistas de Granada<span>Revista</span></figcaption></figure>
+<figure><img src="/_blob/deb397ed1eff495d7d5ba4548b4ad86a" alt="Revista Pequeño Oso y la montaña de hielo, portada y cuatro dobles páginas"><figcaption>Pequeño Oso y la montaña de hielo<span>Revista</span></figcaption></figure>
+<figure><img src="/_blob/27a7f2ba1c78da000d01343396c4ee65" alt="Díptico En torno a Santa Fe, abierto y cerrado"><figcaption>En torno a Santa Fe<span>Díptico</span></figcaption></figure>
+<figure><img src="/_blob/f4a4a5ee3b19a1ba434575dc5a163839" alt="Díptico Pedro Zamora, abierto y cerrado"><figcaption>Pedro Zamora<span>Díptico</span></figcaption></figure>
+<figure><img src="/_blob/0c66cc5d7fbbc84f9b2f9e816670aeb5" alt="Cartel del 534 aniversario de las Capitulaciones de Santa Fe"><figcaption>534 aniversario de las Capitulaciones de Santa Fe<span>Cartel</span></figcaption></figure>
+<figure><img src="/_blob/99ce3c0d8e2037c351b3327cda59e5a8" alt="Cartel del III Festival de Literatura Histórica"><figcaption>III Festival de Literatura Histórica<span>Cartel</span></figcaption></figure>
+<figure><img src="/_blob/2c8c1de360492203dec13225c595e87b" alt="Pliego Haiku de Pedro Garciarias, abierto, portada y colofón"><figcaption>Haiku. Pliegos del Azul<span>Pliego</span></figcaption></figure>
+<figure><img src="/_blob/c6612999e242f4bda8c144224c56f977" alt="Calendario de sobremesa 2027 de Bodonia Artes Gráficas"><figcaption>Bodonia Artes Gráficas<span>Calendario</span></figcaption></figure>
+<figure><img src="/_blob/4eb05b26b9d57c238c57a302781f7dbd" alt="Tarjetas de la clínica dental be&amp;sa, anverso y reverso"><figcaption>Clínica dental be&amp;sa<span>Tarjetas</span></figcaption></figure>
+<figure><img src="/_blob/8a51ca2a34f6c0a3d4b415c9b6b9bc5b" alt="Sobre de Bodonia Artes Gráficas"><figcaption>Bodonia Artes Gráficas<span>Sobre</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/87c6c761f0f882f194cec5160a4518b6" alt=""><figcaption>RDG. Revista del Colegio de Dentistas de Granada<span>Revista</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/deb397ed1eff495d7d5ba4548b4ad86a" alt=""><figcaption>Pequeño Oso y la montaña de hielo<span>Revista</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/27a7f2ba1c78da000d01343396c4ee65" alt=""><figcaption>En torno a Santa Fe<span>Díptico</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/f4a4a5ee3b19a1ba434575dc5a163839" alt=""><figcaption>Pedro Zamora<span>Díptico</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/0c66cc5d7fbbc84f9b2f9e816670aeb5" alt=""><figcaption>534 aniversario de las Capitulaciones de Santa Fe<span>Cartel</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/99ce3c0d8e2037c351b3327cda59e5a8" alt=""><figcaption>III Festival de Literatura Histórica<span>Cartel</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/2c8c1de360492203dec13225c595e87b" alt=""><figcaption>Haiku. Pliegos del Azul<span>Pliego</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/c6612999e242f4bda8c144224c56f977" alt=""><figcaption>Bodonia Artes Gráficas<span>Calendario</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/4eb05b26b9d57c238c57a302781f7dbd" alt=""><figcaption>Clínica dental be&amp;sa<span>Tarjetas</span></figcaption></figure>
+<figure aria-hidden="true"><img src="/_blob/8a51ca2a34f6c0a3d4b415c9b6b9bc5b" alt=""><figcaption>Bodonia Artes Gráficas<span>Sobre</span></figcaption></figure>
+</div>
+</div>
+</section>
+
+<section id="taller" style="padding: 40px 0 120px; height: 838px">
+<div class="wrap dos" style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; align-items: center">
+<div aria-hidden="true" style="font-size: clamp(180px, 34vw, 460px); font-weight: 900; font-style: italic; line-height: .78; color: #000000; letter-spacing: -.06em; width: 467px">35</div>
+<div style="display: flex; flex-direction: column; gap: 22px">
+<p style="margin: 0; font-size: 26px; font-style: italic">El taller</p>
+<p style="margin: 0; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.12">Bodonia Artes Gráficas es una empresa con <em style="background: #9A0015; color: #FFFFFF; padding: 0 .18em">más de 35 años</em> de experiencia en artes gráficas: calidad, eficacia y profesionalidad.</p>
+<p style="margin: 0; font-size: 20px; max-width: 560px">Hacemos todo tipo de trabajos en impresión offset o digital, ya sea grandes tiradas o cantidades más reducidas, con un asesoramiento cercano y experto hasta en los pedidos más especiales.</p>
+</div>
+</div>
+<div class="wrap" style="padding-top: 72px">
+<p style="margin: 0 0 18px; font-size: 26px; font-style: italic">Qué hacemos</p>
+<p style="margin: 0; font-size: clamp(30px, 5.4vw, 76px); font-weight: 900; line-height: 1.02; letter-spacing: -.02em; color: #9A0015">Catálogos <em style="font-weight: 400; color: #000000">libros</em> revistas <em style="font-weight: 400; color: #000000">facsímiles</em> desplegables <em style="font-weight: 400; color: #000000">cartelería</em> folletos <em style="font-weight: 400; color: #000000">maquetación</em> mupis <em style="font-weight: 400; color: #000000">tarjetas</em> trípticos <em style="font-weight: 400; color: #000000">postales</em> papelería <em style="font-weight: 400; color: #000000">diseño gráfico</em> diseño editorial.</p>
+</div>
+</section>
+
+<footer id="contacto" class="rojo" style="background: #9A0015; color: #FFFFFF; padding: 96px 0 28px; height: 1667px">
+<div class="wrap" style="display: flex; flex-direction: column; gap: 44px; width: 1166px">
+<p style="margin: 0; font-size: 40px; font-style: italic">Contacto</p>
+<div style="display: flex; flex-direction: column; gap: 4px; font-size: 34px"><a href="mailto:info@bodonia.es" style="font-size: clamp(34px, 8.4vw, 124px); font-style: italic; line-height: 1; letter-spacing: -0.03em; text-decoration: none; overflow-wrap: anywhere; font-weight: 900">info@bodonia.es</a><a href="tel:648823250" style="font-size: clamp(30px, 6vw, 88px); line-height: 1.1; text-decoration: none">648 82 32 50</a></div>
+<div class="dos" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 56px; font-size: 20px; max-width: 880px">
+<div>C/ Gredos nº 27<br>18140 La Zubia, Granada, España<br><a href="https://www.google.com/maps/search/?api=1&amp;query=37.10948,-3.591575" style="display: inline-block; padding: 10px 0">Ver en el mapa</a></div>
+<div>Lunes a viernes, 9:00 – 20:00<br>Sábado y domingo, cerrado</div>
+</div>
+<form onSubmit="{{ send }}" style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; background: #FFFFFF; color: #000000; padding: 32px; box-shadow: 14px 14px 0 #000000; width: 878px; margin-left: auto; margin-right: auto; align-self: center; width: 100%; box-sizing: border-box">
+<p style="margin: 0; font-size: 34px; font-weight: 900; font-style: italic; letter-spacing: -.02em">Pide información</p>
+<label class="field">Nombre<input type="text" name="nombre" required=""></label>
+<label class="field">Correo electrónico<input type="email" name="correo" required=""></label>
+<label class="field">Mensaje<textarea name="mensaje" rows="5" required=""></textarea></label>
+<label class="field">Adjuntar archivos<input type="file" name="archivos" multiple=""></label>
+<button type="submit" style="align-self: flex-start; background: #9A0015; color: #fff; border: 0; padding: 14px 30px; font: inherit; font-size: 20px; font-style: italic; cursor: pointer; min-height: 48px">Enviar correo</button>
+<sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}"><p style="margin: 0; font-size: 15px">Se ha abierto su programa de correo con el mensaje preparado. Si ha elegido archivos, adjúntelos allí antes de pulsar «Enviar».</p></sc-if>
+</form>
+<section id="legal" style="display: flex; flex-direction: column">
+<p class="label" style="padding-bottom: 16px">Información legal</p>
+<details id="aviso-legal" class="legal"><summary>Aviso legal</summary><div class="legal-b"><p style="margin: 0; font-weight: 700">1.) IDENTIFICACIÓN DEL PRESTADOR DE SERVICIOS:</p>
+<p style="margin: 0">1.1.) En cumplimiento con el deber de información general que, recogido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico, el Reglamento General de Protección de Datos 2016/679 y Ley Orgánica de Protección de Datos Personales y Garantía de Derechos Digitales 3/2018, deben ofrecer los prestadores de servicios de la sociedad de información, a continuación se reflejan los siguientes datos:</p>
+<p style="margin: 0">La Entidad titular del website http://www.bodoniaartesgraficas.wordpress.com es BODONIA ARTES GRAFICAS, S.L. con C.I.F: B-18994244 y dirección en C/ Gredos 27, La Zubia 18140. Granada. Teléfono: 648823250.  E-mail: info@bodonia.es</p>
+<p style="margin: 0; font-weight: 700">2.) AVISO SOBRE LA POLÍTICA DE PRIVACIDAD DE LOS DATOS:</p>
+<p style="margin: 0">A efectos de lo previsto en el Reglamento Europeo 2016/679 y Ley Orgánica de Protección de Datos Personales y Garantía de Derechos Digitales, informamos a los usuarios que los datos obtenidos automáticamente de la conexión a nuestra web, dirección IP,  serán guardados en el Registro de Actividades de Tratamiento: Clientes de la Empresa cuya finalidad es la de que BODONIA ARTES GRAFICAS, S.L. pueda posteriormente obtener mediciones únicamente estadísticas que permitan conocer el número de visitas realizadas a los servidores web, orden de visitas, el punto de acceso…etc.</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L., garantiza la seguridad y confidencialidad de los datos obtenidos automáticamente. De este modo, se compromete al cumplimiento de su obligación de secreto de los datos de carácter personal y de su deber de guardarlos y adoptar todas las medidas técnicas y organizativas necesarias para evitar su alteración, pérdida, tratamiento o uso no autorizado. Por lo tanto, toda la información obtenida no será cedida a terceros salvo que en los casos que por obligación legal así haya que hacerlo o para la correcta prestación de los servicios contratados.</p>
+<p style="margin: 0">Usted podrá en todo momento ejercitar los derechos de acceso, rectificación, cancelación y portabilidad de sus datos, y la limitación u oposición a su tratamiento, así como retirar el consentimiento aceptado al tratamiento de sus datos comunicándolo por escrito a nuestra dirección de correo electrónico info@bodonia.es, e incluso interponer reclamación ante la Agencia Española de Protección de Datos.</p>
+<p style="margin: 0; font-weight: 700">Delegado de Protección de Datos:</p>
+<p style="margin: 0">Datasur Protección de Datos S.L.</p>
+<p style="margin: 0">Paseo Jerónimo de Rueda s/n Edf. CIE Marcelino Camacho. 18195. Cúllar Vega. Granada</p>
+<p style="margin: 0">Tlf.- 958 958 230 E-mail: dpd@data-sur.com.</p>
+<p style="margin: 0; font-weight: 700">3.) VARIOS:</p>
+<p style="margin: 0">A.- BODONIA ARTES GRAFICAS, S.L. utiliza cookies que se quedarán almacenadas en el ordenador. Las cookies son pequeños archivos que nuestro ordenador envía al suyo, pero que no nos proporcionan información ni sobre su nombre, ni sobre cualquier dato de carácter personal suyo. Cuando el usuario se encuentre navegando por las páginas web de BODONIA ARTES GRAFICAS, S.L., el servidor donde se encuentra alojada reconoce automáticamente la dirección IP de su ordenador, el día y la hora en la que comienza la visita, en la que abandona la visita, así como información sobre las distintas secciones consultadas. Es necesario que el servidor conozca estos datos para poder comunicarse y enviarle la petición realizada y que a través del navegador se pueda ver en la pantalla. No elaborando perfiles en ningún caso. El usuario podrá eliminar las cookies de su ordenador en cualquier momento.</p>
+<p style="margin: 0">B.- BODONIA ARTES GRAFICAS, S.L. podrá modificar, sin previo aviso, la información contenida en su sitio web, así como su configuración y presentación.</p>
+<p style="margin: 0">C.- BODONIA ARTES GRAFICAS, S.L. no se hace responsable del incumplimiento de cualquier norma aplicable en que pueda incurrir el usuario en su acceso al sitio web y/o en el uso de las informaciones contenidas en el mismo.</p>
+<p style="margin: 0">D.- BODONIA ARTES GRAFICAS, S.L. no responde de la legalidad de otros sitios web de terceros, que pudieran estar vinculados o enlazados desde este portal.</p></div></details>
+<details id="condiciones-de-uso" class="legal"><summary>Condiciones de uso</summary><div class="legal-b"><p style="margin: 0; font-weight: 700">CONDICIONES DE USO WEB</p>
+<p style="margin: 0">Las presentes, son los términos y condiciones con los que usted (el Usuario) y BODONIA ARTES GRAFICAS, S.L., regulan el uso y disfrute de la web de BODONIA ARTES GRAFICAS, S.L. Ser usuario de la web bodoniaartesgraficas.wordpress.com, implica que Vd. Consiente expresamente las presentes condiciones y lo que se derive de la normativa legal aplicable en esta materia. Si Vd. no está de acuerdo con estas condiciones le rogamos que no continúe usando esta web.</p>
+<p style="margin: 0; font-weight: 700">1.- OBJETO DE LA WEB.</p>
+<p style="margin: 0">La web de BODONIA ARTES GRAFICAS, S.L. (en adelante la web) se ha realizado con objetivo meramente informativo para sus usuarios, que disponen de información que se ofrece de forma gratuita y accesible para todo el mundo sin necesidad de abonar ningún importe en ningún momento del acceso. Es sobre este entorno especialmente, sobre el que cual BODONIA ARTES GRAFICAS, S.L. desea establecer las presentes condiciones y limitaciones de uso, que se extiende y añade en todas las cláusulas complementarias y no contradictorias a las que puedan cubrir otras partes de la web sujetas a condiciones generales y/o particulares.</p>
+<p style="margin: 0">Incluso unas «Condiciones Particulares» en el caso de ser necesarias para servicios concretos. Estas últimas «Condiciones Particulares» habrán de ser puestas a disposición del Usuario de forma fehaciente por cualquier medio y visadas de forma específica por el Usuario, antes de que ambas partes las consideren aceptadas y obren en consecuencia.</p>
+<p style="margin: 0">2.- LIMITACIONES DE USO Y PROTECCIÓN DE LA INFORMACIÓN Y CONTENIDOS DE bodoniaartesgraficas.wordpress.com.</p>
+<p style="margin: 0">El contenido y la información a la que pueda acceder el usuario a través de la web, principalmente mediante el buscador o dentro del espacio reservado para usuarios registrados, son propiedad de BODONIA ARTES GRAFICAS, S.L. Se puede visualizar dicha información para usos personales, informativos y no comerciales. Pero está prohibido copiar, distribuir, ejecutar, reproducir, licenciar, transferir o vender cualquier tipo de información que se extraiga de la web de BODONIA ARTES GRAFICAS, S.L. y en especial del buscador de usuarios.</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L. realiza cambios puntuales en la información, insertando marcas de agua con tecnología de cifrado, que no alteran el contenido ni significado de la misma en grado alguno, pero que permiten la detección de comercializaciones ilícitas de su base de datos y la procedencia de dichas comercializaciones, así como la fecha e IP de extracción. BODONIA ARTES GRAFICAS, S.L. podrá probar la captación ilícita de información y, por tanto, exigirá las penas tipificadas en el código penal al respecto de la apropiación indebida de bases de datos.</p>
+<p style="margin: 0; font-weight: 700">3.- DERECHOS DE AUTOR Y MARCAS.</p>
+<p style="margin: 0">La propiedad intelectual e industrial, marcas comerciales, gráficos, imágenes, logotipos, información e iconos visibles en el Web de BODONIA ARTES GRAFICAS, S.L. son de propiedad exclusiva de BODONIA ARTES GRAFICAS, S.L. o en su caso de la entidad o colectivo que ha autorizado su inclusión. Todo el contenido y su formato están protegidos por las leyes en vigor de ámbito nacional e internacional.</p>
+<p style="margin: 0">El uso interesado de cualquier contenido que se encuentre en el Web de BODONIA ARTES GRAFICAS, S.L. queda absolutamente prohibido, a no ser que exista concesión de una licencia por escrito.</p>
+<p style="margin: 0; font-weight: 700">4.- POLÍTICA DE PRIVACIDAD.</p>
+<p style="margin: 0; font-weight: 700">Responsable:</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L., con CIF: B-18994244y dirección postal:     C/ Gredos 27, La Zubia 18140. Granada. Teléfono: 648823250.  E-mail: info@bodonia.es</p>
+<p style="margin: 0">En BODONIA ARTES GRAFICAS, S.L. tratamos la información obtenida de forma automática según el Reglamento General de Protección de Datos y Ley Orgánica de Protección de Datos Personales y Garantía de Derechos Digitales.</p>
+<p style="margin: 0">Los servidores de nuestro sitio web podrán detectar de manera automática la dirección IP y el nombre de dominio utilizados por el usuario. Una dirección IP es un número asignado automáticamente a un ordenador cuanto éste se conecta a Internet. Toda esta información es almacenada el Registro de Actividades de Tratamiento Clientes de la empresa, que permite el posterior procesamiento de los datos con el fin de obtener mediciones únicamente estadísticas que permitan conocer el número de visitas realizadas a los servidores web, el orden de visitas, el punto de acceso, el día, la hora…etc.</p>
+<p style="margin: 0">Los datos obtenidos se conservarán durante el tiempo necesario para las mediciones estadísticas o durante los años necesarios para cumplir con las obligaciones legales. Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal y para la prestación de los servicios ofertados, así haya que hacerlo y no están previstas las transferencias internacionales de datos.</p>
+<p style="margin: 0">Los usuarios menores de 14 años necesitan el consentimiento de sus padres, tutores o representantes legales para la realización de la consulta. El usuario reconoce ser mayor de 14 años de edad o disponer del correspondiente consentimiento de sus padres, tutores o representantes legales para formular la consulta.</p>
+<p style="margin: 0">Igualmente se informa de la posibilidad del acceso a la información propia del Usuario por parte de los distintos prestadores de servicios del Responsable, garantizando el máximo nivel de confidencialidad ya regulado. (La Empresa dispone de toda la información relativa a estas empresas y/o profesionales para que pueda ser consultada previa solicitud).</p>
+<p style="margin: 0">Así mismo, nos ajustamos a las condiciones que estable la “Ley 14/1966, de 18 de marzo, de prensa e Imprenta” y la “Ley 7/1996, de 15 de enero, de Ordenación del Comercio Minorista”.</p>
+<p style="margin: 0">Los afectados podrán ejercitar ante el Responsable del Tratamiento o ante su Delegado de Protección de Datos, los derechos de acceso, rectificación, cancelación y portabilidad de sus datos, y la limitación u oposición a su tratamiento, retirar el consentimiento en este documento aceptado e incluso interponer reclamación ante la Agencia Española de Protección de Datos.</p>
+<p style="margin: 0; font-weight: 700">Delegado de Protección de Datos:</p>
+<p style="margin: 0">Datasur Protección de Datos S.L.</p>
+<p style="margin: 0">Paseo Jerónimo de Rueda s/n Edf. CIE Marcelino Camacho. 18195. Cúllar Vega. Granada</p>
+<p style="margin: 0">Tlf.- 958 958 230 E-mail:  dpd@data-sur.com.</p>
+<p style="margin: 0; font-weight: 700">5.- RESPONSABILIDAD.</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L. no se hace responsable de los daños y perjuicios que se produzcan por fallos o malas configuraciones del software instalado en el ordenador del Usuario, fallos en la transmisión y defectos del fabricante de software. Este web está preparado por defecto para ser visualizado en cualquier tipo de navegador y con cualquier sistema operativo. BODONIA ARTES GRAFICAS, S.L. no responde de la falta de visualización de información relevante que pudieran producirse en otro tipo de combinación posible de navegadores y/o sistemas operativos.</p>
+<p style="margin: 0">Usted es el único responsable de lo que suceda en su propio Equipo, y deberá tomar las medidas de seguridad adecuadas para proteger la información alojada en el mismo, para evitar pérdidas o daños causados por descargas desde el Web. El usuario deberá de mantener actualizado el navegador a la última versión, elegir complementos y plugins de confianza, revisar las opciones de configuración del navegador y habilitar aquellas que considere más interesante para proteger su privacidad. Respecto de la información a la que pueda acceder el usuario a través de la web, debido a las diferentes fuentes de obtención de la misma y su proceso de grabación, BODONIA ARTES GRAFICAS, S.L. no garantiza la corrección absoluta de la misma y por ello el Usuario no podrá exigir responsabilidad alguna por daños y perjuicios derivados de errores en la información suministrada. BODONIA ARTES GRAFICAS, S.L. no se hace responsable de la legalidad de otros sitios web de terceros desde los que pueda accederse al Web ni tampoco de la legalidad de otros sitios web de terceros, que pudieran estar vinculados desde este Web.</p>
+<p style="margin: 0; font-weight: 700">6.- MODIFICACIONES.</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L. podrá variar las presentes condiciones en cualquier momento, aunque no es intención que sea frecuente, publicando en esta misma página las fechas de las modificaciones y entrando en vigor de forma inmediata. Si por cambio legislativo o resolución judicial deja de ser aplicable una parte de las presentes condiciones, dichas cláusulas serán anuladas, pero las demás serán perfectamente válidas y permanecerán en vigor. El hecho de continuar usando nuestro Web implica que Usted acepta estas condiciones y se compromete a aceptar las modificaciones realizadas en las mismas, obligándose a revisar esta página con frecuencia. En caso de no aceptar estas condiciones, no debe seguir visitando el Web de BODONIA ARTES GRAFICAS, S.L.</p>
+<p style="margin: 0; font-weight: 700">7.- INDEPENDENCIA.</p>
+<p style="margin: 0">Los contenidos de BODONIA ARTES GRAFICAS, S.L. no tienen ninguna línea política ni se apoya ninguna ideología o grupo político-social por encima de otro.</p></div></details>
+<details id="politica-de-cookies" class="legal"><summary>Política de cookies</summary><div class="legal-b"><p style="margin: 0; font-weight: 700">COOKIES</p>
+<p style="margin: 0">Se denomina cookie a un segmento de datos que son almacenados en el navegador del usuario con la finalidad de ofrecer mayor información al servidor web acerca de éste, permitiendo así recordar determinados parámetros e información sobre el usuario, consiguiendo una mayor personalización y análisis sobre el comportamiento del mismo.</p>
+<p style="margin: 0">Utilizamos cookies para facilitar el uso de nuestra página web. Las cookies son pequeños ficheros de información que nos permiten comparar y entender cómo nuestros usuarios navegan a través de nuestra página web, y de esta manera poder mejorar consecuentemente el proceso de navegación. En caso de no querer recibir cookies, por favor configure su navegador de Internet para que las borre del disco duro de su ordenador, las bloquee o le avise en caso de instalación de las mismas. Para continuar sin cambios en la configuración de las cookies, simplemente continúe en la página web.</p>
+<p style="margin: 0; font-weight: 700">Tipos de Cookies:</p>
+<p style="margin: 0">Existen diferentes tipos de cookies, las cuales pueden ser clasificadas según su finalidad a la hora de obtener información acerca del usuario:</p>
+<p style="margin: 0">          Cookies técnicas: Son aquellas que resultan imprescindibles para permitir al usuario la navegación a través de una página web, como por ejemplo, las que permiten almacenar los datos de un pedido online.</p>
+<p style="margin: 0">          Cookies de personalización: Este tipo permite personalizar las funciones o contenidos del sitio web en función de los datos obtenidos del navegador. Mediante estas cookies podemos presentar un sitio web en el mismo idioma del navegador usado para visitar la web.</p>
+<p style="margin: 0">          Cookies de análisis: Se utilizan con fines estadísticos únicamente. Un claro ejemplo podría ser las cookies generadas por el script de seguimiento de Google Analytics.</p>
+<p style="margin: 0">          Cookies publicitarias y de publicidad comportamental: Son todas aquellas que tienen como objetivo mejorar la eficacia de los espacios publicitarios. Así, la red publicitaria de Google o los adservers incluyen este tipo de tecnologías para dar el servicio deseado a sus clientes.</p>
+<p style="margin: 0">Puede obtener más información sobre las cookies y su uso en www.aboutcookies.org.</p>
+<p style="margin: 0; font-weight: 700">Cookies usadas en esta web:</p>
+<p style="margin: 0">Nombre de la cookie: Almacenamiento Local. Cookies Propias, son estrictamente necesarias para la correcta navegación.</p>
+<p style="margin: 0">Finalidad: mantener la sesión del usuario. Caducidad: al finalizar la sesión.</p>
+<p style="margin: 0">Nombre de la cookie: GED_PLAYLIST_ACTIVITY. Cookie de terceros, utilizada en la reproducción de videos a través de la Web. Caducidad: al finalizar la sesión.</p>
+<p style="margin: 0; font-weight: 700">B.- Como administrar las cookies en los ordenadores.</p>
+<p style="margin: 0">Si quiere permitir el uso de cookies de nuestro site, por favor siga las siguientes instrucciones.</p>
+<p style="margin: 0">Google Chrome</p>
+<p style="margin: 0">Al abrir el navegador, pincha “herramientas” en la parte superior y selecciona la pestaña de “opciones”.</p>
+<p style="margin: 0">Dentro de opciones, pincha “privacidad”.</p>
+<p style="margin: 0">Marca “permitir la administración de cookies”.</p>
+<p style="margin: 0">Microsoft Internet Explorer 6.0, 7.0, 8.0, 9.0</p>
+<p style="margin: 0">Al abrir el navegador, pincha “herramientas” en la parte superior y selecciona la pestaña de “opciones”.</p>
+<p style="margin: 0">Revisa la pestaña de “Privacidad” asegurándote está configurada con un nivel de seguridad medio o inferior.</p>
+<p style="margin: 0">Si la configuración de Internet no es media se estarán bloqueando las cookies.</p>
+<p style="margin: 0">Mozilla Firefox</p>
+<p style="margin: 0">Al abrir el navegador, pincha “herramientas” en la parte superior y selecciona la pestaña de “opciones”.</p>
+<p style="margin: 0">Selecciona el icono de Privacidad</p>
+<p style="margin: 0">Pincha en cookies, y marca: “permitir la instalación de cookies”.</p>
+<p style="margin: 0">Safari</p>
+<p style="margin: 0">Al abrir el navegador, pincha “herramientas” en la parte superior y selecciona la pestaña de “opciones”.</p>
+<p style="margin: 0">Pincha en la pestaña de “Seguridad” y revisa si la opción “Bloquear el acceso de cookies de terceros” está marcada o no.</p>
+<p style="margin: 0">Pincha en “guardar”.</p>
+<p style="margin: 0">La instalación de cookies en Mac</p>
+<p style="margin: 0">Si tienes un Mac y quieres permitir el acceso de nuestras cookies en tu ordenador, por favor sigue las siguientes instrucciones:</p>
+<p style="margin: 0">Microsoft Internet Explorer 5.0 en OSX</p>
+<p style="margin: 0">1. Entra en “Explorer” y selecciona “Preferencias” en la barra de navegación.</p>
+<p style="margin: 0">Haz scroll hacia abajo hasta que veas “Cookies” justo debajo de archivos recibidos.</p>
+<p style="margin: 0">Marca “No volver a preguntar”.</p>
+<p style="margin: 0">Safari en OSX</p>
+<p style="margin: 0">Entra en Safari y selecciona “Preferencias” en la barra de navegación.</p>
+<p style="margin: 0">Pincha en la pestaña de “Seguridad” y marcae la opción “aceptar cookies”</p>
+<p style="margin: 0">Selecciona la opción: “Sólo desde el site actual en que estoy navegando”</p>
+<p style="margin: 0">Mozilla y Netscape en OSX</p>
+<p style="margin: 0">Entra en “Mozilla” o “Netscape” y en la parte superior de tu navegador, marca la opción de “Preferencias”</p>
+<p style="margin: 0">Haz scroll hacia abajo hasta que veas “Cookies” justo debajo de “Privacidad y Seguridad”.</p>
+<p style="margin: 0">Marca la opción “Permitir el acceso de cookies sólo desde el site actual”</p>
+<p style="margin: 0">Opera</p>
+<p style="margin: 0">Entra en “Opera” y selecciona “Menu” y “Ajustes” en la barra de navegación.</p>
+<p style="margin: 0">Selecciona “Preferencias” y pincha en la pestaña de “Avanzado”.</p>
+<p style="margin: 0">Marca la opción “Aceptar cookies”</p></div></details>
+<details id="politica-de-privacidad" class="legal"><summary>Política de privacidad</summary><div class="legal-b"><p style="margin: 0; font-weight: 700">PROTECCIÓN DE DATOS</p>
+<p style="margin: 0; font-weight: 700">Responsable:</p>
+<p style="margin: 0">BODONIA ARTES GRAFICAS, S.L., con CIF: B-18994244y dirección postal: C/ Gredos 27, La Zubia 18140. Granada. Teléfono: 648823250.  E-mail: info@bodonia.es</p>
+<p style="margin: 0">En BODONIA ARTES GRAFICAS, S.L. tratamos la información obtenida de forma automática según el Reglamento General de Protección de Datos y Ley Orgánica de Protección de Datos Personales y Garantía de Derechos Digitales.</p>
+<p style="margin: 0">Los servidores de nuestro sitio web podrán detectar de manera automática la dirección IP y el nombre de dominio utilizados por el usuario. Una dirección IP es un número asignado automáticamente a un ordenador cuanto éste se conecta a Internet. Toda esta información es almacenada el Registro de Actividades de Tratamiento Clientes de la empresa, que permite el posterior procesamiento de los datos con el fin de obtener mediciones únicamente estadísticas que permitan conocer el número de visitas realizadas a los servidores web, el orden de visitas, el punto de acceso, el día, la hora…etc.</p>
+<p style="margin: 0">Los datos obtenidos se conservarán durante el tiempo necesario para las mediciones estadísticas o durante los años necesarios para cumplir con las obligaciones legales. Los datos no se cederán a terceros salvo en los casos en que exista una obligación legal y para la prestación de los servicios ofertados, así haya que hacerlo y no están previstas las transferencias internacionales de datos.</p>
+<p style="margin: 0">Los usuarios menores de 14 años necesitan el consentimiento de sus padres, tutores o representantes legales para la realización de la consulta. El usuario reconoce ser mayor de 14 años de edad o disponer del correspondiente consentimiento de sus padres, tutores o representantes legales para formular la consulta.</p>
+<p style="margin: 0">Igualmente se informa de la posibilidad del acceso a la información propia del Usuario por parte de los distintos prestadores de servicios del Responsable, garantizando el máximo nivel de confidencialidad ya regulado. (La Empresa dispone de toda la información relativa a estas empresas y/o profesionales para que pueda ser consultada previa solicitud).</p>
+<p style="margin: 0">Así mismo, nos ajustamos a las condiciones que estable la “Ley 14/1966, de 18 de marzo, de prensa e Imprenta” y la “Ley 7/1996, de 15 de enero, de Ordenación del Comercio Minorista”.</p>
+<p style="margin: 0">Los afectados podrán ejercitar ante el Responsable del Tratamiento o ante su Delegado de Protección de Datos, los derechos de acceso, rectificación, cancelación y portabilidad de sus datos, y la limitación u oposición a su tratamiento, retirar el consentimiento en este documento aceptado e incluso interponer reclamación ante la Agencia Española de Protección de Datos.</p>
+<p style="margin: 0; font-weight: 700">Delegado de Protección de Datos:</p>
+<p style="margin: 0">Datasur Protección de Datos S.L.</p>
+<p style="margin: 0">Paseo Jerónimo de Rueda s/n Edf. CIE Marcelino Camacho. 18195. Cúllar Vega. Granada</p>
+<p style="margin: 0">Tlf.- 958 958 230 E-mail: dpd@data-sur.com.</p></div></details>
+</section>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 24px; align-items: center; border-top: 2px solid #FFFFFF; padding-top: 10px; font-size: 15px">
+<span>Bodonia Artes Gráficas S.L.</span>
+<nav aria-label="Legal" style="display: flex; flex-wrap: wrap; gap: 0 22px">
+<a href="#aviso-legal" style="padding: 14px 0">Aviso legal</a>
+<a href="#condiciones-de-uso" style="padding: 14px 0">Condiciones de uso</a>
+<a href="#politica-de-cookies" style="padding: 14px 0">Política de cookies</a>
+<a href="#politica-de-privacidad" style="padding: 14px 0">Política de privacidad</a>
+</nav>
+</div>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":8200}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+sent: !!(this.state && this.state.sent),
+send: (e) => {
+e.preventDefault();
+const f = e.target.elements;
+const nombres = Array.from(f.archivos.files || []).map((x) => x.name);
+const cuerpo = 'Nombre: ' + f.nombre.value + '\nCorreo: ' + f.correo.value + '\n\n' + f.mensaje.value + (nombres.length ? '\n\nArchivos que adjunto: ' + nombres.join(', ') : '');
+const url = 'mailto:info@bodonia.es?subject=' + encodeURIComponent('Consulta desde la web de Bodonia Artes Gráficas') + '&body=' + encodeURIComponent(cuerpo);
+this.setState({ sent: true });
+window.location.href = url;
+}
+};
+}
+}
+</script>
+</body>
+</html>

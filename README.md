@@ -8,10 +8,11 @@ La empresa está en pleno lavado de cara: con una nueva persona al cargo, se ren
 
 | Carpeta | Proyecto | Estado |
 | --- | --- | --- |
-| [`web/`](web/) | Página web y landing | Pendiente de cargar material |
-| [`redes-sociales/`](redes-sociales/) | Redes sociales: plantillas, patrones y publicaciones | Pendiente de cargar material |
-| [`maquetacion/`](maquetacion/) | Archivos de trabajos para maquetar y sus versiones maquetadas | Abierto |
-| [`futuros-proyectos/`](futuros-proyectos/) | Ideas y proyectos que vengan más adelante (p. ej. automatizaciones) | Abierto |
+| [`web/`](web/) | Página web y landing | Rediseño en cuatro versiones; pendiente de elegir y publicar |
+| [`redes-sociales/`](redes-sociales/) | Redes sociales: plantillas, patrones y publicaciones | En marcha: posts finales y calendario hasta el 18 nov |
+| [`maquetacion/`](maquetacion/) | Archivos de trabajos para maquetar y sus versiones maquetadas | Abierto: Hidalgos de España 2024 |
+| [`futuros-proyectos/`](futuros-proyectos/) | Ideas y proyectos que vengan más adelante (p. ej. automatizaciones) | Abierto: prototipo daigual |
+| [`docs/resumenes/`](docs/resumenes/) | Resúmenes de los chats de trabajo | 4 resúmenes |
 
 ## Uso
 

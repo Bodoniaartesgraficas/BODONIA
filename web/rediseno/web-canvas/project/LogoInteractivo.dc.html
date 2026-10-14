@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Bodonia Artes Gráficas — Títulos interactivos</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap">
+<style>
+body{margin:0}
+.panel{background:#fff;padding:36px 48px 60px;display:flex;flex-direction:column;gap:26px;border-bottom:2px solid #141414;min-height:380px;box-sizing:border-box}
+.letra{font-size:22px;font-style:italic;color:#9A0015;margin:0}
+.nota{font-size:16px;margin:0;color:#3A3C40}
+.fila{display:flex;align-items:flex-start;gap:.04em;line-height:1;font-size:104px;padding:.15em 0 .1em .2em}
+.ag{display:inline-block;font-weight:900;line-height:1;letter-spacing:.04em;color:#9A0015;width:max-content;font-size:68px;transform:scaleX(1.14);transform-origin:left center}
+.ag span{font-weight:400;letter-spacing:0}
+.pz{display:inline-flex;flex-direction:column;width:1.02em;color:#F6F4EF;font-style:italic;font-weight:500;font-family:inherit;font-size:inherit;line-height:1;filter:drop-shadow(.05em .07em .05em rgba(0,0,0,.45));transition:transform .45s cubic-bezier(.2,.9,.3,1.3)}
+.pz .c{display:flex;align-items:center;justify-content:center;height:.6em;font-size:.8em;transform:skewX(-24deg);transform-origin:bottom left;border-bottom:.04em solid #0E0F10;transition:background .4s ease;background:repeating-linear-gradient(118deg,rgba(255,255,255,.13) 0 1px,transparent 1px 4px),repeating-linear-gradient(28deg,rgba(0,0,0,.22) 0 1px,transparent 1px 5px),linear-gradient(150deg,#8A8D91,#55585C 60%,#6F7276)}
+.pz .l{display:inline-block;transform:scaleX(-1) skewX(10deg)}
+.pz .p{display:flex;align-items:center;justify-content:center;height:1.06em;font-size:.84em;transition:background .4s ease;background:repeating-linear-gradient(104deg,rgba(255,255,255,.09) 0 1px,transparent 1px 3px),repeating-linear-gradient(12deg,rgba(0,0,0,.28) 0 1px,transparent 1px 4px),linear-gradient(170deg,#4A4D51,#202124 55%,#34373A)}
+.suelta{margin-left:.4em}
+.suelta .l{transform:rotate(-90deg)}
+.bt{border:0;padding:0;background:none;cursor:pointer}
+.bt:focus-visible{outline:3px solid #9A0015;outline-offset:6px}
+.accion{align-self:flex-start;background:#141414;color:#fff;border:0;padding:12px 24px;font:inherit;font-size:18px;font-style:italic;cursor:pointer;min-height:44px}
+/* F: saltan y se enderezan */
+.f .pz{transform:rotate(var(--r)) translateY(var(--y))}
+.f .pz:hover{transform:rotate(0deg) translateY(-26px) scale(1.12)}
+/* G: se componen */
+.g .pz{transform:translate(var(--x),var(--y)) rotate(var(--r));transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.g:hover .pz,.g.ok .pz{transform:translate(0,0) rotate(0deg)}
+/* H: se entintan */
+.pz.tinta .c{background:repeating-linear-gradient(118deg,rgba(255,255,255,.16) 0 1px,transparent 1px 4px),linear-gradient(150deg,#D9505F,#B01228 60%,#C93344)}
+.pz.tinta .p{background:repeating-linear-gradient(104deg,rgba(255,255,255,.1) 0 1px,transparent 1px 3px),linear-gradient(170deg,#9A0015,#5E000D 60%,#7C0011)}
+/* I: imprimen */
+.col{display:inline-flex;flex-direction:column;align-items:center;gap:.16em}
+.col .pz:active{transform:translateY(.14em) scale(.97)}
+.sello{font-size:.92em;font-weight:900;color:#9A0015;opacity:0;transform:translateY(-.5em) scale(1.35) rotate(-6deg);transition:opacity .25s ease,transform .35s cubic-bezier(.2,.9,.3,1.4);min-height:1em}
+.sello.si{opacity:1;transform:none}
+/* J: ola */
+.j .pz{animation:ola 2.4s ease-in-out infinite;animation-delay:var(--d)}
+.j:hover .pz{animation-play-state:paused}
+@keyframes ola{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-22px) rotate(-3deg)}}
+@media(prefers-reduced-motion:reduce){.j .pz{animation:none}.pz{transition:none}}
+</style>
+</helmet>
+<div style="font-family: 'Bodoni Moda', 'Bodoni MT', Didot, serif; color: #141414; background: #fff">
+
+<section class="panel">
+<p class="letra">Variante F — cada pieza salta y se endereza al pasar el ratón</p>
+<div class="fila f" aria-label="Bodonia">
+<span class="pz" style="--r: -5deg; --y: 0px"><span class="c"><span class="l">B</span></span><span class="p">b</span></span><span class="pz" style="--r: 3deg; --y: 8px"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--r: -2deg; --y: 3px"><span class="c"><span class="l">D</span></span><span class="p">d</span></span><span class="pz" style="--r: 4deg; --y: 14px"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--r: -4deg; --y: 6px"><span class="c"><span class="l">N</span></span><span class="p">n</span></span><span class="pz" style="--r: 2deg; --y: 16px"><span class="c"><span class="l">I</span></span><span class="p">i</span></span><span class="pz suelta" style="--r: -22deg; --y: 40px"><span class="c"><span class="l">a</span></span><span class="p">A</span></span>
+</div>
+<div class="ag">artes gráficas<span>, s. l.</span></div>
+</section>
+
+<section class="panel">
+<p class="letra">Variante G — las piezas están revueltas y se componen solas</p>
+<p class="nota">Pase el ratón por encima o pulse el botón.</p>
+<div class="fila g {{ gCls }}" aria-label="Bodonia">
+<span class="pz" style="--x: -30px; --y: 46px; --r: -34deg"><span class="c"><span class="l">B</span></span><span class="p">b</span></span><span class="pz" style="--x: 14px; --y: -28px; --r: 22deg"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--x: -8px; --y: 58px; --r: 48deg"><span class="c"><span class="l">D</span></span><span class="p">d</span></span><span class="pz" style="--x: 26px; --y: 10px; --r: -18deg"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--x: 40px; --y: -36px; --r: 31deg"><span class="c"><span class="l">N</span></span><span class="p">n</span></span><span class="pz" style="--x: 64px; --y: 50px; --r: -52deg"><span class="c"><span class="l">I</span></span><span class="p">i</span></span><span class="pz suelta" style="--x: 90px; --y: -10px; --r: 70deg"><span class="c"><span class="l">a</span></span><span class="p">A</span></span>
+</div>
+<button type="button" class="accion" onClick="{{ gToggle }}">{{ gTexto }}</button>
+</section>
+
+<section class="panel">
+<p class="letra">Variante H — las piezas se entintan en rojo al tocarlas</p>
+<p class="nota">Pase el ratón o pulse cada pieza; se quedan entintadas.</p>
+<div class="fila">
+<sc-for list="{{ tinta }}" as="it" hint-placeholder-count="7"><button type="button" class="pz bt {{ it.cls }}" onMouseEnter="{{ it.on }}" onClick="{{ it.on }}" aria-label="{{ it.aria }}"><span class="c"><span class="l">{{ it.up }}</span></span><span class="p">{{ it.lo }}</span></button></sc-for>
+</div>
+<button type="button" class="accion" onClick="{{ limpiarTinta }}">Limpiar la tinta</button>
+</section>
+
+<section class="panel">
+<p class="letra">Variante I — pulse cada pieza y deja su letra impresa debajo</p>
+<p class="nota">Al imprimir las siete aparece el resto del nombre.</p>
+<div class="fila" style="gap: .08em">
+<sc-for list="{{ imprime }}" as="it" hint-placeholder-count="7"><span class="col {{ it.wrap }}"><button type="button" class="pz bt" onClick="{{ it.on }}" aria-label="{{ it.aria }}"><span class="c"><span class="l" style="{{ it.lstyle }}">{{ it.up }}</span></span><span class="p">{{ it.lo }}</span></button><span class="sello {{ it.vis }}" aria-hidden="true">{{ it.print }}</span></span></sc-for>
+</div>
+<sc-if value="{{ todoImpreso }}" hint-placeholder-val="{{ false }}"><div class="ag">artes gráficas<span>, s. l.</span></div></sc-if>
+<button type="button" class="accion" onClick="{{ limpiarImpresion }}">Empezar de nuevo</button>
+</section>
+
+<section class="panel" style="border-bottom: 0">
+<p class="letra">Variante J — las piezas se mueven en ola y se paran al pasar el ratón</p>
+<div class="fila j" aria-label="Bodonia">
+<span class="pz" style="--d: 0s"><span class="c"><span class="l">B</span></span><span class="p">b</span></span><span class="pz" style="--d: .15s"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--d: .3s"><span class="c"><span class="l">D</span></span><span class="p">d</span></span><span class="pz" style="--d: .45s"><span class="c"><span class="l">O</span></span><span class="p">o</span></span><span class="pz" style="--d: .6s"><span class="c"><span class="l">N</span></span><span class="p">n</span></span><span class="pz" style="--d: .75s"><span class="c"><span class="l">I</span></span><span class="p">i</span></span><span class="pz suelta" style="--d: .9s"><span class="c"><span class="l">a</span></span><span class="p">A</span></span>
+</div>
+<div class="ag">artes gráficas<span>, s. l.</span></div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1360,"height":2500}}'>
+class Component extends DCLogic {
+renderVals() {
+const st = this.state || {};
+const tinta = st.tinta || {};
+const impreso = st.impreso || {};
+const P = [['B','b'],['O','o'],['D','d'],['O','o'],['N','n'],['I','i'],['a','A']];
+const nombres = ['B','O','D','O','N','I','A'];
+return {
+gCls: st.g ? 'ok' : '',
+gTexto: st.g ? 'Revolver otra vez' : 'Componer',
+gToggle: () => this.setState({ g: !st.g }),
+tinta: P.map((p, i) => ({
+up: p[0], lo: p[1],
+cls: (tinta[i] ? 'tinta' : '') + (i === 6 ? ' suelta' : ''),
+aria: 'Entintar la pieza ' + nombres[i],
+on: () => this.setState({ tinta: Object.assign({}, tinta, { [i]: true }) })
+})),
+limpiarTinta: () => this.setState({ tinta: {} }),
+imprime: P.map((p, i) => ({
+up: p[0], lo: p[1],
+print: nombres[i].toLowerCase(),
+wrap: i === 6 ? 'suelta' : '',
+lstyle: i === 6 ? 'transform: rotate(-90deg)' : '',
+vis: impreso[i] ? 'si' : '',
+aria: 'Imprimir la letra ' + nombres[i],
+on: () => this.setState({ impreso: Object.assign({}, impreso, { [i]: true }) })
+})),
+todoImpreso: P.every((p, i) => !!impreso[i]),
+limpiarImpresion: () => this.setState({ impreso: {} })
+};
+}
+}
+</script>
+</body>
+</html>

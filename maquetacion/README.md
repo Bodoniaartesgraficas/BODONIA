@@ -14,4 +14,4 @@ Aligerar el trabajo de maquetación del día a día. Aquí se suben los archivos
 
 | Trabajo | Descripción | Archivo / enlace | Estado |
 | --- | --- | --- | --- |
-| | | | |
+| Hidalgos de España 2024, Tomo 1 | Libro de fichas de hidalguía, maquetado en IDML a partir del Word y una muestra | [`2024-hidalgos-de-espana-tomo1/`](2024-hidalgos-de-espana-tomo1/) | IDML entregado en el chat; falta subir los archivos y revisarlo en InDesign |

@@ -1,0 +1,112 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Copia.dc.html": {
+      "expand": "fill",
+      "h": 7200,
+      "is_interactive": true,
+      "title": "Copia",
+      "w": 1360,
+      "x": 0,
+      "y": 8200
+    },
+    "CopiaMovil.dc.html": {
+      "h": 7800,
+      "is_interactive": true,
+      "title": "Copia — móvil",
+      "w": 390,
+      "x": 1440,
+      "y": 8200
+    },
+    "Loca.dc.html": {
+      "expand": "fill",
+      "h": 6282,
+      "is_interactive": true,
+      "title": "Variante loca",
+      "w": 1394,
+      "x": 1975,
+      "y": 0
+    },
+    "LocaMovil.dc.html": {
+      "h": 5900,
+      "is_interactive": true,
+      "title": "Variante loca — móvil",
+      "w": 390,
+      "x": 3440,
+      "y": 76
+    },
+    "LogoInteractivo.dc.html": {
+      "h": 2500,
+      "is_interactive": true,
+      "title": "Títulos interactivos",
+      "w": 1360,
+      "x": 5764,
+      "y": 2550
+    },
+    "LogoVariantes.dc.html": {
+      "h": 2500,
+      "title": "Variantes del título",
+      "w": 1360,
+      "x": 5764,
+      "y": -121
+    },
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 6201,
+      "is_interactive": true,
+      "title": "Inicio",
+      "w": 1360,
+      "x": 0,
+      "y": 0
+    },
+    "MainMovil.dc.html": {
+      "h": 6500,
+      "is_interactive": true,
+      "title": "Inicio — móvil",
+      "w": 390,
+      "x": 1440,
+      "y": 0
+    },
+    "Retro.dc.html": {
+      "expand": "fill",
+      "h": 7400,
+      "is_interactive": true,
+      "title": "Retro",
+      "w": 1360,
+      "x": 2400,
+      "y": 8200
+    },
+    "RetroMovil.dc.html": {
+      "h": 7600,
+      "is_interactive": true,
+      "title": "Retro — móvil",
+      "w": 390,
+      "x": 3840,
+      "y": 8200
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-09T16:25:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {},
+  "order": [
+    "Main.dc.html",
+    "Loca.dc.html",
+    "LogoVariantes.dc.html",
+    "LogoInteractivo.dc.html",
+    "MainMovil.dc.html",
+    "LocaMovil.dc.html",
+    "Copia.dc.html",
+    "CopiaMovil.dc.html",
+    "Retro.dc.html",
+    "RetroMovil.dc.html"
+  ],
+  "pages": [],
+  "title": "Bodonia Artes Gráficas — rediseño web"
+}

@@ -271,12 +271,12 @@ projectDialog.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='
   track.addEventListener('pointermove',e=>{ if(d) track.scrollLeft=d.s-(e.clientX-d.x); });
   track.addEventListener('pointerup',()=>{ d=null; }); track.addEventListener('pointercancel',()=>{ d=null; }); })();
 
-// Tamaño de las fotos: la primera fila llena la pantalla y deja asomar la segunda.
+// Tamaño de las fotos: la fila llena la pantalla.
 function medir() {
   const g = galleries[0]; if (!g) return;
   const top = g.getBoundingClientRect().top + scrollY;
-  const asoma = innerWidth <= 600 ? 0 : Math.max(70, innerHeight * .1);
-  document.documentElement.style.setProperty('--alto', Math.max(260, innerHeight - top - asoma - 8) + 'px');
+  const asoma = 0;
+  document.documentElement.style.setProperty('--alto', Math.max(260, innerHeight - top - asoma) + 'px');
 }
 medir(); addEventListener('resize', medir);
 document.querySelector('#contact-form').addEventListener('submit',e=>{

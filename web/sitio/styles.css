@@ -370,3 +370,11 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 
 /* Última pieza (a/A) puesta del revés: el pie queda arriba */
 .pieza .cara .let.let-inversa{transform:skewX(10deg)}
+
+/* Última pieza como antes; solo la letra de arriba (a minúscula) girada 180 grados */
+.pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(180deg)}
+/* Todo el texto de las ventanas en Bodoni */
+.text-dialog,.text-dialog *,.text-dialog input,.text-dialog textarea,.text-dialog button{font-family:var(--serif)!important}
+.text-dialog .antetitulo{font-weight:500}
+#contact-dialog p,#contact-dialog label,#contact-dialog small,#contact-dialog .legal-links,#contact-dialog button,#contact-dialog .map-link{font-size:15px!important}
+#contact-dialog input,#contact-dialog textarea{font-size:17px!important}

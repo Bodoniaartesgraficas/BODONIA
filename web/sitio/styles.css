@@ -382,3 +382,4 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 /* Logo como el original: N en espejo y la a de la última pieza tumbada */
 .pieza .cara .let.let-espejo{transform:skewX(10deg) scaleX(-1)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg)}
+.pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg) scaleY(-1)}

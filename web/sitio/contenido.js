@@ -94,6 +94,7 @@ window.CONTENIDO = {
     portada   Foto que se ve en la galería (vertical, proporción 4:5).
     detalle   Foto que aparece al pasar el ratón por encima. Opcional.
     completa  Foto que se abre al pulsar el trabajo. Opcional: si no está, se usa la portada.
+    escenas   Lista de fotos que salen en fila al pulsar el trabajo, detrás de la portada. Opcional: si no está, se usan detalle y completa.
     encuadre  Opcional. Qué parte de la portada se ve si no es 4:5: "50% 50%" es el centro;
               el primer número mueve a izquierda/derecha y el segundo arriba/abajo.
   */

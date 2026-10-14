@@ -29,6 +29,7 @@ C.filas.forEach((fila, fi) => {
     const article = document.createElement('article');
     article.className = 'project'; article.dataset.title = p.titulo; article.dataset.type = p.tipo;
     article.dataset.full = p.completa || p.portada;
+    article.dataset.escenas = JSON.stringify([p.portada].concat(p.escenas || [p.detalle, p.completa]).filter(Boolean));
     const button = document.createElement('button');
     button.className = 'project-image'; button.setAttribute('aria-label', 'Abrir ' + p.titulo);
     const cover = document.createElement('img');
@@ -176,23 +177,71 @@ document.querySelectorAll('dialog').forEach(dialog=>{
     if(e.target === dialog && (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom)) dialog.close();
   });
 });
+// Vista de un trabajo: la foto pulsada crece hasta llenar la pantalla y después aparecen sus escenas en fila.
+const track = document.querySelector('#project-track');
+let origen = null;
 function renderProject(index) {
   selected = (index + visible.length) % visible.length;
   const project = visible[selected];
-  const name = project.dataset.title;
-  document.querySelector('#project-title').textContent = name;
+  document.querySelector('#project-title').textContent = project.dataset.title;
   document.querySelector('#project-type').textContent = project.dataset.type;
-  const image = document.querySelector('#project-full');
-  image.src = project.dataset.full;
-  image.alt = `${name}: vista completa del trabajo`;
+  track.textContent = '';
+  JSON.parse(project.dataset.escenas).forEach((src, i) => {
+    const fig = document.createElement('figure'); fig.className = 'escena';
+    const img = document.createElement('img'); img.src = src; img.draggable = false;
+    img.alt = i ? `${project.dataset.title}: escena ${i + 1}` : project.dataset.title;
+    fig.appendChild(img); track.appendChild(fig);
+  });
+  track.scrollLeft = 0;
 }
+function rectDe(el) { const r = el.getBoundingClientRect(); return {left:r.left+'px', top:r.top+'px', width:r.width+'px', height:r.height+'px'}; }
+function abrirProyecto(project) {
+  controls.forEach(c => c.stop());
+  document.querySelectorAll('dialog[open]').forEach(d => d.close());
+  renderProject(visible.indexOf(project));
+  origen = project.querySelector('.cover');
+  projectDialog.showModal();
+  if (reducedMotion.matches) return;
+  const destino = track.querySelector('.escena');
+  const clon = document.createElement('img'); clon.className = 'vuelo'; clon.src = origen.src; clon.alt = '';
+  projectDialog.appendChild(clon);
+  projectDialog.classList.add('volando');
+  const desde = rectDe(origen), hasta = rectDe(destino);
+  const vuelo = clon.animate([desde, hasta], {duration: 900, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'});
+  vuelo.finished.then(() => { projectDialog.classList.remove('volando'); clon.remove(); });
+}
+function cerrarProyecto() {
+  if (reducedMotion.matches || !origen || !projectDialog.open) return projectDialog.close();
+  const primera = track.querySelector('.escena');
+  const r = origen.getBoundingClientRect();
+  if (track.scrollLeft > 10 || r.bottom < 0 || r.top > innerHeight) return projectDialog.close();
+  const clon = document.createElement('img'); clon.className = 'vuelo'; clon.src = primera.querySelector('img').src; clon.alt = '';
+  projectDialog.appendChild(clon); projectDialog.classList.add('volando', 'cerrando');
+  clon.animate([rectDe(primera), rectDe(origen)], {duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'})
+    .finished.then(() => { projectDialog.close(); projectDialog.classList.remove('volando', 'cerrando'); clon.remove(); });
+}
+projectDialog.querySelector('.close').addEventListener('click', e => { e.stopImmediatePropagation(); cerrarProyecto(); }, true);
+projectDialog.addEventListener('cancel', e => { e.preventDefault(); cerrarProyecto(); });
 projects.forEach(project=>project.querySelector('button').addEventListener('click',e=>{
   if(dragged && e.detail) { dragged = false; return; }
-  renderProject(visible.indexOf(project)); showDialog(projectDialog);
+  abrirProyecto(project);
 }));
 document.querySelector('#project-prev').addEventListener('click',()=>renderProject(selected-1));
 document.querySelector('#project-next').addEventListener('click',()=>renderProject(selected+1));
-projectDialog.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();renderProject(selected+(e.key==='ArrowRight'?1:-1));} });
+projectDialog.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();track.scrollBy({left:(e.key==='ArrowRight'?1:-1)*track.clientWidth*.6,behavior:'smooth'});} });
+// Arrastrar las escenas con el ratón
+(function(){ let d=null; track.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse')return; d={x:e.clientX,s:track.scrollLeft}; track.setPointerCapture(e.pointerId); });
+  track.addEventListener('pointermove',e=>{ if(d) track.scrollLeft=d.s-(e.clientX-d.x); });
+  track.addEventListener('pointerup',()=>{ d=null; }); track.addEventListener('pointercancel',()=>{ d=null; }); })();
+
+// Tamaño de las fotos: la primera fila llena la pantalla y deja asomar la segunda.
+function medir() {
+  const g = galleries[0]; if (!g) return;
+  const top = g.getBoundingClientRect().top + scrollY;
+  const asoma = innerWidth <= 600 ? 0 : Math.max(70, innerHeight * .1);
+  document.documentElement.style.setProperty('--alto', Math.max(260, innerHeight - top - asoma - 8) + 'px');
+}
+medir(); addEventListener('resize', medir);
 document.querySelector('#contact-form').addEventListener('submit',e=>{
   e.preventDefault();
   const form = e.currentTarget, status = document.querySelector('#form-status'), button = form.querySelector('button[type=submit]');

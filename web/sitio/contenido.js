@@ -122,7 +122,6 @@ window.CONTENIDO = {
         detalle: "fotos/proyectos/01-la-tortajada-detalle.jpg",
         completa: "fotos/proyectos/01-la-tortajada-completa.jpg",
         escenas: ["fotos/proyectos/01-la-tortajada-interior-1.jpg","fotos/proyectos/01-la-tortajada-interior-2.jpg","fotos/proyectos/01-la-tortajada-interior-3.jpg","fotos/proyectos/01-la-tortajada-interior-4.jpg"],
-        encuadre: "50% 72%",
       },
       {
         titulo: "Territorios de la mirada",

@@ -289,3 +289,8 @@ html:not(.pagina),html:not(.pagina) body{background:#0b0b0b}
 @keyframes b-late{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(hover:hover) and (pointer:fine){.gallery .project-image,.gallery.dragging,.gallery.dragging button{cursor:none}}
 @media(hover:none),(prefers-reduced-motion:reduce){#cursor-b{display:none}}
+/* Pantalla de carga en negro */
+#loader{background:#0b0b0b}
+.loader-pie{color:#f4f2ee}
+.loader-cuenta{color:#c8243a}
+.loader-barra{background:#c8243a}

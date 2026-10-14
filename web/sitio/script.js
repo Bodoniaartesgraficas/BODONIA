@@ -302,7 +302,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const imgs = [...document.querySelectorAll('#proyectos img.cover')].slice(0, 3);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 1100, maximo = 5000;
+  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 5000, maximo = 9000;
   let mostrado = 0;
   document.documentElement.classList.add('cargando');
   function paso(now) {

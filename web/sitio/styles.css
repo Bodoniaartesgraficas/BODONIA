@@ -278,3 +278,7 @@ html:not(.pagina),html:not(.pagina) body{background:#0b0b0b}
 @keyframes fondo-v{from{background:rgb(11 11 11 / 0)}to{background:#0b0b0b}}
 @keyframes fondo-out{from{background:#0b0b0b}to{background:rgb(11 11 11 / 0)}}
 .escena img{background:#1a1a1a}
+/* Logo a la izquierda, sin halo */
+.intro{left:0!important;transform:none;padding-left:var(--gutter)!important}
+.intro .brand{filter:none}
+.intro .logo>span[aria-hidden]:last-child{text-shadow:none}

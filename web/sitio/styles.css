@@ -88,12 +88,18 @@ html.pagina body{display:block;min-height:100dvh}
 .pie::before{content:"";position:absolute;left:0;top:.2em;width:.34em;height:.05em;background:#C9CBCE;box-shadow:0 .04em 0 #0A0A0B}
 .pieza,.tipo,.fila .foto{transition:transform .28s cubic-bezier(.23,1,.32,1)}
 .solo-lectores{position:absolute;width:1px;height:1px;overflow:hidden}
-:root{--logo:clamp(36px,min(11vw,10.5dvh),130px)}
+:root{--logo:6.2vw}
 .site-header{justify-content:flex-end}
-.intro{display:block;padding:8px var(--gutter) 28px}
+.intro{display:block;padding:4px var(--gutter) 12px}
 .intro .brand{display:inline-block}
-.logo{margin:0;display:flex;flex-direction:column;gap:.18em;font-size:var(--logo);line-height:1;font-weight:400}
+.logo{margin:0;display:flex;flex-direction:column;gap:.12em;font-size:var(--logo);line-height:1;font-weight:400}
 .logo>span[aria-hidden]:first-of-type{padding-left:.3em}
 :root{--card:min(calc((100vw - 2 * var(--gutter) - 2 * var(--gap))/3),calc((100dvh - 76px - 2.3 * var(--logo) - 84px)*.8))}
 @media(max-width:900px){:root{--card:min(calc((100vw - 2 * var(--gutter) - var(--gap))/2),calc((100dvh - 76px - 2.3 * var(--logo) - 84px)*.8))}}
 @media(max-width:600px){:root{--card:min(calc(100vw - 56px),calc((100dvh - 76px - 2.3 * var(--logo) - 84px)*.8))}}
+
+/* El titular-logo gana a las reglas generales de h1 de la página */
+.intro .logo{font-size:var(--logo)!important;font-weight:400!important;letter-spacing:0!important;max-width:none!important}
+.intro .logo .logo-sub{letter-spacing:0}
+
+.servicios-pie{margin:24px 0 0;font:400 24px/1.3 var(--serif);color:var(--red)}

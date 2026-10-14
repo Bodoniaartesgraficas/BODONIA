@@ -35,13 +35,14 @@ window.CONTENIDO = {
 
   // Ventana «Qué hacemos»: añade o quita bloques { nombre, detalle }
   servicios: {
-    titulo: "Qué hacemos.",
+    titulo: "Todo lo que diseñamos e imprimimos.",
     lista: [
       { nombre: "Damos forma", detalle: "Diseño gráfico, diseño editorial y maquetación." },
-      { nombre: "Hacemos libros", detalle: "Catálogos de arte, revistas y facsímiles." },
-      { nombre: "Llenamos paredes y manos", detalle: "Carteles, mupis, folletos, dípticos y desplegables." },
-      { nombre: "Y lo de cada día", detalle: "Tarjetas, sobres, postales y papelería." },
+      { nombre: "Hacemos libros", detalle: "Libros, catálogos, revistas y facsímiles." },
+      { nombre: "Llenamos paredes y manos", detalle: "Cartelería, mupis, folletos, desplegables y trípticos." },
+      { nombre: "Y lo de cada día", detalle: "Tarjetas, postales y papelería." },
     ],
+    pie: "Y lo que se te ocurra.",
   },
 
   // Ventana «Hablemos»

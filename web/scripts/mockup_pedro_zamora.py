@@ -33,7 +33,53 @@ def place(canvas, tex, quad, shade=None):
     canvas.alpha_composite(out)
 
 
-def mesa(W, H, seed=3):
+def blur_noise(rng, W, H, fh, fw):
+    r = rng.random((max(fh, 4), max(fw, 4)))
+    return np.array(Image.fromarray((r * 255).astype('uint8')).resize((W, H), Image.BICUBIC)).astype(float) / 255 - .5
+
+
+def superficie(W, H, kind, seed):
+    """Lino terracota, alfombra beige o madera negra: las superficies de las referencias."""
+    rng = np.random.default_rng(seed)
+    yy, xx = np.mgrid[0:H, 0:W]
+    folds = blur_noise(rng, W, H, 5, 7) * 1.0 + blur_noise(rng, W, H, 11, 15) * .5
+    if kind == 'lino':
+        base = np.array([172, 98, 70], float)
+        weave = (np.sin(xx / SS * 1.7) * np.sin(yy / SS * 1.7)) * .018 + blur_noise(rng, W, H, H // 2, W // 2) * .05
+        img = base[None, None, :] * (1 + folds[:, :, None] * .42 + weave[:, :, None])
+    elif kind == 'alfombra':
+        base = np.array([206, 190, 166], float)
+        fine = blur_noise(rng, W, H, H // 3, W // 3) * .14 + blur_noise(rng, W, H, H // 8, W // 8) * .10
+        img = base[None, None, :] * (1 + folds[:, :, None] * .16 + fine[:, :, None])
+    else:  # negro: madera oscura de ébano con veta suave
+        base = np.array([46, 40, 36], float)
+        veta = blur_noise(rng, W, H, H, W // 400) * .30 + blur_noise(rng, W, H, H // 3, W // 90) * .16
+        img = base[None, None, :] * (1 + veta[:, :, None] + folds[:, :, None] * .10)
+    return Image.fromarray(np.clip(img, 0, 255).astype('uint8')).convert('RGBA')
+
+
+def luz_ventana(canvas, ang, centro, ancho, sep, fuerza, tinte=(1.0, 1.0, 1.0)):
+    """Sombras alargadas de una ventana, como en las referencias."""
+    W, H = canvas.size
+    m = Image.new('L', (W, H), 0)
+    d = ImageDraw.Draw(m)
+    L = max(W, H) * 2
+    for i, off in enumerate((-1, 0, 1)):
+        c = (centro[0] + off * sep, centro[1])
+        d.polygon(rot([(c[0] - ancho / 2, c[1] - L), (c[0] + ancho / 2, c[1] - L),
+                       (c[0] + ancho / 2, c[1] + L), (c[0] - ancho / 2, c[1] + L)], ang, W / 2, H / 2), fill=255)
+    m = np.array(m.filter(ImageFilter.GaussianBlur(26 * SS))).astype(float) / 255
+    arr = np.array(canvas).astype(float)
+    sombra_ = 1 - fuerza * m
+    cal = 1 + .07 * (1 - m)
+    for c, t in zip(range(3), ((1.04, 1.0, .93))):
+        arr[:, :, c] *= sombra_ * cal * (1 - (1 - tinte[c]) * m) * t
+    return Image.fromarray(np.clip(arr, 0, 255).astype('uint8')).convert('RGBA')
+
+
+def mesa(W, H, seed=3, kind='madera'):
+    if kind != 'madera':
+        return superficie(W, H, kind, seed)
     rng = np.random.default_rng(seed)
     base = np.array([196, 160, 120], float)
     yy = np.linspace(0, 1, H)[:, None]
@@ -157,13 +203,14 @@ def libro_cerrado(cubierta, out):
     franja(cv, a, b, vv, .90, 1.0, tablero)
     place(cv, front, quad, shade=lambda im: cierre_luz(im, .16))
     d.line([quad[0], quad[1], quad[2]], fill=(98, 88, 80, 255), width=2 * SS)
+    cv = luz_ventana(cv, 24, (W * .30, H * .5), 230 * SS, 560 * SS, .17)
     cv = cv.resize((W // SS, H // SS), Image.LANCZOS).convert('RGB')
     cv.save(out, quality=90)
 
 
-def libro_abierto(inter, out, tam, ang, cx, cy, ancho, seed, mesa_seed):
+def libro_abierto(inter, out, tam, ang, cx, cy, ancho, seed, mesa_seed, kind='madera', luz=None):
     W, H = tam[0] * SS, tam[1] * SS
-    cv = mesa(W, H, seed=mesa_seed)
+    cv = mesa(W, H, seed=mesa_seed, kind=kind)
     spread = Image.open(inter).convert('RGB')
     sw, sh = spread.size
     w = int(W * ancho)
@@ -197,6 +244,8 @@ def libro_abierto(inter, out, tam, ang, cx, cy, ancho, seed, mesa_seed):
         c = int(228 + rng.integers(-12, 8))
         d.line([(a[0], a[1] + v[1] * tt), (b[0], b[1] + v[1] * tt)], fill=(c, c - 6, c - 22, 255), width=SS)
     place(cv, spread, quad, shade=lambda im: cierre_luz(im, .08))
+    if luz:
+        cv = luz_ventana(cv, *luz)
     cv = cv.resize((W // SS, H // SS), Image.LANCZOS).convert('RGB')
     cv.save(out, quality=90)
 
@@ -205,14 +254,15 @@ if __name__ == '__main__':
     src, dst = sys.argv[1], sys.argv[2]
     cub = glob.glob(src + '/*PORTADA_EN_NOIR.png')[0]
     libro_cerrado(cub, dst + '/05-pedro-zamora-en-noir-portada.jpg')
+    # (patrón, giro, cx, cy, ancho, seed, seed de mesa, superficie, luz de ventana)
     esc = [
-        ('*INTERIOR.png', (-2.0, .50, .47, .74, 11, 11)),
-        ('*INTERIOR3.png', (1.6, .50, .47, .74, 12, 12)),
-        ('*INTERIOR4.png', (-1.2, .50, .47, .74, 13, 13)),
-        ('*INTERIOR6.png', (2.2, .50, .47, .74, 14, 14)),
+        ('*INTERIOR.png', (-3.0, .50, .50, .68, 11, 21, 'lino', (22, (2600 * SS * .62, 0), 300 * SS, 760 * SS, .30))),
+        ('*INTERIOR3.png', (2.4, .50, .50, .70, 12, 22, 'alfombra', (-18, (2600 * SS * .36, 0), 260 * SS, 700 * SS, .22))),
+        ('*INTERIOR4.png', (-1.8, .50, .50, .70, 13, 23, 'negro', (28, (2600 * SS * .55, 0), 240 * SS, 640 * SS, .55))),
+        ('*INTERIOR6.png', (3.2, .50, .50, .68, 14, 24, 'madera', (20, (2600 * SS * .40, 0), 280 * SS, 720 * SS, .30))),
     ]
-    for n, (pat, (ang, fx, fy, ancho, seed, ms)) in enumerate(esc, 1):
+    for n, (pat, (ang, fx, fy, ancho, seed, ms, kind, luz)) in enumerate(esc, 1):
         f = glob.glob(src + '/' + pat)[0]
         libro_abierto(f, dst + f'/05-pedro-zamora-en-noir-abierto-{n}.jpg', (2600, 1650), ang,
-                      2600 * SS * fx, 1650 * SS * fy, ancho, seed, ms)
+                      2600 * SS * fx, 1650 * SS * fy, ancho, seed, ms, kind, luz)
     print('ok')

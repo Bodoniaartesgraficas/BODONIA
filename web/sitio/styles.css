@@ -325,3 +325,24 @@ dialog::backdrop{background:rgb(0 0 0 / 55%)}
 @media(max-width:900px){.site-header .lema{display:none}}
 .text-dialog{--red:#ee4a62;--rojo:#ee4a62}
 .text-dialog .antetitulo{color:#ee4a62;white-space:nowrap}
+
+/* Ventanas en gris con el estilo de Variante loca: 35 enorme, subrayado rojo y cinta de palabras */
+@font-face{font-family:'Bodoni Moda';src:url(fonts/bodoni-moda-black-italic.woff2) format('woff2');font-weight:900;font-style:italic;font-display:swap}
+.text-dialog{--paper:#38393b;background:#38393b;border-color:#4a4b4e;--muted:#bdb9b1;--line:#505155}
+.text-dialog input,.text-dialog textarea{border-color:#6a6b6f}
+.titular em{background:#9A0015;color:#fff!important;padding:0 .2em;font-style:italic;font-weight:900;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.titular{font-weight:900;font-style:italic}
+.titular span{font-weight:400;font-style:normal}
+.gran35{position:absolute;right:56px;top:34px;font:900 italic clamp(120px,17vw,230px)/.78 'Bodoni Moda',serif;letter-spacing:-.06em;color:#f4f2ee;opacity:.12;pointer-events:none}
+#about-dialog .dialog-content,#services-dialog .dialog-content{position:relative}
+.services dt{font-weight:400}
+.services>div:nth-child(3n+2) dt{font-style:italic;font-weight:900}
+.marq{overflow:hidden;white-space:nowrap;display:flex;border-top:1px solid #505155;padding:14px 0;background:#9A0015;color:#fff;font:italic 900 clamp(15px,1.5vw,20px)/1 'Bodoni Moda',serif;letter-spacing:.04em}
+.marq div{flex-shrink:0;animation:corre 26s linear infinite;padding-right:1.5em}
+@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@media(prefers-reduced-motion:reduce){.marq div{animation:none}}
+html:not(.pagina) main{padding-bottom:var(--gutter)}
+#about-dialog .promise,#services-dialog .servicios-pie{color:#f4f2ee!important}
+.gran35{top:auto;bottom:34px;right:40px}
+#about-dialog .dialog-content{padding-bottom:70px}
+#about-dialog .titular{font-size:clamp(22px,2.5vw,34px)}

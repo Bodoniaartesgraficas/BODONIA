@@ -295,3 +295,6 @@ html:not(.pagina),html:not(.pagina) body{background:#0b0b0b}
 .loader-cuenta{color:#c8243a}
 .loader-barra{background:#c8243a}
 #cursor-b{width:42px}
+/* Degradado oscuro y suave arriba, para que el logo se lea sin parecer un parche */
+html:not(.pagina) body::before{content:"";position:fixed;left:0;right:0;top:0;height:clamp(140px,22vh,220px);z-index:19;pointer-events:none;background:linear-gradient(to bottom,rgb(11 11 11 / 72%) 0%,rgb(11 11 11 / 38%) 45%,rgb(11 11 11 / 0) 100%)}
+.intro .logo>span[aria-hidden]:last-child{color:#d8344a!important}

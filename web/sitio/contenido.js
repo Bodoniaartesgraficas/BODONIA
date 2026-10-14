@@ -130,6 +130,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/02-territorios-de-la-mirada-portada.jpg",
         detalle: "fotos/proyectos/02-territorios-de-la-mirada-detalle.jpg",
         completa: "fotos/proyectos/02-territorios-de-la-mirada-completa.jpg",
+        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg"],
       },
       {
         titulo: "Santa Fe—Mauthausen—Santa Fe",
@@ -137,6 +138,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/03-santa-fe-mauthausen-portada.jpg",
         detalle: "fotos/proyectos/03-santa-fe-mauthausen-detalle.jpg",
         completa: "fotos/proyectos/03-santa-fe-mauthausen-completa.jpg",
+        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg"],
       },
       {
         titulo: "Primitivismo y modernidad",
@@ -144,6 +146,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
+        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg"],
         encuadre: "50% 65%",
       },
       {
@@ -167,27 +170,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
-      },
-      {
-        titulo: "Yauco. Esencia y patrimonio cultural",
-        tipo: "Libro",
-        portada: "fotos/proyectos/07-yauco-portada.jpg",
-        detalle: "fotos/proyectos/07-yauco-detalle.jpg",
-        completa: "fotos/proyectos/07-yauco-completa.jpg",
-      },
-      {
-        titulo: "RDG. Colegio de Dentistas de Granada",
-        tipo: "Revista",
-        portada: "fotos/proyectos/08-revista-rdg-portada.jpg",
-        detalle: "fotos/proyectos/08-revista-rdg-detalle.jpg",
-        completa: "fotos/proyectos/08-revista-rdg-completa.jpg",
-      },
-      {
-        titulo: "Pequeño Oso y la montaña de hielo",
-        tipo: "Revista",
-        portada: "fotos/proyectos/09-pequeno-oso-portada.jpg",
-        detalle: "fotos/proyectos/09-pequeno-oso-detalle.jpg",
-        completa: "fotos/proyectos/09-pequeno-oso-completa.jpg",
+        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-4.jpg"],
       },
       ],
     },

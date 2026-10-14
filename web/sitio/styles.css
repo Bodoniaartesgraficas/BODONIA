@@ -362,3 +362,8 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 /* La cara superior es un poco más alta y la letra cabe dentro */
 .cara{height:.74em!important}
 .cara .let{font-size:.78em!important;line-height:1.05;padding:.02em 0}
+
+.cara .let.let-inversa{transform:scaleX(-1) skewX(10deg)}
+/* Ventanas: tipografía más ligera */
+.titular,.titular em{font-weight:400!important}
+.gran35{font-weight:400}

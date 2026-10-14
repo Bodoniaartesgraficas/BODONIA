@@ -127,13 +127,28 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 @media(max-width:600px){.site-header{position:relative}}
 
 /* Pantalla de carga */
-#loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--paper);transition:opacity .6s ease,visibility .6s}
-.loader-logo{font:400 min(13vw,130px)/1 var(--serif);animation:loader-in .6s var(--ease) both}
-#loader .pieza{animation:levanta 1.1s ease-in-out infinite;animation-delay:calc(var(--i) * .12s)}
-#loader.hecho{opacity:0;visibility:hidden}
+#loader{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--paper);transition:transform 1.1s cubic-bezier(.76,0,.24,1)}
+.loader-logo{font:400 min(13vw,130px)/1 var(--serif);transition:transform 1.1s cubic-bezier(.76,0,.24,1),opacity .5s ease}
+#loader .pieza{animation:aparece .7s cubic-bezier(.22,1,.36,1) both,levanta 1.1s ease-in-out .8s infinite;animation-delay:calc(var(--i) * .08s),calc(.8s + var(--i) * .12s)}
+.loader-pie{position:absolute;left:var(--gutter);right:var(--gutter);bottom:28px;display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+.loader-cuenta{font:italic 400 clamp(56px,9vw,120px)/.8 var(--serif);letter-spacing:-.02em;color:#9A0015;font-variant-numeric:tabular-nums;text-transform:none}
+.loader-barra{position:absolute;left:0;right:0;bottom:0;height:3px;background:#9A0015;transform:scaleX(0);transform-origin:left}
+#loader.hecho{transform:translateY(-100%)}
+#loader.hecho .loader-logo{transform:translateY(40vh);opacity:0}
+html.cargando{overflow:hidden}
+html.entra .project-image{animation:destapa 1.3s cubic-bezier(.76,0,.24,1) both}
+html.entra .project-image img.cover{animation:acerca 1.6s cubic-bezier(.22,1,.36,1) both}
+html.entra .works:nth-child(2) .project-image{animation-delay:.15s}
+html.entra .project:nth-child(2) .project-image{animation-delay:.08s}
+html.entra .project:nth-child(3) .project-image{animation-delay:.16s}
+html.entra .project:nth-child(4) .project-image{animation-delay:.24s}
+html.entra .intro{animation:sube .9s cubic-bezier(.22,1,.36,1) .2s both}
+@keyframes aparece{from{opacity:0;translate:0 .5em}to{opacity:1;translate:0 0}}
 @keyframes levanta{0%,60%,100%{translate:0 0}25%{translate:0 -.22em}}
-@keyframes loader-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.loader-logo,#loader .pieza{animation:none}#loader{transition:none}}
+@keyframes destapa{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes acerca{from{scale:1.25}to{scale:1}}
+@keyframes sube{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#loader,#loader .pieza,.loader-logo{animation:none;transition:none}html.entra *{animation:none!important}}
 
 /* Qué hacemos: lista de productos a dos columnas */
 .services{display:grid;grid-template-columns:1fr 1fr;column-gap:32px;row-gap:2px;margin:24px 0 0}
@@ -159,3 +174,9 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 .titular em{display:block}
 #services-dialog .servicios-pie{font:italic 400 clamp(26px,3.4vw,38px)/1.2 var(--serif);color:var(--rojo);margin:36px 0 0}
 .works+.works{margin-top:40px}
+/* Qué hacemos: título en una línea, productos en redonda, pie en cursiva pequeña */
+#services-dialog .titular{font-size:clamp(24px,3.3vw,40px);max-width:none}
+#services-dialog .titular em{display:inline}
+@media(min-width:700px){#services-dialog .titular{white-space:nowrap}}
+#services-dialog .services>div dt{font-style:normal}
+#services-dialog .servicios-pie{font-size:clamp(18px,1.8vw,22px);margin-top:28px}

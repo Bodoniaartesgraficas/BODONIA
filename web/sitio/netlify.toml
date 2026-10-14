@@ -21,6 +21,6 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-  for = "/assets/*"
+  for = "/fotos/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"

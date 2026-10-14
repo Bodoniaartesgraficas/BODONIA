@@ -1,5 +1,6 @@
 @font-face{font-family:'Bodoni Moda';src:url(fonts/bodoni-moda.woff2) format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
 @font-face{font-family:'DM Sans';src:url(fonts/dm-sans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
+/* Colores y medidas principales: --red es el rojo Bodonia, --ink el texto, --muted el gris. */
 :root{--red:#a32429;--ink:#202020;--muted:#646464;--line:#dededb;--paper:#fff;--gutter:32px;--gap:16px;--card:min(calc((100vw - 2 * var(--gutter) - 3 * var(--gap))/4),calc((100dvh - 300px)*.8));--serif:'Bodoni Moda','Bodoni 72',Didot,serif;--sans:'DM Sans',Arial,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}body{height:100dvh;min-width:320px;display:grid;grid-template-rows:88px minmax(0,1fr) 76px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:13px;-webkit-font-smoothing:antialiased}button,input,textarea{font:inherit}button,a{-webkit-tap-highlight-color:transparent}button{color:inherit;cursor:pointer;border:0;border-radius:0;background:none;padding:0}a{color:inherit;text-decoration:none}button:disabled{opacity:.3;cursor:default}button:active:not(:disabled){transform:translateY(1px)}svg{width:20px;height:20px;stroke:currentColor;stroke-width:1.2;flex-shrink:0}::selection{background:#a3242928;color:var(--ink)}:focus-visible{outline:2px solid var(--red);outline-offset:4px}input,textarea{caret-color:var(--red)}
 .site-header{display:flex;align-items:center;justify-content:space-between;padding:0 var(--gutter)}.brand{display:block}.brand img{display:block;width:124px;height:auto}.site-header nav{display:flex;gap:32px;align-items:center}.site-header nav a,.site-header nav button{padding:12px 0;font-size:12px}.site-header [aria-current]{color:var(--red)}
@@ -57,13 +58,23 @@ main{grid-template-rows:minmax(0,1fr) auto;padding-bottom:36px}
 @media(max-width:360px){.brand img{width:78px}.site-header nav button{padding-inline:8px}}
 @media(max-height:600px) and (min-width:601px){body{grid-template-rows:60px minmax(0,1fr)}main{grid-template-rows:minmax(0,1fr) auto;padding-bottom:24px}.intro{min-height:0;gap:12px;padding:12px var(--gutter) 20px}.intro h1{font-size:30px}.intro p{font-size:13px}}
 
-/* Información legal y formulario (añadido para publicar) */
+/* Galería editable: cada trabajo tiene una foto de portada y otra de detalle (al pasar el ratón). */
+.project-image img.detalle{object-fit:cover;object-position:center;transform:none}
+
+/* Enlaces legales y formulario */
 .legal-links{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:20px;font-size:12px;color:var(--muted)}
-.legal-links button{color:inherit;text-decoration:underline;text-underline-offset:3px;padding:6px 0}
-form small button{color:inherit;text-decoration:underline;text-underline-offset:3px;font-size:inherit}
+.legal-links a,form small a{text-decoration:underline;text-underline-offset:3px}
 .form-status{color:var(--red);font-size:13px;line-height:1.6;margin:0}.form-status:empty{display:none}
-.legal{border-top:1px solid var(--line)}.legal:last-child{border-bottom:1px solid var(--line)}
-.legal summary{cursor:pointer;font:400 23px/1.3 var(--serif);padding:18px 0;list-style-position:inside}
+@media(hover:hover) and (pointer:fine){.legal-links a:hover,form small a:hover{color:var(--red)}}
+
+/* Páginas sencillas (información legal, gracias, 404) */
+html.pagina,html.pagina body{height:auto;overflow:auto}
+html.pagina body{display:block;min-height:100dvh}
+.pagina main{display:block;padding:24px var(--gutter) 64px}
+.pagina .intro{padding:24px 0 32px}
+.pagina .intro a{color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.pagina .site-header nav a{min-height:38px;padding:9px 18px;border-radius:999px;font-size:12px;line-height:18px;color:#fff;background:var(--red)}
+.legal{border-top:1px solid var(--line);max-width:880px}.legal:last-of-type{border-bottom:1px solid var(--line)}
+.legal summary{cursor:pointer;font:400 23px/1.3 var(--serif);padding:18px 0}
 .legal-b{display:flex;flex-direction:column;gap:12px;font-size:14px;line-height:1.7;color:var(--muted);max-width:70ch;padding:0 0 28px}
 .legal-b p{margin:0}.legal-b .legal-h{color:var(--ink);font-weight:500}
-@media(hover:hover) and (pointer:fine){.legal-links button:hover,form small button:hover{color:var(--red)}}

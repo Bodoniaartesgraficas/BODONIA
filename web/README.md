@@ -10,7 +10,7 @@ Contexto completo y pendientes: [`docs/resumenes/2026-10-14-web-rediseno-y-publi
 
 | Carpeta | Qué hay | Origen |
 | --- | --- | --- |
-| [`sitio/`](sitio/) | **Web lista para Netlify: versión daigual** (galería horizontal de proyectos). `index.html`, `styles.css`, `script.js`, fotos, fuentes Bodoni Moda y DM Sans, formulario, información legal, `gracias.html`, `404.html` y `netlify.toml`. Se arrastra esta carpeta a Netlify | Exportada de `../futuros-proyectos/daigual/` con [`scripts/exportar_daigual.py`](scripts/exportar_daigual.py) |
+| [`sitio/`](sitio/) | **Web en edición** basada en la idea de daigual: una página con galería de trabajos y ventanas de El taller, Qué hacemos y Hablemos. Textos en `contenido.js`, fotos en `fotos/`, información legal en `legal.html`. Cómo editarla: [`EDITAR.md`](EDITAR.md) | Montada a partir de `../futuros-proyectos/daigual/` |
 | [`rediseno/web-canvas/project/`](rediseno/web-canvas/project/) | Tableros del rediseño: Inicio, Variante loca, Copia y Retro, cada uno en escritorio y móvil, más pruebas del logo | `bodonia-artifacts.zip` |
 | [`rediseno/web-canvas/project/PLAN-PUBLICACION.md`](rediseno/web-canvas/project/PLAN-PUBLICACION.md) | Plan de publicación en 6 fases (Netlify + dominio bodonia.es de OVH) | `bodonia-artifacts.zip` |
 | [`rediseno/assets/`](rediseno/assets/) | Logos sin fondo, fotos de trabajos, calendario, sobre y fuente Bodoni Moda | `bodonia-artifacts.zip` |
@@ -27,17 +27,14 @@ No subido por tamaño: `mockup finalizados/territorios_v2_ligero.mp4` (9,8 MB), 
 | Entregable | Descripción | Archivo / enlace | Estado |
 | --- | --- | --- | --- |
 | Rediseño web | Cuatro versiones (Inicio, Variante loca, Copia, Retro) en escritorio y móvil | [`rediseno/web-canvas/project/`](rediseno/web-canvas/project/) · [artifact](https://claude.ai/artifact/5gNNFqz4XXHA9tKQtcwrim) | Descartado para publicar: se elige daigual (14/10/2026) |
-| Web para publicar (daigual) | HTML estático, formulario con Netlify Forms, información legal con bodonia.es y sin cookies | [`sitio/`](sitio/) | Lista, pendiente de confirmar y subir a Netlify |
+| Web (basada en daigual) | Página editable: textos en `contenido.js`, fotos en `fotos/`, formulario con Netlify Forms, información legal | [`sitio/`](sitio/) · [`EDITAR.md`](EDITAR.md) | En edición; no publicar todavía |
 | Plan de publicación | Netlify + bodonia.es | [`PLAN-PUBLICACION.md`](rediseno/web-canvas/project/PLAN-PUBLICACION.md) | Fases 1 y 2 hechas (falta confirmar versión); siguiente: Fase 3 |
 | Mockups de trabajos | Imágenes para la galería | [`mockups-finalizados/`](mockups-finalizados/) | Hecho |
 | Portada de Facebook | 3280×1440 | [`rediseno/fb/`](rediseno/fb/) | Hecho |
 
-## Notas de la exportación (versión daigual)
+## Estado (14/10/2026)
 
-- Versión elegida para publicar: **daigual** (14/10/2026). Diseño sin cambios respecto al prototipo.
-- Tipografías Bodoni Moda y DM Sans alojadas en la propia web (`sitio/fonts/`, licencia OFL), sin Google Fonts.
-- Los cinco mockups PNG (2-3 MB cada uno) pasan a JPEG de alta calidad (≈ 0,2-0,4 MB) con el mismo aspecto.
-- Formulario «Hablemos»: se envía con Netlify Forms (antes abría el programa de correo) y el botón pasa de «Preparar correo» a «Enviar». En Netlify hay que activar la detección de formularios y el aviso por correo a info@bodonia.es.
-- Información legal: el prototipo no tenía. Se añade una ventana con Aviso legal, Condiciones de uso, Política de cookies y Política de privacidad (los textos de la web actual, con bodonia.es, sin cookies y con el formulario y Netlify). Se abre desde la ventana de contacto y desde la nota del formulario.
-- Añadidos: título y datos para Google y redes, favicon, imagen para compartir, `robots.txt` y `sitemap.xml`.
+- daigual es la idea de partida, no la versión final: la web se seguirá editando antes de publicar.
+- `sitio/` es la versión editable. Guía en [`EDITAR.md`](EDITAR.md).
+- Ya resuelto para cuando se publique: tipografías alojadas en la web (sin Google Fonts), formulario con Netlify Forms, información legal con bodonia.es y sin cookies, favicon, imagen para compartir, `robots.txt`, `sitemap.xml` y `netlify.toml`.
 - La exportación de la versión Inicio sigue disponible con `rediseno/scripts/exportar_inicio.py` (sale en `sitio-inicio/`).

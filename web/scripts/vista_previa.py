@@ -43,3 +43,43 @@ legal = legal.replace('href="/"', 'href="index.html"')
 legal = re.sub(r'<link rel="(icon|apple-touch-icon)"[^>]*>', "", legal)
 (OUT / "legal.html").write_text(legal, encoding="utf-8")
 print("ok", len(index) // 1024, "KB")
+
+# --- Versión de un solo archivo (fotos incrustadas), para el visor de artifacts ---
+import io
+from PIL import Image
+
+def data_uri(rel, width):
+    im = Image.open(SITIO / rel)
+    buf = io.BytesIO()
+    if rel.endswith(".png"):
+        im.thumbnail((width, width * 4)); im.save(buf, "PNG", optimize=True); mime = "image/png"
+    else:
+        im = im.convert("RGB"); im.thumbnail((width, width * 4)); im.save(buf, "JPEG", quality=80, optimize=True, progressive=True); mime = "image/jpeg"
+    return f"data:{mime};base64," + base64.b64encode(buf.getvalue()).decode()
+
+unico = index
+for rel in sorted(set(re.findall(r'(fotos/[\w./-]+\.(?:jpg|png))', unico))):
+    width = 1800 if rel.endswith("-completa.jpg") else (400 if "logo" in rel else 900)
+    unico = unico.replace(f'"{rel}"', f'"{data_uri(rel, width)}"')
+legal_body = re.search(r"<main>(.*)</main>", legal, re.S).group(1)
+CLOSE = '<button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>'
+legal_dialog = (f'<dialog id="legal-dialog" class="text-dialog" aria-labelledby="legal-t">{CLOSE}<div class="dialog-content">'
+                + legal_body.replace('<section class="intro"><h1>Información legal.</h1></section>', '<h2 id="legal-t">Información legal.</h2>')
+                + "</div></dialog>\n")
+unico = unico.replace('<dialog class="project-dialog"', legal_dialog + '<dialog class="project-dialog"', 1)
+unico = re.sub(r'<a href="legal\.html#([\w-]+)"', r'<a href="#\1" data-legal="\1"', unico)
+unico = unico.replace("</script>\n", "</script>\n", 1)
+unico += """<script>
+document.querySelectorAll('[data-legal]').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelectorAll('dialog[open]').forEach(d => d.close());
+  const dlg = document.querySelector('#legal-dialog'); dlg.showModal();
+  dlg.querySelectorAll('details').forEach(d => d.open = d.id === a.dataset.legal);
+  document.getElementById(a.dataset.legal).scrollIntoView();
+}));
+document.querySelector('#legal-dialog .close').addEventListener('click', () => document.querySelector('#legal-dialog').close());
+</script>
+"""
+assert not re.search(r"(src|href)=.fotos/", unico)
+(OUT / "web-bodonia.html").write_text(unico, encoding="utf-8")
+print("un solo archivo:", len(unico) // 1024, "KB")

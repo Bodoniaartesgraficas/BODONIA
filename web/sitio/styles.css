@@ -383,3 +383,4 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .pieza .cara .let.let-espejo{transform:skewX(10deg) scaleX(-1)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg) scaleY(-1)}
+.pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-45deg) scaleY(-1)}

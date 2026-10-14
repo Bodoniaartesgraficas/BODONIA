@@ -25,12 +25,6 @@ window.CONTENIDO = {
     contacto: "Hablemos",
   },
 
-  // Texto grande de la portada
-  portada: {
-    titulo: "Diseño, maquetación e impresión.",
-    texto: "Más de 35 años dando forma a tus ideas. Te ayudamos a elegir formato, papel y acabado; diseñamos, maquetamos e imprimimos en offset o digital en nuestro taller de La Zubia, Granada.",
-  },
-
   // Ventana «El taller»
   taller: {
     titulo: "Tú traes la idea.\nNosotros, más de 35 años\nde imprenta.",

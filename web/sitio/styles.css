@@ -367,3 +367,6 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 /* Ventanas: tipografía más ligera */
 .titular,.titular em{font-weight:400!important}
 .gran35{font-weight:400}
+
+/* Última pieza (a/A) puesta del revés: el pie queda arriba */
+.pieza .cara .let.let-inversa{transform:skewX(10deg)}

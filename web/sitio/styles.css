@@ -180,3 +180,12 @@ html.entra .intro{animation:sube .9s cubic-bezier(.22,1,.36,1) .2s both}
 @media(min-width:700px){#services-dialog .titular{white-space:nowrap}}
 #services-dialog .services>div dt{font-style:normal}
 #services-dialog .servicios-pie{font-size:clamp(18px,1.8vw,22px);margin-top:28px}
+/* El taller: titular y frase en una línea; ventanas con esquinas redondas y fondo desenfocado */
+#about-dialog{width:min(1120px,calc(100vw - 48px))}
+#about-dialog .titular{font-size:clamp(24px,3vw,40px);max-width:none}
+#about-dialog .titular em{display:inline}
+#about-dialog .promise{font-size:clamp(22px,2.6vw,34px);max-width:none}
+@media(min-width:760px){#about-dialog .titular,#about-dialog .promise{white-space:nowrap}}
+dialog{border-radius:22px;overflow:hidden}
+dialog .dialog-content{overflow:auto;max-height:inherit}
+dialog::backdrop{background:rgb(255 255 255 / 25%);-webkit-backdrop-filter:blur(7px) saturate(.9);backdrop-filter:blur(7px) saturate(.9)}

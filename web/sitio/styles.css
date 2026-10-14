@@ -407,3 +407,7 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 @keyframes postal{from{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) - 18%)) rotate(calc(var(--r) + 10deg)) scale(1.12)}}
 /* Postales más grandes */
 .carrusel{width:74%}
+
+/* postales a sangre */
+.postal{padding:0;background:none}
+.postal img{display:block;max-width:var(--cw);max-height:var(--cw)}

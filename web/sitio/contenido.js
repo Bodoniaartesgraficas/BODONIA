@@ -193,13 +193,6 @@ window.CONTENIDO = {
         completa: "fotos/proyectos/11-diptico-pedro-zamora-completa.jpg",
       },
       {
-        titulo: "534 aniversario de las Capitulaciones",
-        tipo: "Cartel",
-        portada: "fotos/proyectos/12-cartel-capitulaciones-portada.jpg",
-        detalle: "fotos/proyectos/12-cartel-capitulaciones-detalle.jpg",
-        completa: "fotos/proyectos/12-cartel-capitulaciones-completa.jpg",
-      },
-      {
         titulo: "III Festival de Literatura Histórica",
         tipo: "Cartel",
         portada: "fotos/proyectos/13-cartel-festival-literatura-portada.jpg",

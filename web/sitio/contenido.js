@@ -16,7 +16,7 @@ window.CONTENIDO = {
   // Pestaña del navegador y resultados de Google
   pagina: {
     titulo: "Bodonia Artes Gráficas · Imprenta en La Zubia, Granada",
-    lema: "Imprenta · Diseño, maquetación e impresión",
+    lema: "Diseño · Maquetación · Impresión",
   },
 
   // Franja final de la página, debajo de las fotos

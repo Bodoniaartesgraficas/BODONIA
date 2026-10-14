@@ -416,3 +416,6 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .works+.works .project-image{height:calc(var(--alto,520px) * .3)}
 @media(min-width:601px){.works+.works .gallery .project{flex-basis:calc(var(--card) * .3)}.works+.works .gallery .project.activo{flex-basis:calc(var(--card) * .3 * 1.38)}}
 @media(max-width:600px){.works+.works .gallery .project{flex-basis:calc(var(--card) * .3)}}
+
+/* Móvil: las fotos llenan la pantalla hasta los botones de abajo */
+@media(max-width:600px){.project-image{aspect-ratio:auto;height:calc(var(--alto,520px) - 84px - env(safe-area-inset-bottom,0px))}:root{--card:calc(100vw - 2 * var(--gutter) - 28px)}.gallery .project{flex:0 0 var(--card);width:var(--card)}.gallery{grid-auto-columns:var(--card)}}

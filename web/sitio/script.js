@@ -179,7 +179,19 @@ document.querySelectorAll('dialog').forEach(dialog=>{
     if(e.target === dialog && (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom)) dialog.close();
   });
 });
+// Al pasar el ratón: el trabajo se ensancha, los de al lado se oscurecen 
 const puedeHover = window.matchMedia('(hover:hover) and (pointer:fine)');
+projects.forEach(project => {
+  const escenas = JSON.parse(project.dataset.escenas).slice(1);
+  if (!escenas.length) return;
+  project.addEventListener('pointerenter', e => {
+    if (e.pointerType !== 'mouse' || !puedeHover.matches || document.querySelector('.gallery.dragging')) return;
+    project.classList.add('activo'); project.parentElement.classList.add('con-activo');
+  });
+  project.addEventListener('pointerleave', () => {
+    project.classList.remove('activo'); project.parentElement.classList.remove('con-activo');
+  });
+});
 
 // Puntero con la B de Bodonia sobre las fotos: sigue al ratón con un poco de retraso y se inclina al moverse.
 (function () {

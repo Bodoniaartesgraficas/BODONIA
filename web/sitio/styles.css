@@ -385,3 +385,8 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-90deg) scaleY(-1)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-45deg) scaleY(-1)}
 .pieza .cara .let.let-inversa{transform:skewX(10deg) rotate(-10deg) scaleY(-1)}
+.pieza .cara .let.let-inversa{display:inline-block;transform-origin:50% 50%;line-height:1;transform:rotate(25deg) scaleY(-1)}
+.pieza .cara:has(.let-inversa){display:flex!important;align-items:center!important;justify-content:center!important}
+.pieza .cara .let.let-inversa{position:static!important;margin:0!important}
+.pieza .cara .let.let-inversa{transform:rotate(25deg) scaleY(-1) translateY(.2em)}
+.pieza .cara .let.let-inversa{transform:rotate(25deg) scaleY(-1) translateY(-.22em)}

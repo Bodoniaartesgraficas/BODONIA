@@ -177,6 +177,27 @@ document.querySelectorAll('dialog').forEach(dialog=>{
     if(e.target === dialog && (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom)) dialog.close();
   });
 });
+// Al pasar el ratón: el trabajo se ensancha, los de al lado se oscurecen y dentro pasan sus escenas en una ventanita.
+const puedeHover = window.matchMedia('(hover:hover) and (pointer:fine)');
+projects.forEach(project => {
+  const escenas = JSON.parse(project.dataset.escenas).slice(1);
+  if (!escenas.length) return;
+  const caja = document.createElement('span'); caja.className = 'carrusel'; caja.setAttribute('aria-hidden', 'true');
+  const img = document.createElement('img'); img.alt = ''; img.draggable = false; caja.appendChild(img);
+  project.querySelector('.project-image').appendChild(caja);
+  let timer = 0, k = 0;
+  project.addEventListener('pointerenter', e => {
+    if (e.pointerType !== 'mouse' || !puedeHover.matches || document.querySelector('.gallery.dragging')) return;
+    project.classList.add('activo'); project.parentElement.classList.add('con-activo');
+    k = 0; img.src = escenas[0];
+    clearInterval(timer);
+    if (escenas.length > 1 && !reducedMotion.matches) timer = setInterval(() => { k = (k + 1) % escenas.length; img.src = escenas[k]; }, 420);
+  });
+  project.addEventListener('pointerleave', () => {
+    clearInterval(timer); project.classList.remove('activo'); project.parentElement.classList.remove('con-activo');
+  });
+});
+
 // Vista de un trabajo: la foto pulsada crece hasta llenar la pantalla y después aparecen sus escenas en fila.
 const track = document.querySelector('#project-track');
 let origen = null;

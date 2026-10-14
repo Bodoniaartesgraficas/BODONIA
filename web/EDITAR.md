@@ -28,6 +28,9 @@ Con una sola foto basta: si faltan detalle o completa, la web usa la portada. Si
 
 ## Ver los cambios antes de publicar
 
+Vista previa en Claude: https://claude.ai/artifact/KwJk3khBZxwvkKWtCEdYAs (se actualiza con `python3 web/scripts/vista_previa.py <carpeta>` y se vuelve a publicar en el mismo enlace). En la vista previa el formulario no envía mensajes.
+
+
 Abre la carpeta `sitio` con cualquier servidor local o súbela a Netlify como borrador. Abrir `index.html` con doble clic también funciona, pero el formulario solo envía una vez publicado en Netlify.
 
 ## Origen

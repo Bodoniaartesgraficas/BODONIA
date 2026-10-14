@@ -45,7 +45,8 @@ C.filas.forEach((fila, fi) => {
     }
     article.appendChild(button); galleryEl.appendChild(article); projects.push(article);
   });
-  section.append(galleryEl); filasEl.appendChild(section);
+  const flecha = (clase, texto) => { const b = document.createElement('button'); b.className = 'fila-flecha ' + clase; b.setAttribute('aria-label', texto); b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; return b; };
+  section.append(galleryEl, flecha('atras', 'Trabajos anteriores'), flecha('adelante', 'Trabajos siguientes')); filasEl.appendChild(section);
   galleries.push(galleryEl);
 });
 
@@ -152,6 +153,10 @@ function initGallery(gallery, speed) {
   }
   requestAnimationFrame(drift);
   schedulePhotos();
+  // Flechas a los lados de la fila: avanzan o retroceden tres trabajos.
+  const section = gallery.parentElement;
+  section.querySelector('.fila-flecha.atras').addEventListener('click', () => { hold = 2.5; dir = -1; step(-3); });
+  section.querySelector('.fila-flecha.adelante').addEventListener('click', () => { hold = 2.5; dir = 1; step(3); });
   return { stop: stopMotion, toStart: smooth => { stopMotion(); move(-gallery.scrollLeft, smooth); dir = 1; hold = 1.5; } };
 }
 const controls = galleries.map((g, i) => initGallery(g, C.filas[i].velocidad || 20));

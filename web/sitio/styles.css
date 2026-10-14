@@ -189,3 +189,13 @@ html.entra .intro{animation:sube .9s cubic-bezier(.22,1,.36,1) .2s both}
 dialog{border-radius:22px;overflow:hidden}
 dialog .dialog-content{overflow:auto;max-height:inherit}
 dialog::backdrop{background:rgb(255 255 255 / 25%);-webkit-backdrop-filter:blur(7px) saturate(.9);backdrop-filter:blur(7px) saturate(.9)}
+
+/* Flechas de cada fila */
+.works{position:relative}
+.fila-flecha{position:absolute;top:50%;z-index:2;display:grid;place-items:center;width:52px;height:52px;margin-top:-26px;border-radius:50%;background:rgb(255 255 255 / 88%);color:var(--ink);box-shadow:0 4px 18px rgb(0 0 0 / 18%);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .25s ease,background .2s ease,color .2s ease}
+.fila-flecha svg{width:22px;height:22px;stroke-width:1.5}
+.fila-flecha.atras{left:calc(var(--gutter) + 12px)}.fila-flecha.atras svg{transform:rotate(180deg)}
+.fila-flecha.adelante{right:calc(var(--gutter) + 12px)}
+.works:hover .fila-flecha,.fila-flecha:focus-visible{opacity:1}
+.fila-flecha:hover{background:#9A0015;color:#fff}
+@media(hover:none){.fila-flecha{opacity:1;width:42px;height:42px;margin-top:-21px}}

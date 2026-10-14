@@ -13,7 +13,7 @@ document.querySelector('#contact-map').href = C.contacto.mapa;
 const servicesList = document.querySelector('#services-list');
 C.servicios.lista.forEach(s => {
   const row = document.createElement('div'), dt = document.createElement('dt'), dd = document.createElement('dd');
-  dt.textContent = s.nombre; dd.textContent = s.detalle; row.append(dt, dd); servicesList.appendChild(row);
+  dt.textContent = s.nombre; row.append(dt); if (s.detalle) { dd.textContent = s.detalle; row.append(dd); } servicesList.appendChild(row);
 });
 const filasEl = document.querySelector('#filas');
 const galleries = [];

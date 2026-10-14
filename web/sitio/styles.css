@@ -131,3 +131,12 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 #loader.hecho{opacity:0;visibility:hidden}
 @keyframes loader-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){#loader img{animation:none}#loader{transition:none}}
+
+/* Qué hacemos: lista de productos a dos columnas */
+.services{display:grid;grid-template-columns:1fr 1fr;column-gap:32px;row-gap:2px;margin:24px 0 0}
+.services>div{display:block;padding:0;border:0}
+.services dt{font:400 clamp(22px,3vw,32px)/1.35 var(--serif);margin:0}
+@media(max-width:600px){.services dt{font-size:22px}}
+.services{grid-auto-flow:column;grid-template-rows:repeat(8,auto)}
+.servicios-pie{margin-top:32px}
+@media(max-width:600px){.services{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:1fr}}

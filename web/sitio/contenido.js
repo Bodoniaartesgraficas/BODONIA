@@ -33,14 +33,25 @@ window.CONTENIDO = {
     enlace: "Contacta con el taller",
   },
 
-  // Ventana «Qué hacemos»: añade o quita bloques { nombre, detalle }
+  // Ventana «Qué hacemos»: un producto por línea: { nombre }
   servicios: {
     titulo: "Todo lo que diseñamos e imprimimos.",
     lista: [
-      { nombre: "Damos forma", detalle: "Diseño gráfico, diseño editorial y maquetación." },
-      { nombre: "Hacemos libros", detalle: "Libros, catálogos, revistas y facsímiles." },
-      { nombre: "Llenamos paredes y manos", detalle: "Cartelería, mupis, folletos, desplegables y trípticos." },
-      { nombre: "Y lo de cada día", detalle: "Tarjetas, postales y papelería." },
+      { nombre: "Libros" },
+      { nombre: "Catálogos" },
+      { nombre: "Revistas" },
+      { nombre: "Facsímiles" },
+      { nombre: "Desplegables" },
+      { nombre: "Cartelería" },
+      { nombre: "Mupis" },
+      { nombre: "Folletos" },
+      { nombre: "Trípticos" },
+      { nombre: "Tarjetas" },
+      { nombre: "Postales" },
+      { nombre: "Papelería" },
+      { nombre: "Diseño gráfico" },
+      { nombre: "Diseño editorial" },
+      { nombre: "Maquetación" },
     ],
     pie: "Y lo que se te ocurra.",
   },

@@ -411,3 +411,8 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 /* postales a sangre */
 .postal{padding:0;background:none}
 .postal img{display:block;max-width:var(--cw);max-height:var(--cw)}
+
+/* Fila de abajo (Otros trabajos): cuadritos un 70% más pequeños */
+.works+.works .project-image{height:calc(var(--alto,520px) * .3)}
+@media(min-width:601px){.works+.works .gallery .project{flex-basis:calc(var(--card) * .3)}.works+.works .gallery .project.activo{flex-basis:calc(var(--card) * .3 * 1.38)}}
+@media(max-width:600px){.works+.works .gallery .project{flex-basis:calc(var(--card) * .3)}}

@@ -356,3 +356,9 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .services dt,.services>div:nth-child(3n+2) dt{font-style:normal!important;font-weight:400!important}
 .titular em{background:#9A0015;color:#fff!important}
 #about-dialog .promise,#services-dialog .servicios-pie{color:#9A0015!important}
+/* Letras de la cara superior: sin espejo, se leen de izquierda a derecha y encajan en el bloque */
+.cara .let{transform:skewX(10deg);font-size:1em;line-height:1;white-space:nowrap}
+.cara{overflow:visible}
+/* La cara superior es un poco más alta y la letra cabe dentro */
+.cara{height:.74em!important}
+.cara .let{font-size:.78em!important;line-height:1.05;padding:.02em 0}

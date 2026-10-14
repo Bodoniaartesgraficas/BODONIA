@@ -355,3 +355,4 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .marq{display:none!important}
 .services dt,.services>div:nth-child(3n+2) dt{font-style:normal!important;font-weight:400!important}
 .titular em{background:#9A0015;color:#fff!important}
+#about-dialog .promise,#services-dialog .servicios-pie{color:#9A0015!important}

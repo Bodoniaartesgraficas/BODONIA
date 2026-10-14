@@ -206,14 +206,14 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const imgs = [...document.querySelectorAll('.gallery img.cover')].slice(0, 6);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 2200, maximo = 7000;
+  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 1100, maximo = 5000;
   let mostrado = 0;
   document.documentElement.classList.add('cargando');
   function paso(now) {
     const t = now - inicio;
     const real = imgs.length ? cargadas / imgs.length : 1;
     const objetivo = Math.min(t / minimo, t > maximo ? 1 : real, 1);
-    mostrado += (objetivo - mostrado) * .08;
+    mostrado += (objetivo - mostrado) * .2;
     if (objetivo === 1 && 1 - mostrado < .004) mostrado = 1;
     cuenta.textContent = String(Math.round(mostrado * 100)).padStart(3, '0');
     barra.style.transform = `scaleX(${mostrado})`;
@@ -223,7 +223,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
       document.documentElement.classList.remove('cargando');
       document.documentElement.classList.add('entra');
       setTimeout(() => { loader.remove(); document.documentElement.classList.remove('entra'); }, 1800);
-    }, 250);
+    }, 120);
   }
   requestAnimationFrame(paso);
 })();

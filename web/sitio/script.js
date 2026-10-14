@@ -195,8 +195,8 @@ projects.forEach(project => {
     p.style.setProperty('--y', (Math.random() * 10 - 5).toFixed(0) + '%');
     const img = document.createElement('img'); img.alt = ''; img.draggable = false; img.src = escenas[k];
     p.appendChild(img); caja.appendChild(p);
-    while (caja.children.length > 5) caja.firstElementChild.remove();
-    k = (k + 1) % escenas.length;
+    k++;
+    if (k >= escenas.length) clearInterval(timer);
   }
   project.addEventListener('pointerenter', e => {
     if (e.pointerType !== 'mouse' || !puedeHover.matches || document.querySelector('.gallery.dragging')) return;
@@ -205,6 +205,7 @@ projects.forEach(project => {
     k = 0; caja.textContent = ''; postal();
     clearInterval(timer);
     if (escenas.length > 1 && !reducedMotion.matches) timer = setInterval(postal, 650);
+    else if (reducedMotion.matches) while (k < escenas.length) postal();
   });
   project.addEventListener('pointerleave', () => {
     clearInterval(timer); project.classList.remove('activo'); project.parentElement.classList.remove('con-activo');

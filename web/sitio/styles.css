@@ -405,3 +405,5 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .postal{inset:auto;left:50%;top:50%;width:auto;height:auto;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(var(--r))}
 .postal img{width:auto;height:auto;max-width:calc(var(--cw) - 10px);max-height:calc(var(--cw) - 10px);object-fit:contain}
 @keyframes postal{from{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) - 18%)) rotate(calc(var(--r) + 10deg)) scale(1.12)}}
+/* Postales más grandes */
+.carrusel{width:74%}

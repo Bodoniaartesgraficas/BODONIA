@@ -199,3 +199,7 @@ dialog::backdrop{background:rgb(255 255 255 / 25%);-webkit-backdrop-filter:blur(
 .works:hover .fila-flecha,.fila-flecha:focus-visible{opacity:1}
 .fila-flecha:hover{background:#9A0015;color:#fff}
 @media(hover:none){.fila-flecha{opacity:1;width:42px;height:42px;margin-top:-21px}}
+/* Mismo espacio, y más pequeño, entre fotos y entre filas */
+:root{--gap:8px}
+.works+.works{margin-top:var(--gap)}
+.works .gallery{padding-bottom:0}

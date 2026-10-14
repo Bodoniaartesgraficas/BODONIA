@@ -1,4 +1,5 @@
 @font-face{font-family:'Bodoni Moda';src:url(fonts/bodoni-moda.woff2) format('woff2');font-weight:400 900;font-style:normal;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url(fonts/bodoni-moda-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
 @font-face{font-family:'DM Sans';src:url(fonts/dm-sans.woff2) format('woff2');font-weight:100 1000;font-style:normal;font-display:swap}
 /* Colores y medidas principales: --red es el rojo Bodonia, --ink el texto, --muted el gris. */
 :root{--red:#a32429;--ink:#202020;--muted:#646464;--line:#dededb;--paper:#fff;--gutter:32px;--gap:16px;--card:min(calc((100vw - 2 * var(--gutter) - 3 * var(--gap))/4),calc((100dvh - 300px)*.8));--serif:'Bodoni Moda','Bodoni 72',Didot,serif;--sans:'DM Sans',Arial,sans-serif;--ease:cubic-bezier(.22,1,.36,1)}
@@ -142,3 +143,19 @@ html:not(.pagina) main{display:block;padding-bottom:56px}
 .services{grid-auto-flow:column;grid-template-rows:repeat(8,auto)}
 .servicios-pie{margin-top:32px}
 @media(max-width:600px){.services{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:1fr}}
+
+/* Ventanas El taller y Qué hacemos: Bodoni en negro y rojo, con cursivas */
+#about-dialog,#services-dialog{--rojo:#9A0015}
+.titular{font:400 clamp(34px,5.4vw,60px)/1.04 var(--serif);letter-spacing:-.02em;margin:0 0 28px;max-width:14em;text-wrap:balance}
+.titular em{font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--rojo)}
+#about-dialog .dialog-content>p:not(.promise){font:400 clamp(18px,2vw,22px)/1.6 var(--serif);max-width:34em;margin:0 0 28px}
+#about-dialog .promise{font:italic 400 clamp(24px,3.2vw,36px)/1.2 var(--serif);color:var(--rojo);margin:36px 0 24px;max-width:18em;text-wrap:balance}
+#about-dialog .text-link{font:italic 400 20px/1.2 var(--serif);color:var(--ink);border-bottom:1px solid var(--rojo);padding-bottom:3px}
+#about-dialog .text-link:hover{color:var(--rojo)}
+.services dt{transition:color .2s ease}
+.services>div:nth-child(3n+2) dt{font-style:italic}
+.services dt:hover{color:var(--rojo)}
+.servicios-pie{font:italic 400 clamp(26px,3.4vw,38px)/1.2 var(--serif);color:var(--rojo)}
+.titular em{display:block}
+#services-dialog .servicios-pie{font:italic 400 clamp(26px,3.4vw,38px)/1.2 var(--serif);color:var(--rojo);margin:36px 0 0}
+.works+.works{margin-top:40px}

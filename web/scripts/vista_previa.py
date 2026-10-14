@@ -15,7 +15,7 @@ OUT.mkdir(parents=True)
 shutil.copytree(SITIO / "fotos", OUT / "fotos")
 
 css = (SITIO / "styles.css").read_text(encoding="utf-8")
-for name in ("bodoni-moda.woff2", "dm-sans.woff2"):
+for name in ("bodoni-moda.woff2", "bodoni-moda-italic.woff2", "dm-sans.woff2"):
     data = base64.b64encode((SITIO / "fonts" / name).read_bytes()).decode()
     css = css.replace(f"url(fonts/{name})", f"url(data:font/woff2;base64,{data})")
 

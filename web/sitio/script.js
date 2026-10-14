@@ -22,8 +22,7 @@ let n = 0;
 C.filas.forEach((fila, fi) => {
   const section = document.createElement('section');
   section.className = 'works'; if (fi === 0) section.id = 'proyectos'; section.setAttribute('aria-label', fila.titulo);
-  const label = document.createElement('p'); label.className = 'fila-titulo'; label.textContent = fila.titulo;
-  const galleryEl = document.createElement('div');
+    const galleryEl = document.createElement('div');
   galleryEl.className = 'gallery'; galleryEl.tabIndex = 0;
   galleryEl.setAttribute('aria-label', fila.titulo + '. Galería horizontal: usa las flechas para recorrer los trabajos.');
   fila.proyectos.forEach(p => {
@@ -46,7 +45,7 @@ C.filas.forEach((fila, fi) => {
     }
     article.appendChild(button); galleryEl.appendChild(article); projects.push(article);
   });
-  section.append(label, galleryEl); filasEl.appendChild(section);
+  section.append(galleryEl); filasEl.appendChild(section);
   galleries.push(galleryEl);
 });
 

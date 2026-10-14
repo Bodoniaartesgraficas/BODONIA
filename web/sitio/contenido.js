@@ -27,7 +27,8 @@ window.CONTENIDO = {
 
   // Ventana «El taller»
   taller: {
-    titulo: "Tú traes la idea.\nNosotros, más de 35 años de imprenta.",
+    titulo: "Tú traes la idea.",
+    subtitulo: "Nosotros, más de 35 años de imprenta.",
     texto: "Bodonia Artes Gráficas es un taller de Granada al que se puede venir con un archivo terminado o con solo una intención. Te ayudamos a elegir formato, papel y acabado, lo diseñamos y maquetamos, y lo imprimimos en offset o en digital según lo que pida el trabajo.",
     frase: "Lo que entregamos es lo que nos gustaría recibir.",
     enlace: "Contacta con el taller",
@@ -35,7 +36,8 @@ window.CONTENIDO = {
 
   // Ventana «Qué hacemos»: un producto por línea: { nombre }
   servicios: {
-    titulo: "Todo lo que diseñamos e imprimimos.",
+    titulo: "Todo lo que",
+    subtitulo: "diseñamos e imprimimos.",
     lista: [
       { nombre: "Libros" },
       { nombre: "Catálogos" },

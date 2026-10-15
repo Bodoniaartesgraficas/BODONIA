@@ -1,7 +1,6 @@
 """Territorios de la mirada: monta los interiores sobre los tres fondos del cliente.
 
-Composición, como en La Tortajada: fondo 1 con un doble suelto, fondo 2 con otro suelto y
-fondo 3 con dos dobles juntos. Los originales sobre negro están en
+Cada doble va suelto, en horizontal, sobre un fondo en formato 3:4 (el cuarto reutiliza el primero, volteado). Los originales sobre negro están en
 web/referencias-mockups/territorios-dobles/1..4.jpg.
 
 Uso: python3 web/scripts/territorios_fondos.py <fondo1> <fondo2> <fondo3>
@@ -25,15 +24,10 @@ def alto(sp):
 
 def main(fondos):
     b = [sf.fondo(f) for f in fondos]
-    sf.pon(b[0], doble(1), sf.H * .5)
-    sf.pon(b[1], doble(2), sf.H * .5)
-    a, c = doble(3), doble(4)
-    sep = 110
-    total = alto(a) + sep + alto(c)
-    sf.pon(b[2], a, sf.H / 2 - total / 2 + alto(a) / 2)
-    sf.pon(b[2], c, sf.H / 2 + total / 2 - alto(c) / 2)
-    for i, im in enumerate(b, 1):
-        im.save(sf.SITIO / f"02-territorios-de-la-mirada-interior-{i}.jpg", quality=86, optimize=True, progressive=True)
+    b.append(b[0].transpose(Image.FLIP_LEFT_RIGHT))  # el cuarto reutiliza el primer fondo, volteado
+    for i in range(4):
+        sf.pon(b[i], doble(i + 1), sf.H * .5)
+        b[i].save(sf.SITIO / f"02-territorios-de-la-mirada-interior-{i + 1}.jpg", quality=86, optimize=True, progressive=True)
 
 if __name__ == "__main__":
     main(sys.argv[1:4])

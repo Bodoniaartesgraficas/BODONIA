@@ -11,8 +11,8 @@ from PIL import Image, ImageFilter, ImageChops
 
 SITIO = Path(__file__).resolve().parents[1] / "sitio" / "fotos" / "proyectos"
 ORIGEN = Path(__file__).resolve().parents[1] / "referencias-mockups" / "santa-fe-dobles"
-W, H = 1600, 2844
-ANCHO = .88
+W, H = 1600, 2133  # formato 3:4
+ANCHO = .80
 
 
 def doble(n):

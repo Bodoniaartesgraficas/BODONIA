@@ -441,3 +441,7 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .instagram-flotante img{width:80px;height:80px}
 .instagram-flotante:hover{transform:scale(1.15)}
 @media(max-width:600px){.instagram-flotante{left:24px;right:auto;bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+/* Instagram: abajo a la derecha, a ~3 cm; pequeño y crece al tamaño completo con el cursor */
+.instagram-flotante{left:auto;right:calc(3cm + env(safe-area-inset-right,0px));bottom:calc(3cm + env(safe-area-inset-bottom,0px));transform:scale(.5);transform-origin:100% 100%}
+.instagram-flotante:hover{transform:scale(1)}
+@media(max-width:600px){.instagram-flotante{left:auto;right:24px;bottom:calc(96px + env(safe-area-inset-bottom,0px))}}

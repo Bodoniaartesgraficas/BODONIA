@@ -1,8 +1,9 @@
-"""Pedro Zamora. En noir: monta los seis dobles de páginas sobre los tres fondos negros del cliente (dos por fondo).
+"""Pedro Zamora. En noir: monta los seis dobles de páginas sobre los cinco fondos negros del cliente,
+mezclando sueltos y un doble (ver REPARTO).
 
-Uso: python3 web/scripts/en_noir_fondos.py <fondo1> <fondo2> <fondo3>
+Uso: python3 web/scripts/en_noir_fondos.py <fondo1> ... <fondo5>
 Los dobles originales sobre negro están en web/referencias-mockups/en-noir-dobles/1..6.jpg.
-Escribe fotos/proyectos/05-pedro-zamora-en-noir-interior-1..3.jpg.
+Escribe fotos/proyectos/05-pedro-zamora-en-noir-interior-1..5.jpg.
 """
 import sys
 from pathlib import Path
@@ -24,14 +25,19 @@ def pon(lienzo, spread, cy):
     ImageDraw.Draw(lienzo).rectangle((x, y, x + w - 1, y + h - 1), outline=(88, 88, 88), width=2)
     return h
 
+REPARTO = [[1], [2], [3, 4], [5], [6]]  # dobles de páginas que lleva cada fondo
+
 def main(fondos):
-    for i, f in enumerate(fondos, 1):
+    for i, (f, grupo) in enumerate(zip(fondos, REPARTO), 1):
         b = sf.fondo(f)
-        a, c = doble(2 * i - 1), doble(2 * i)
-        h = round(a.height * sf.W * sf.ANCHO / a.width); sep = 110
-        pon(b, a, sf.H / 2 - (h + sep) / 2)
-        pon(b, c, sf.H / 2 + (h + sep) / 2)
+        piezas = [doble(n) for n in grupo]
+        hs = [round(p.height * sf.W * sf.ANCHO / p.width) for p in piezas]
+        sep = 110
+        y = sf.H / 2 - (sum(hs) + sep * (len(hs) - 1)) / 2
+        for p, h in zip(piezas, hs):
+            pon(b, p, y + h / 2)
+            y += h + sep
         b.save(SITIO / f"05-pedro-zamora-en-noir-interior-{i}.jpg", quality=88, optimize=True, progressive=True)
 
 if __name__ == "__main__":
-    main(sys.argv[1:4])
+    main(sys.argv[1:6])

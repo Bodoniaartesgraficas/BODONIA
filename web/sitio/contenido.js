@@ -140,14 +140,6 @@ window.CONTENIDO = {
         escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-5.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-6.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-7.jpg","fotos/proyectos/03-santa-fe-mauthausen-video.mp4"],
       },
       {
-        titulo: "Pedro Zamora. En noir",
-        tipo: "Catálogo",
-        portada: "fotos/proyectos/05-pedro-zamora-en-noir-portada.jpg",
-        detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
-        completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
-        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-7.jpg","fotos/proyectos/05-pedro-zamora-en-noir-video.mp4"],
-      },
-      {
         titulo: "Primitivismo y modernidad",
         tipo: "Catálogo",
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
@@ -155,6 +147,14 @@ window.CONTENIDO = {
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
         escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-6.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-7.jpg","fotos/proyectos/04-primitivismo-y-modernidad-video.mp4"],
         encuadre: "50% 65%",
+      },
+      {
+        titulo: "Pedro Zamora. En noir",
+        tipo: "Catálogo",
+        portada: "fotos/proyectos/05-pedro-zamora-en-noir-portada.jpg",
+        detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
+        completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
+        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-7.jpg","fotos/proyectos/05-pedro-zamora-en-noir-video.mp4"],
       },
       {
         titulo: "Iglesia y Convento de Santa María de Coín",

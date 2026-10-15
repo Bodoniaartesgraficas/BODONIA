@@ -137,7 +137,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/03-santa-fe-mauthausen-portada.jpg",
         detalle: "fotos/proyectos/03-santa-fe-mauthausen-detalle.jpg",
         completa: "fotos/proyectos/03-santa-fe-mauthausen-completa.jpg",
-        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg"],
+        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg"],
       },
       {
         titulo: "Pedro Zamora. En noir",

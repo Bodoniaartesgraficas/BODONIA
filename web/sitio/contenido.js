@@ -129,7 +129,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/02-territorios-de-la-mirada-portada.jpg",
         detalle: "fotos/proyectos/02-territorios-de-la-mirada-detalle.jpg",
         completa: "fotos/proyectos/02-territorios-de-la-mirada-completa.jpg",
-        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-4.jpg"],
+        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg"],
       },
       {
         titulo: "Santa Fe—Mauthausen—Santa Fe",

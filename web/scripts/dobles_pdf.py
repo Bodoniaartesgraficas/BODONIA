@@ -1,7 +1,7 @@
 """Monta dobles de páginas sacados del PDF de interior sobre fondos 3:4, dos dobles por foto.
 
 Uso: python3 web/scripts/dobles_pdf.py <interior.pdf> <salida.jpg> <fondo> <pág izq 1> <pág izq 2>
-Cada doble es la página indicada (izquierda) y la siguiente. Se recorta al TrimBox (23,5 pt de sangre).
+Cada doble es la página indicada (izquierda) y la siguiente. Se recorta al TrimBox (la sangre se lee del PDF).
 """
 import sys, subprocess, tempfile
 from pathlib import Path
@@ -10,13 +10,21 @@ from PIL import Image
 import santa_fe_fondos as sf
 
 DPI = 150
-SANGRE = 23.5
+
+_sangre = {}
+def sangre(pdf):
+    """Sangre en puntos, según el TrimBox de la primera página (0 si el PDF ya viene al corte)."""
+    if pdf not in _sangre:
+        out = subprocess.check_output(["pdfinfo", "-box", "-f", "1", "-l", "1", pdf], text=True, stderr=subprocess.DEVNULL)
+        trim = next(l for l in out.splitlines() if "TrimBox" in l).split()
+        _sangre[pdf] = float(trim[3])
+    return _sangre[pdf]
 
 def pagina(pdf, n, tmp):
     base = Path(tmp) / f"p{n}"
-    subprocess.run(["pdftoppm", "-r", str(DPI), "-f", str(n), "-l", str(n), "-jpeg", "-jpegopt", "quality=92", "-singlefile", pdf, str(base)], check=True)
+    subprocess.run(["pdftoppm", "-r", str(DPI), "-f", str(n), "-l", str(n), "-jpeg", "-jpegopt", "quality=92", "-singlefile", pdf, str(base)], check=True, stderr=subprocess.DEVNULL)
     im = Image.open(str(base) + ".jpg").convert("RGB")
-    s = round(SANGRE * DPI / 72)
+    s = round(sangre(pdf) * DPI / 72)
     return im.crop((s, s, im.width - s, im.height - s))
 
 def doble(pdf, n, tmp):

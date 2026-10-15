@@ -1,8 +1,8 @@
 """Genera un vídeo 3:4 (1080x1440) de un libro que se abre en perspectiva y pasa páginas.
 
-Es una versión sencilla del mockup 3D: portada que se abre y dos pasos de página sobre fondo negro.
+Es una versión sencilla del mockup 3D: portada que se abre y dos pasos de página sobre un fondo gris de estudio.
 Uso: python3 web/scripts/libro_video.py <portada.png (solo la cara frontal, o desplegada con 2 caras)> <doble1.jpg> <doble2.jpg> <doble3.jpg> <salida.mp4>
-El vídeo es la escena final tal cual: fondo negro liso, sin fondo de imagen detrás.
+El vídeo es la escena final tal cual, en 3:4 como las fotos.
 """
 import sys, math, subprocess
 import numpy as np
@@ -85,8 +85,13 @@ def hoja(lienzo, mascara, frente, dorso, ang, cx, zoom):
         sh = .78 + .22 * abs(math.cos(math.radians(ang))) if True else 1
         pinta(lienzo, mascara, sub, [(x0, PH, z0 + .02), (x1, PH, z1 + .02), (x1, 0, z1 + .02), (x0, 0, z0 + .02)], cx, zoom, sh)
 
-def fondo_negro():
-    return Image.new("RGBA", (VW, VH), (0, 0, 0, 255))  # negro liso
+def fondo_gris():
+    """Fondo gris de estudio, como los mockups originales."""
+    yy, xx = np.mgrid[0:VH, 0:VW]
+    r = np.sqrt(((xx - VW * .45) / VW) ** 2 + ((yy - VH * .42) / VH) ** 2)
+    g = np.clip(222 - 70 * r, 0, 255)
+    img = np.stack([g, g * .975, g * .955], axis=2).astype("uint8")
+    return Image.fromarray(img).convert("RGBA")
 
 def ease(t): return t * t * (3 - 2 * t)
 def tramo(t, a, b): return min(1, max(0, (t - a) / (b - a)))
@@ -99,7 +104,7 @@ def main(portada_png, d1, d2, d3, salida):
     frente_cub = cov.resize((540, 772), Image.LANCZOS)
     S = [mitades(recorta_claro(Image.open(p))) for p in (d1, d2, d3)]
     papel = Image.new("RGB", (540, 772), (232, 226, 217))
-    bg = fondo_negro()
+    bg = fondo_gris()
     ff = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{VW}x{VH}", "-r", str(FPS), "-i", "-",
                            "-an", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", salida], stdin=subprocess.PIPE)
     total = 11.5
@@ -144,6 +149,10 @@ def main(portada_png, d1, d2, d3, salida):
         if a0 < 180: hoja(capa, masc, frente_cub, S[0][0], a0, cx, zoom)
         if 0 < a1 < 180: hoja(capa, masc, S[0][1], S[1][0], a1, cx, zoom)
         if 0 < a2 < 180: hoja(capa, masc, S[1][1], S[2][0], a2, cx, zoom)
+        # sombra proyectada
+        sh = Image.new("L", (VW, VH), 0); sh.paste(masc.transform((VW, VH), Image.AFFINE, (1, 0, -10, 0, 1, -26)), (0, 0))
+        sh = sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v: int(v * .45))
+        lienzo.paste(Image.new("RGBA", (VW, VH), (30, 24, 18, 255)), (0, 0), sh)
         lienzo.alpha_composite(capa)
         ff.stdin.write(lienzo.convert("RGB").tobytes())
     ff.stdin.close(); ff.wait()

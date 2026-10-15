@@ -4,8 +4,10 @@ El libro se recorta fotograma a fotograma con U2-Net (paquete rembg) y se rellen
 negro nunca entre dentro del libro. Encuadre:
   - vídeo vertical: ancho completo y se recorta arriba y abajo a 3:4, centrado en el libro;
   - vídeo apaisado: el menor 3:4 que contiene el libro en todo el vídeo (lo que sobra es negro).
+Con "original" como tercer argumento se conserva el fondo del render (gris o blanco) con el mismo encuadre;
+lo que se sale del vídeo se rellena prolongando sus bordes, suavizados.
 Requiere: python3 -m pip install "rembg[cpu]"
-Uso: python3 web/scripts/video_sin_fondo.py <vídeo.mp4> <salida.mp4 en fotos/proyectos>
+Uso: python3 web/scripts/video_sin_fondo.py <vídeo.mp4> <salida.mp4 en fotos/proyectos> [original]
 """
 import sys, subprocess
 import numpy as np
@@ -35,7 +37,7 @@ def mascara(f, sesion):
     solido = ndimage.binary_fill_holes(ndimage.binary_closing(m > .5, iterations=3))  # sin huecos dentro del libro
     return np.maximum(np.clip((m - .25) / .5, 0, 1), solido).astype(np.float32)
 
-def main(video, salida):
+def main(video, salida, modo="negro"):
     vw, vh, fps = info(video)
     mh = round(vh * MW / vw)
     sesion = new_session("u2net")
@@ -63,6 +65,15 @@ def main(video, salida):
                             str(sf.SITIO / salida)], stdin=subprocess.PIPE)
     # zona visible del vídeo escalado
     ax0, ay0 = max(0, -ox), max(0, -oy); ax1, ay1 = min(ow, W - ox), min(oh, H - oy)
+    if modo == "original":
+        iy = np.clip(np.arange(H) - oy, 0, oh - 1); ix = np.clip(np.arange(W) - ox, 0, ow - 1)
+        fuera_y = (np.arange(H) - oy < 0) | (np.arange(H) - oy >= oh)
+        for f in lee(video, ow, oh):
+            g = f[iy][:, ix].astype(np.float32)
+            # el relleno prolonga el borde, suavizado en horizontal para que no queden rayas
+            g[fuera_y] = ndimage.gaussian_filter1d(g[fuera_y], 40, axis=1, mode="nearest")
+            out.stdin.write(g.clip(0, 255).astype(np.uint8).tobytes())
+        out.stdin.close(); out.wait(); return
     for f, m in zip(lee(video, ow, oh), mascaras):
         a = np.asarray(Image.fromarray(m).resize((ow, oh), Image.BILINEAR), np.float32)[ay0:ay1, ax0:ax1, None] / 255
         lienzo = np.zeros((H, W, 3), np.float32)
@@ -71,4 +82,4 @@ def main(video, salida):
     out.stdin.close(); out.wait()
 
 if __name__ == "__main__":
-    main(*sys.argv[1:3])
+    main(*sys.argv[1:4])

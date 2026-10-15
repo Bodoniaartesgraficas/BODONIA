@@ -159,7 +159,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
-        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg"],
+        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg"],
         encuadre: "50% 65%",
       },
       {

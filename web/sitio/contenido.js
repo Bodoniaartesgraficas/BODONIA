@@ -137,7 +137,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/03-santa-fe-mauthausen-portada.jpg",
         detalle: "fotos/proyectos/03-santa-fe-mauthausen-detalle.jpg",
         completa: "fotos/proyectos/03-santa-fe-mauthausen-completa.jpg",
-        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg"],
+        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-5.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-6.mp4"],
       },
       {
         titulo: "Pedro Zamora. En noir",
@@ -153,7 +153,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
-        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg"],
+        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-6.mp4"],
         encuadre: "50% 65%",
       },
       {
@@ -162,7 +162,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
-        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg"],
+        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-4.mp4"],
       },
       ],
     },

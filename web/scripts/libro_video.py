@@ -1,14 +1,14 @@
-"""Genera un vídeo 3:4 (720x960) de un libro que se abre en perspectiva y pasa páginas.
+"""Genera un vídeo 3:4 (1080x1440) de un libro que se abre en perspectiva y pasa páginas.
 
 Es una versión sencilla del mockup 3D: portada que se abre y dos pasos de página sobre fondo negro.
 Uso: python3 web/scripts/libro_video.py <portada.png (solo la cara frontal, o desplegada con 2 caras)> <doble1.jpg> <doble2.jpg> <doble3.jpg> <salida.mp4>
-Después se coloca sobre el fondo con en_noir_video.py.
+El vídeo es la escena final tal cual: fondo negro liso, sin fondo de imagen detrás.
 """
 import sys, math, subprocess
 import numpy as np
 from PIL import Image, ImageFilter
 
-VW, VH, FPS = 720, 960, 24   # formato 3:4
+VW, VH, FPS = 1080, 1440, 24   # formato 3:4, mismo tamaño que las fotos
 PW, PH = 1.0, 1.43          # página: ancho y alto en unidades del libro
 PHI = math.radians(52)      # elevación de la cámara
 DIST = 6.0
@@ -20,7 +20,7 @@ def recorta_claro(im, umbral=20):
 
 def mitades(im):
     im = im.convert("RGB"); w = im.width // 2
-    t = (360, 515)
+    t = (540, 772)
     return im.crop((0, 0, w, im.height)).resize(t, Image.LANCZOS), im.crop((w, 0, im.width, im.height)).resize(t, Image.LANCZOS)
 
 def portada(ruta):
@@ -38,8 +38,8 @@ def proyecta(p, cx, zoom):
     tgt = np.array([cx, PH / 2, 0]); cam = tgt - DIST * d
     v = np.array([x, y, z]) - cam
     depth = v @ d
-    f = 317 * DIST * zoom
-    return (VW / 2 + f * v[0] / depth, VH / 2 - f * (v @ up) / depth + 40)
+    f = .47 * VW * DIST * zoom
+    return (VW / 2 + f * v[0] / depth, VH / 2 - f * (v @ up) / depth + VH * .03)
 
 def coef(dst, src):
     A = []; B = []
@@ -72,10 +72,12 @@ def hoja(lienzo, mascara, frente, dorso, ang, cx, zoom):
     tex = frente if cara_frente else dorso
     for j in range(N):
         (x0, z0), (x1, z1) = pts[j], pts[j + 1]
+        e = .15 if j < N - 1 else 0  # cada tira solapa un poco la siguiente para que no asome el fondo entre ellas
+        x1, z1 = x1 + (x1 - x0) * e, z1 + (z1 - z0) * e
         if cara_frente:
-            a, b = j / N, (j + 1) / N
+            a, b = j / N, (j + 1 + e) / N
         else:
-            a, b = 1 - (j + 1) / N, 1 - j / N   # dorso: se ve invertido en horizontal
+            a, b = 1 - (j + 1 + e) / N, 1 - j / N   # dorso: se ve invertido en horizontal
         W, H = tex.size
         sub = tex.crop((round(a * W), 0, round(b * W), H))
         if not cara_frente:
@@ -84,11 +86,7 @@ def hoja(lienzo, mascara, frente, dorso, ang, cx, zoom):
         pinta(lienzo, mascara, sub, [(x0, PH, z0 + .02), (x1, PH, z1 + .02), (x1, 0, z1 + .02), (x0, 0, z0 + .02)], cx, zoom, sh)
 
 def fondo_negro():
-    yy, xx = np.mgrid[0:VH, 0:VW]
-    r = np.sqrt(((xx - VW * .45) / VW) ** 2 + ((yy - VH * .42) / VH) ** 2)
-    g = np.clip(30 - 34 * r, 4, 255)   # negro con un leve foco en el centro
-    img = np.stack([g, g * .97, g * .94], axis=2).astype("uint8")
-    return Image.fromarray(img).convert("RGBA")
+    return Image.new("RGBA", (VW, VH), (0, 0, 0, 255))  # negro liso
 
 def ease(t): return t * t * (3 - 2 * t)
 def tramo(t, a, b): return min(1, max(0, (t - a) / (b - a)))
@@ -98,9 +96,9 @@ def main(portada_png, d1, d2, d3, salida):
     if cov.width > cov.height:  # portada desplegada (contraportada + portada): nos quedamos con la mitad derecha
         cov = portada(portada_png); cw = cov.width // 2
         cov = cov.crop((cw, 0, cov.width, cov.height))
-    frente_cub = cov.resize((360, 515), Image.LANCZOS)
+    frente_cub = cov.resize((540, 772), Image.LANCZOS)
     S = [mitades(recorta_claro(Image.open(p))) for p in (d1, d2, d3)]
-    papel = Image.new("RGB", (360, 515), (232, 226, 217))
+    papel = Image.new("RGB", (540, 772), (232, 226, 217))
     bg = fondo_negro()
     ff = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{VW}x{VH}", "-r", str(FPS), "-i", "-",
                            "-an", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", salida], stdin=subprocess.PIPE)
@@ -125,6 +123,7 @@ def main(portada_png, d1, d2, d3, salida):
         estado = 0 if a1 == 0 else (1 if a2 == 0 else 2)
         # página derecha de debajo y izquierda
         def pag(tex, x0, x1):
+            if x1 == 0: x1 = .006  # la página izquierda pasa un poco bajo la derecha: sin rendija en el lomo
             pinta(capa, masc, tex, [(x0, PH, 0), (x1, PH, 0), (x1, 0, 0), (x0, 0, 0)], cx, zoom)
         if a0 < 180:
             pag(S[0][1], 0, PW)                      # derecha del primer doble (bajo la portada)
@@ -145,10 +144,6 @@ def main(portada_png, d1, d2, d3, salida):
         if a0 < 180: hoja(capa, masc, frente_cub, S[0][0], a0, cx, zoom)
         if 0 < a1 < 180: hoja(capa, masc, S[0][1], S[1][0], a1, cx, zoom)
         if 0 < a2 < 180: hoja(capa, masc, S[1][1], S[2][0], a2, cx, zoom)
-        # sombra proyectada
-        sh = Image.new("L", (VW, VH), 0); sh.paste(masc.transform((VW, VH), Image.AFFINE, (1, 0, -10, 0, 1, -26)), (0, 0))
-        sh = sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v: int(v * .6))
-        lienzo.paste(Image.new("RGBA", (VW, VH), (0, 0, 0, 255)), (0, 0), sh)
         lienzo.alpha_composite(capa)
         ff.stdin.write(lienzo.convert("RGB").tobytes())
     ff.stdin.close(); ff.wait()

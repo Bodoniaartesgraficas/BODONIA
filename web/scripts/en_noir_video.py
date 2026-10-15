@@ -1,4 +1,4 @@
-"""Pone un vídeo de mockup (16:9) sobre el fondo que sobra, en formato 3:4.
+"""Pone un vídeo de mockup (apaisado o vertical) sobre el fondo que sobra, en formato 3:4.
 
 Uso: python3 web/scripts/en_noir_video.py <vídeo.mp4> <fondo> <salida.mp4>
 En noir: salida 05-pedro-zamora-en-noir-interior-5.mp4; Territorios: 02-territorios-de-la-mirada-interior-3.mp4.
@@ -14,7 +14,12 @@ ANCHO = .88
 
 def main(video, fondo, salida):
     bg = sf.fondo(fondo).resize((W, H), Image.LANCZOS)
-    w = round(W * ANCHO); h = round(w * 9 / 16); x, y = (W - w) // 2, (H - h) // 2  # vídeos 16:9
+    vw, vh = map(int, subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
+                                                "-of", "csv=p=0:s=x", video], text=True).strip().split("x"))
+    w = round(W * ANCHO); h = round(w * vh / vw)
+    if h > H * ANCHO:  # vídeos verticales: limita por el alto
+        h = round(H * ANCHO); w = round(h * vw / vh)
+    w -= w % 2; h -= h % 2; x, y = (W - w) // 2, (H - h) // 2
     sombra = Image.new("L", (W, H), 0)
     sombra.paste(Image.new("L", (w, h), 255), (x + 4, y + 18))
     sombra = sombra.filter(ImageFilter.GaussianBlur(22)).point(lambda v: int(v * .5))

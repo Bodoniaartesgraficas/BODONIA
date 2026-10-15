@@ -162,7 +162,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
-        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-4.mp4"],
+        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-4.mp4"],
       },
       ],
     },

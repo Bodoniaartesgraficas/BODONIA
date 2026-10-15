@@ -129,7 +129,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/02-territorios-de-la-mirada-portada.jpg",
         detalle: "fotos/proyectos/02-territorios-de-la-mirada-detalle.jpg",
         completa: "fotos/proyectos/02-territorios-de-la-mirada-completa.jpg",
-        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg"],
+        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.mp4"],
       },
       {
         titulo: "Santa Fe—Mauthausen—Santa Fe",
@@ -145,7 +145,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/05-pedro-zamora-en-noir-portada.jpg",
         detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
         completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
-        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg"],
+        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.mp4"],
       },
       {
         titulo: "Primitivismo y modernidad",

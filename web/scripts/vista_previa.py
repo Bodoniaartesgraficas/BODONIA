@@ -63,6 +63,8 @@ unico = unico.replace('"fotos/instagram.svg"', '"data:image/svg+xml;base64,' + _
 for rel in sorted(set(re.findall(r'(fotos/[\w./-]+\.(?:jpg|png))', unico))):
     width = 1800 if rel.endswith("-completa.jpg") else (400 if "logo" in rel else 900)
     unico = unico.replace(f'"{rel}"', f'"{data_uri(rel, width)}"')
+for rel in sorted(set(re.findall(r'(fotos/[\w./-]+\.mp4)', unico))):  # vídeos de escenas
+    unico = unico.replace(f'"{rel}"', '"data:video/mp4;base64,' + _b.b64encode((SITIO / rel).read_bytes()).decode() + '"')
 legal_body = re.search(r"<main>(.*)</main>", legal, re.S).group(1)
 CLOSE = '<button class="close" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>'
 legal_dialog = (f'<dialog id="legal-dialog" class="text-dialog" aria-labelledby="legal-t">{CLOSE}<div class="dialog-content">'

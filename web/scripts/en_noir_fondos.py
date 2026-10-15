@@ -25,7 +25,7 @@ def pon(lienzo, spread, cy):
     ImageDraw.Draw(lienzo).rectangle((x, y, x + w - 1, y + h - 1), outline=(88, 88, 88), width=2)
     return h
 
-REPARTO = [[1], [2], [3, 4], [5], [6]]  # dobles de páginas que lleva cada fondo
+REPARTO = [[1], [3, 4], [2], [5, 6]]  # dobles de páginas que lleva cada fondo (el quinto fondo es para el vídeo)
 
 def main(fondos):
     for i, (f, grupo) in enumerate(zip(fondos, REPARTO), 1):
@@ -40,4 +40,4 @@ def main(fondos):
         b.save(SITIO / f"05-pedro-zamora-en-noir-interior-{i}.jpg", quality=88, optimize=True, progressive=True)
 
 if __name__ == "__main__":
-    main(sys.argv[1:6])
+    main(sys.argv[1:5])

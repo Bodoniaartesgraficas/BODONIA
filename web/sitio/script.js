@@ -225,6 +225,11 @@ function renderProject(index) {
   track.textContent = '';
   JSON.parse(project.dataset.escenas).forEach((src, i) => {
     const fig = document.createElement('figure'); fig.className = 'escena';
+    if (/\.mp4$/.test(src)) {  // vídeo: se reproduce solo, mudo y en bucle
+      const v = document.createElement('video'); v.src = src;
+      v.autoplay = v.loop = v.muted = v.playsInline = true; v.setAttribute('aria-label', `${project.dataset.title}: vídeo`);
+      fig.appendChild(v); track.appendChild(fig); return;
+    }
     const img = document.createElement('img'); img.src = src; img.draggable = false;
     img.alt = i ? `${project.dataset.title}: escena ${i + 1}` : project.dataset.title;
     fig.appendChild(img); track.appendChild(fig);

@@ -520,3 +520,7 @@ html:not(.pagina) main{padding:0!important;height:100dvh}
 .intro{z-index:30}
 }
 @media(max-width:600px){.intro .brand{margin:14px 0 0 16px;display:inline-block}}
+
+/* Escenas en vídeo, con el mismo tamaño que las fotos (3:4) */
+.escena video{height:100%;width:auto;aspect-ratio:3/4;max-width:calc(100vw - 2 * var(--gutter));display:block;pointer-events:none;background:#1a1a1a}
+@media(max-width:600px){.escena video{height:auto;width:calc(100vw - 2 * var(--gutter))}}

@@ -505,3 +505,16 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 .text-dialog .close{border-radius:50%}
 .text-dialog .dialog-content p.antetitulo{font-size:11px!important;letter-spacing:.18em!important}
 /* ===== FIN FEEDBACK ===== */
+/* Móvil: fotos a sangre en toda la pantalla; botones e Instagram flotando encima */
+@media(max-width:600px){
+html:not(.pagina) body{grid-template-rows:0 100dvh 0!important}
+html:not(.pagina) main{padding:0!important;height:100dvh}
+.site-header{position:fixed!important;left:0;right:0;bottom:0;z-index:40;background:none!important}
+:root{--gutter:0px;--gap:0px;--card:100vw}
+.gallery{padding:0!important;gap:0!important;scroll-snap-type:x mandatory}
+.gallery .project{flex:0 0 100vw!important;width:100vw!important;scroll-snap-align:start}
+.project-image{height:100dvh!important;border-radius:0!important}
+.instagram-flotante{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+.intro{z-index:30}
+}
+@media(max-width:600px){.intro .brand{margin:14px 0 0 16px;display:inline-block}}

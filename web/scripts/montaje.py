@@ -28,7 +28,7 @@ CATALOGOS = {
         ("ead9bdce-0851-49f4-a38b-0e86c885cadf", [43]),
         ("12d77379-3de9-45b3-b817-49b3f76c5b76", [51, 61]),
         (None, [31]),
-        (None, [21, 39]),
+        (None, [47, 39]),
     ]),
     "primitivismo": ("04-primitivismo-y-modernidad", "primitivismo-dobles", PDF_AF, [
         ("18c1e109-4d5f-4784-a830-1dc26dded669", ["m1", "m3"]),
@@ -36,19 +36,19 @@ CATALOGOS = {
         ("aeb6fbea-72d8-4836-bc6b-67b3330e326e", ["m4", 60]),
         ("0a7aca49-6dab-465a-b971-1c54e98fc84f", [66]),
         ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 216]),
-        (None, [108]),
+        (None, [142]),
         (None, [118, 220]),
     ]),
     # las fotos 1 a 3 salen de otro montaje; aquí se añaden desde la 4 (None = amarillo liso, sin fondo todavía)
     "tortajada": ("01-la-tortajada", "la-tortajada-dobles", None, [
         ("5e750332-124f-4079-a8be-7d5a2a962622", ["m1", "m2"]),
         (None, ["m3"]),
-        (None, ["m4", "m5"]),
+        (None, ["m7", "m5"]),
         (None, ["m6"]),
     ], 4),
     # En noir: las fotos 1 a 4 salen de en_noir_fondos.py; aquí se añaden desde la 5
     "en-noir": ("05-pedro-zamora-en-noir", "en-noir-dobles", PDF_NOIR, [
-        (None, [12]),
+        (None, [24]),
         (None, [30, 46]),
         (None, [88]),
     ], 5),

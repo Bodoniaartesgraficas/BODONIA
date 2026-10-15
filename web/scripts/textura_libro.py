@@ -39,7 +39,7 @@ def textura(foto, salida, cubiertas, acabado, semilla=3):
             # brillos puntuales muy finos de la película
             efecto += np.clip(blur(rng.normal(0, 1, (H, W)), 1.5) * 8 - 6, 0, None) * 2
         else:  # relieve: la tinta y el dibujo se levantan del papel
-            efecto += grano * 3.2
+            efecto += grano * 1.0
             l = blur(lum, 1.1)
             emb = (np.roll(l, (1, 1), (0, 1)) - np.roll(l, (-1, -1), (0, 1)))
             efecto += np.clip(emb, -40, 40) * .45

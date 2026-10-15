@@ -437,3 +437,7 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .instagram-flotante img{display:block;width:53px;height:53px;border-radius:50%;filter:brightness(.82) saturate(.9)}
 .instagram-flotante:hover{transform:scale(1.06)}
 @media(max-width:600px){.instagram-flotante{right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+.instagram-flotante{right:auto;left:max(48px,env(safe-area-inset-left,0px));bottom:calc(48px + env(safe-area-inset-bottom,0px));width:80px;height:80px;transition:transform .25s var(--ease,ease)}
+.instagram-flotante img{width:80px;height:80px}
+.instagram-flotante:hover{transform:scale(1.15)}
+@media(max-width:600px){.instagram-flotante{left:24px;right:auto;bottom:calc(96px + env(safe-area-inset-bottom,0px))}}

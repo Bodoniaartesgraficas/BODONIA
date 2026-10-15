@@ -100,7 +100,7 @@ function initGallery(gallery, speed) {
   gallery.addEventListener('wheel', e => {
     if (!e.shiftKey || e.ctrlKey || document.querySelector('dialog[open]')) return;
     e.preventDefault();
-    move((e.deltaX || e.deltaY) * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? gallery.clientWidth : 1));
+    move(1.2 * (e.deltaX || e.deltaY) * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? gallery.clientWidth : 1));
   }, {passive:false});
   gallery.addEventListener('keydown', e => {
     if (!['ArrowRight','ArrowLeft','Home','End'].includes(e.key)) return;

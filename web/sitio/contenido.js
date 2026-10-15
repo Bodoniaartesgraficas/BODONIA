@@ -113,7 +113,7 @@ window.CONTENIDO = {
   filas: [
     {
       titulo: "Catálogos, libros y revistas",
-      velocidad: 16.8, // píxeles por segundo: más bajo = más lento
+      velocidad: 20.16, // píxeles por segundo: más bajo = más lento
       proyectos: [
       {
         titulo: "¡Con lo que ha sido! La Tortajada",

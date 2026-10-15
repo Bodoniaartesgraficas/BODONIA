@@ -121,7 +121,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/01-la-tortajada-portada.jpg",
         detalle: "fotos/proyectos/01-la-tortajada-detalle.jpg",
         completa: "fotos/proyectos/01-la-tortajada-completa.jpg",
-        escenas: ["fotos/proyectos/01-la-tortajada-interior-1.jpg","fotos/proyectos/01-la-tortajada-interior-2.jpg","fotos/proyectos/01-la-tortajada-interior-3.jpg"],
+        escenas: ["fotos/proyectos/01-la-tortajada-interior-2.jpg","fotos/proyectos/01-la-tortajada-interior-3.jpg","fotos/proyectos/01-la-tortajada-interior-1.jpg"],
       },
       {
         titulo: "Territorios de la mirada",
@@ -129,7 +129,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/02-territorios-de-la-mirada-portada.jpg",
         detalle: "fotos/proyectos/02-territorios-de-la-mirada-detalle.jpg",
         completa: "fotos/proyectos/02-territorios-de-la-mirada-completa.jpg",
-        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-4.jpg"],
+        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg"],
       },
       {
         titulo: "Santa Fe—Mauthausen—Santa Fe",
@@ -145,13 +145,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/05-pedro-zamora-en-noir-portada.jpg",
         detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
         completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
-        escenas: [
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg",
-        ],
+        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg"],
       },
       {
         titulo: "Primitivismo y modernidad",
@@ -168,7 +162,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
-        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg"],
+        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg"],
       },
       ],
     },

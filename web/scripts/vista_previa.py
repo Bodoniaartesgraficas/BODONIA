@@ -58,6 +58,8 @@ def data_uri(rel, width):
     return f"data:{mime};base64," + base64.b64encode(buf.getvalue()).decode()
 
 unico = index
+import base64 as _b
+unico = unico.replace('"fotos/instagram.svg"', '"data:image/svg+xml;base64,' + _b.b64encode(open(SITIO / 'fotos/instagram.svg','rb').read()).decode() + '"')
 for rel in sorted(set(re.findall(r'(fotos/[\w./-]+\.(?:jpg|png))', unico))):
     width = 1800 if rel.endswith("-completa.jpg") else (400 if "logo" in rel else 900)
     unico = unico.replace(f'"{rel}"', f'"{data_uri(rel, width)}"')

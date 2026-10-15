@@ -465,8 +465,10 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 /* ===== FEEDBACK DISEÑADOR (oct 2026) — para deshacer, borrar desde aquí hasta el final ===== */
 /* Carga: fondo blanco, solo el logo y una barra fina abajo */
 #loader{background:#fff}
-.loader-pie{display:none}
-.loader-barra{height:2px;background:#9A0015}
+.loader-pie{display:flex!important;opacity:1!important;visibility:visible!important}
+.loader-pie>span:first-child{visibility:hidden}
+.loader-cuenta{color:#9A0015!important;margin-bottom:12px}
+.loader-barra{height:10px!important;background:#9A0015}
 /* Cabecera más sencilla: el lema deja de parecer un enlace */
 .lema{font:400 11px/1.3 var(--sans);letter-spacing:.18em;opacity:.75;top:30px}
 /* Sin puntero de la B: cursor normal */

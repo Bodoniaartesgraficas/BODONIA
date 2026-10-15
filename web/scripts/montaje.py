@@ -1,6 +1,6 @@
 """Fotos interiores de los catálogos, alternando sueltas y dobles (nunca dos sueltas ni dos dobles seguidas).
 
-Cada foto es un fondo 3:4 con uno o dos dobles de páginas apilados. Un doble es un mockup sobre negro
+Cada foto es un fondo 3:4 (o negro liso si aún no hay fondo: None) con uno o dos dobles de páginas apilados. Un doble es un mockup sobre negro
 (web/referencias-mockups/<carpeta>/N.jpg) o un par de páginas del PDF de interior (página izquierda N).
 Uso: python3 web/scripts/montaje.py <santa-fe|primitivismo|coin>
 """
@@ -15,6 +15,7 @@ UP = Path("/mnt/user-data/uploads/hearth")
 REF = Path(__file__).resolve().parents[1] / "referencias-mockups"
 PDF_SF = "/mnt/project-files/Santa Fe_Mauthausen_Santa Fe ALTA.pdf"
 PDF_AF = "/mnt/project-files/catálogo ARTE AFRICANO  24nov.pdf"
+PDF_COIN = "/mnt/project-files/CRÓNICAS DE LA IGLESIA DE SANTA MARÍA DE COÍN ALTA copia.pdf"
 
 def f(uid): return next((UP / uid).glob("*.jp*g"))
 
@@ -33,10 +34,13 @@ CATALOGOS = {
         ("0a7aca49-6dab-465a-b971-1c54e98fc84f", [66]),
         ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 216]),
     ]),
-    "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", None, [
+    "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", PDF_COIN, [
         ("997ff50b-a9af-4475-8f22-6175f6e769e1", ["m1"]),
         ("1172d16d-e742-4f7e-9581-373da77dc44a", ["m2", "m3"]),
         ("00b5d91c-b5b1-4e04-a55e-8d452ca626d9", ["m4"]),
+        ("8bbeb95b-303d-4154-a944-ff73c45d4b3a", [53, 129]),
+        ("23d9fb77-4e7c-4720-8d7b-062e5e25e1ee", [93]),
+        ("9b9a6fed-841c-4da0-90d0-0737371dce5f", [67, 103]),
     ]),
 }
 QUITA_ABAJO = {"61af4831-1489-4214-9d6d-b71583ff5b5f": .07}  # marca de agua
@@ -51,7 +55,8 @@ def main(nombre):
     with tempfile.TemporaryDirectory() as tmp:
         for i, (fondo, piezas) in enumerate(fotos, 1):
             ims = [mockup(carpeta, p[1:]) if isinstance(p, str) else dobles_pdf.doble(pdf, p, tmp) for p in piezas]
-            b = sf.fondo(f(fondo), QUITA_ABAJO.get(fondo, 0))
+            # sin fondo todavía: negro liso, a la espera de que llegue uno
+            b = sf.fondo(f(fondo), QUITA_ABAJO.get(fondo, 0)) if fondo else Image.new("RGB", (sf.W, sf.H), (0, 0, 0))
             hs = [round(p.height * sf.W * sf.ANCHO / p.width) for p in ims]
             sep = 110
             y = sf.H / 2 - (sum(hs) + sep * (len(hs) - 1)) / 2

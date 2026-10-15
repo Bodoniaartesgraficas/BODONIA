@@ -505,6 +505,8 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 .text-dialog .dialog-content p.antetitulo{font-size:11px!important;letter-spacing:.18em!important}
 /* Logo: «artes gráficas» alineado con la primera caja y algo más separado */
 .intro .logo>span[aria-hidden]:last-of-type{margin-left:.74em;margin-top:.35em}
+/* Puntero de la B un 30% más pequeño */
+#cursor-b{width:29px}
 /* ===== FIN FEEDBACK ===== */
 /* Móvil: fotos a sangre en toda la pantalla; botones e Instagram flotando encima */
 @media(max-width:600px){

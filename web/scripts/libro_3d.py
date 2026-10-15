@@ -101,11 +101,12 @@ def portada_frontal(ruta, carpeta):
 # ---------------------------------------------------------------- geometría del libro
 
 class Libro:
-    def __init__(s, W, H, paginas, hoja=.000105):
+    def __init__(s, W, H, paginas, hoja=.000105, cubierta=.00045):
         s.W, s.H = W, H
-        s.c = .00045                         # cubierta: cartulina plastificada
+        s.c = cubierta                       # rústica: cartulina plastificada; tapa dura: el cartón
         s.h = paginas / 4 * hoja             # media tripa (hoja: grosor de cada hoja, en metros)
         s.a = s.c + s.h
+        s.tapa = None                        # TapaDura, si el libro es de tapa dura
         s.g0 = .2                            # fondo del lomo, en fracción de la media tripa
         s.lam = .3 * s.h + .0045             # cuánto tarda la página en subir desde el lomo
         s.lomo_sube = .12 * s.h + .0009      # abombado de la página abierta
@@ -173,6 +174,55 @@ class Libro:
             z = s.bisagra[1] + np.concatenate([[0], np.cumsum(dz)]) + .00012
             pts[:, j] = np.stack([x, np.full_like(x, y), z], -1)
         return pts
+
+class TapaDura:
+    """Tapa dura (cartoné): dos cartones que sobresalen del bloque (la ceja) y el lomo de la cubierta, que los une por
+    los cajos y va por fuera del lomo del bloque. La cubierta impresa [trasera | lomo | portada] lo forra todo y se
+    dobla hacia dentro por los cantos de los cartones."""
+    def __init__(s, L, ruta, lomo, ceja=.003, cajo=.004):
+        s.L, s.ruta, s.ceja, s.cajo = L, ruta, ceja, cajo
+        im = Image.open(ruta).convert("RGB")
+        s.alto = L.H + 2 * ceja
+        s.total = s.alto * im.width / im.height       # ancho de la cubierta desplegada
+        s.panel = (s.total - lomo) / 2
+        s.pliegue = L.W + ceja - s.panel               # x del lomo de la cubierta con el libro cerrado (por fuera del bloque)
+        s.kappa = (cajo - s.pliegue) / (.75 * 2 * L.a)  # con el libro cerrado, la curva del lomo llega justo a x = pliegue
+        a = np.asarray(im).astype(float) / 255
+        n = max(2, a.shape[0] // 80)
+        borde = np.concatenate([a[:n].reshape(-1, 3), a[-n:].reshape(-1, 3)])
+        s.color = tuple(np.median(borde, axis=0) ** 2.2)   # el papel que se dobla por los cantos (en lineal)
+
+    def u_trasera(s, x): return (s.L.W + s.ceja - x) / s.total
+    def u_portada(s, x): return 1 - (s.L.W + s.ceja + x) / s.total   # x de la portada abierta (negativa)
+    def v(s, y): return (y + s.ceja) / s.alto
+
+    def perfil(s, eje, beta, n=72):
+        """Perfil exterior del lomo, del cajo de la trasera al de la portada: Bézier tangente a los dos cartones,
+        remuestreada por longitud de arco para que la cubierta no resbale de un fotograma a otro."""
+        A = np.array([s.cajo, 0.0]); dA = np.array([-1.0, 0.0])
+        B = gira(np.array([[-s.cajo, 0.0, 0.0]]), eje, beta)[0][[0, 2]]
+        dB = np.array([-math.cos(beta), -math.sin(beta)])
+        m = s.kappa * np.linalg.norm(B - A)
+        P = [A, A + m * dA, B - m * dB, B]
+        t = np.linspace(0, 1, 400)[:, None]
+        c = (1 - t) ** 3 * P[0] + 3 * (1 - t) ** 2 * t * P[1] + 3 * (1 - t) * t ** 2 * P[2] + t ** 3 * P[3]
+        arco = np.r_[0, np.cumsum(np.hypot(*np.diff(c, axis=0).T))]
+        q = np.linspace(0, arco[-1], n)
+        p = np.stack([np.interp(q, arco, c[:, 0]), np.interp(q, arco, c[:, 1])], -1)
+        # el cajo: un surco junto a cada cartón, donde la cubierta se mete entre el cartón y el lomo
+        d = np.gradient(p, axis=0); d /= np.linalg.norm(d, axis=1)[:, None]
+        hacia_dentro = np.stack([d[:, 1], -d[:, 0]], -1)
+        surco = sum(np.exp(-((q - s0) / .0011) ** 2) for s0 in (.0028, arco[-1] - .0028))
+        return p + hacia_dentro * (.0007 * surco)[:, None]
+
+    def rejilla(s, eje, beta):
+        p = s.perfil(eje, beta)
+        ys = np.array([-s.ceja, s.L.H + s.ceja])
+        return np.stack(np.broadcast_arrays(p[:, None, 0], ys[None, :], p[:, None, 1]), -1)
+
+    def uv(s, n=72):
+        u = np.linspace(s.u_trasera(s.cajo), s.u_portada(-s.cajo), n)
+        return np.stack(np.broadcast_arrays(u[:, None], np.array([0.0, 1.0])[None, :]), -1)
 
 def espejo(g):
     """Simetría x -> -x; se transpone la rejilla para que las normales sigan saliendo hacia fuera."""
@@ -383,9 +433,11 @@ def escena(L, tex, color_lomo, muestras):
     O = {}
     O["canto"] = mat_canto(max(20, min(90, int(L.h / .00011))))
     O["blanco"] = mat_liso("papel", (.86, .85, .82), .7)
-    O["lomo"] = mat_liso("lomo", color_lomo, .45, .5)
+    # tapa dura: el lomo del bloque va tapado por la cubierta y solo asoma por los extremos (papel)
+    O["lomo"] = mat_liso("lomo", (.74, .72, .68) if L.tapa else color_lomo, .45, .5)
     O["carton"] = mat_liso("carton", (.80, .79, .76), .75, .3)
-    O["tapa"], _ = mat_imagen("tapa", tex["portada"], rug=.4, espec=.5)
+    if not L.tapa:
+        O["tapa"], _ = mat_imagen("tapa", tex["portada"], rug=.4, espec=.5)
     O["der"], O["tex_der"] = mat_imagen("pag_der", tex["S"][0][1])
     O["izq"], O["tex_izq"] = mat_imagen("pag_izq", tex["S"][0][0])
     uv = L.uvs()
@@ -399,8 +451,24 @@ def escena(L, tex, color_lomo, muestras):
                     (O["blanco"] if k == "abajo" else O["canto"])), k == "arriba") for k in uv}
     # tapas
     W, H, c = L.W, L.H, L.c
-    trasera = caja("trasera", 0, W, 0, H, 0, c, [O["lomo"], O["blanco"], O["carton"]], lambda x, y: (x / W, y / H))
-    delantera = caja("delantera", -W, 0, 0, H, 0, c, [O["tapa"], O["blanco"], O["carton"]], lambda x, y: (-x / W, y / H))
+    lomo_tapa = None
+    if L.tapa:
+        T = L.tapa
+        O["cub"], _ = mat_imagen("cubierta", T.ruta, rug=.55, espec=.35)
+        O["canto_tapa"] = mat_liso("canto_tapa", T.color, .7, .3)
+        x0, x1, y0, y1 = T.cajo, W + T.ceja, -T.ceja, H + T.ceja
+        mats = [O["cub"], O["canto_tapa"], O["canto_tapa"]]
+        trasera = caja("trasera", x0, x1, y0, y1, 0, c, mats, lambda x, y: (T.u_trasera(x), T.v(y)))
+        delantera = caja("delantera", -x1, -x0, y0, y1, 0, c, mats, lambda x, y: (T.u_portada(x), T.v(y)))
+        for ob in (trasera, delantera): ob.modifiers["bisel"].width = .0004
+        # lomo de la cubierta, con el grosor del cartón del lomo
+        lomo_tapa = Rejilla("lomo_tapa", T.uv(), O["cub"])
+        lomo_tapa.me.materials.append(mat_liso("carton_gris", (.40, .38, .35), .9, .2)); lomo_tapa.me.materials.append(O["canto_tapa"])
+        so = lomo_tapa.ob.modifiers.new("grosor", "SOLIDIFY"); so.thickness = .0009; so.offset = -1
+        so.material_offset = 1; so.material_offset_rim = 2
+    else:
+        trasera = caja("trasera", 0, W, 0, H, 0, c, [O["lomo"], O["blanco"], O["carton"]], lambda x, y: (x / W, y / H))
+        delantera = caja("delantera", -W, 0, 0, H, 0, c, [O["tapa"], O["blanco"], O["carton"]], lambda x, y: (-x / W, y / H))
     # hojas que pasan
     uvh = np.stack(np.broadcast_arrays(np.linspace(0, 1, NS + 1)[:, None], np.linspace(0, 1, NY)[None, :]), -1)
     hojas = []
@@ -410,7 +478,7 @@ def escena(L, tex, color_lomo, muestras):
     cam_d = bpy.data.cameras.new("camara"); cam_d.sensor_width = 36; cam_d.sensor_fit = "AUTO"
     cam_d.dof.use_dof = True; cam_d.dof.aperture_fstop = 14
     cam = bpy.data.objects.new("camara", cam_d); sc.collection.objects.link(cam); sc.camera = cam
-    return dict(B=B, I=I, trasera=trasera, delantera=delantera, hojas=hojas, cam=cam, O=O)
+    return dict(B=B, I=I, trasera=trasera, delantera=delantera, lomo_tapa=lomo_tapa, hojas=hojas, cam=cam, O=O)
 
 # ---------------------------------------------------------------- animación
 
@@ -428,7 +496,8 @@ def geometria(L, t):
     beta = phi - math.pi
     izq = {n: gira(espejo(g), eje, beta) for n, g in der.items()}
     hojas = [L.hoja(x) if 0 < x < 1 else None for x in u]
-    return dict(der=der, izq=izq, eje=eje, beta=beta, hojas=hojas, phi=phi, k=k, u=u)
+    lomo = L.tapa.rejilla(eje, beta) if L.tapa else None
+    return dict(der=der, izq=izq, eje=eje, beta=beta, hojas=hojas, lomo=lomo, phi=phi, k=k, u=u)
 
 def camara_base(L, t, phi):
     ab = suave(phi / math.pi)
@@ -457,9 +526,11 @@ def puntos(G, L):
     pts += [h.reshape(-1, 3) for h in G["hojas"] if h is not None]
     # tapas: esquinas
     W, H, c = L.W, L.H, L.c
-    tr = np.array([[x, y, z] for x in (0, W) for y in (0, H) for z in (0, c)])
-    de = np.array([[x, y, z] for x in (-W, 0) for y in (0, H) for z in (0, c)])
+    x0, x1, y0, y1 = (L.tapa.cajo, W + L.tapa.ceja, -L.tapa.ceja, H + L.tapa.ceja) if L.tapa else (0, W, 0, H)
+    tr = np.array([[x, y, z] for x in (x0, x1) for y in (y0, y1) for z in (0, c)])
+    de = np.array([[x, y, z] for x in (-x1, -x0) for y in (y0, y1) for z in (0, c)])
     de = gira(de[None], G["eje"], G["beta"])[0]
+    if G["lomo"] is not None: pts.append(G["lomo"].reshape(-1, 3))
     return np.concatenate(pts + [tr, de])
 
 def encuadres(L, n, lente0=50.0):
@@ -485,8 +556,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pdf"); ap.add_argument("--dobles", type=int, nargs=3, help="con --pdf: página izquierda de cada doble")
     ap.add_argument("--imagenes", nargs=3, help="en vez de --pdf: tres dobles de páginas en imagen plana")
-    ap.add_argument("--hoja", type=float, default=.105, help="grosor de cada hoja de papel, en mm")
-    ap.add_argument("--portada", required=True); ap.add_argument("--paginas", type=int, required=True)
+    ap.add_argument("--hoja", type=float, help="grosor de cada hoja de papel, en mm (rústica: .105; tapa dura: sale del lomo)")
+    ap.add_argument("--portada", help="rústica: la portada (o la cubierta desplegada)")
+    ap.add_argument("--tapa-dura", nargs=2, metavar=("CUBIERTA", "LOMO_MM"),
+                    help="tapa dura: cubierta desplegada [trasera | lomo | portada] sin pestañas, y ancho del lomo en mm")
+    ap.add_argument("--paginas", type=int, required=True)
     ap.add_argument("--mm", type=float, nargs=2, required=True); ap.add_argument("--salida", required=True)
     ap.add_argument("--muestras", type=int, default=40); ap.add_argument("--prueba", default="")
     ap.add_argument("--carpeta", default="")
@@ -499,8 +573,16 @@ def main():
         S = [dobles_imagen(r, tmp, i) for i, r in enumerate(a.imagenes)]
     else:
         S = [(pagina_pdf(a.pdf, n, tmp), pagina_pdf(a.pdf, n + 1, tmp)) for n in a.dobles]
-    portada, color_lomo = portada_frontal(a.portada, tmp)
-    L = Libro(a.mm[0] / 1000, a.mm[1] / 1000, a.paginas, a.hoja / 1000)
+    if a.tapa_dura:
+        # cartón de 2,5 mm; el bloque llena el lomo de la cubierta
+        lomo = float(a.tapa_dura[1]) / 1000; carton = .0025
+        hoja = a.hoja / 1000 if a.hoja else (lomo / 2 - carton) / (a.paginas / 4)
+        L = Libro(a.mm[0] / 1000, a.mm[1] / 1000, a.paginas, hoja, cubierta=carton)
+        L.tapa = TapaDura(L, a.tapa_dura[0], lomo)
+        portada, color_lomo = None, None
+    else:
+        portada, color_lomo = portada_frontal(a.portada, tmp)
+        L = Libro(a.mm[0] / 1000, a.mm[1] / 1000, a.paginas, (a.hoja or .105) / 1000)
     E = escena(L, {"S": S, "portada": portada}, color_lomo, a.muestras)
     sc = bpy.context.scene
     n = int(TOTAL * FPS)
@@ -513,6 +595,7 @@ def main():
         for k, g in G["der"].items(): E["B"][k].pon(g)
         for k, g in G["izq"].items(): E["I"][k].pon(g)
         E["delantera"].matrix_world = matriz_giro(G["eje"], G["beta"])
+        if E["lomo_tapa"]: E["lomo_tapa"].pon(G["lomo"])
         # texturas de cada lado según las páginas que ya han pasado
         u1, u2 = G["u"]
         der = 0 if u1 <= 0 else (1 if u2 <= 0 else 2)

@@ -461,3 +461,45 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 @media(max-width:600px){.instagram-flotante{right:calc(16px + 1cm);bottom:calc(84px + .5cm + env(safe-area-inset-bottom,0px))}}
 .instagram-flotante{bottom:calc(24px + env(safe-area-inset-bottom,0px));opacity:.9}
 @media(max-width:600px){.instagram-flotante{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}
+
+/* ===== FEEDBACK DISEÑADOR (oct 2026) — para deshacer, borrar desde aquí hasta el final ===== */
+/* Carga: fondo blanco, solo el logo y una barra fina abajo */
+#loader{background:#fff}
+.loader-pie{display:none}
+.loader-barra{height:2px;background:#9A0015}
+/* Cabecera más sencilla: el lema deja de parecer un enlace */
+.lema{font:400 11px/1.3 var(--sans);letter-spacing:.18em;opacity:.75;top:30px}
+/* Sin puntero de la B: cursor normal */
+#cursor-b{display:none!important}
+@media(hover:hover) and (pointer:fine){.gallery .project-image,.gallery.dragging,.gallery.dragging button{cursor:pointer}}
+/* Flechas más visibles */
+.fila-flecha svg{stroke-width:2.2;filter:drop-shadow(0 0 2px rgb(0 0 0 / 90%)) drop-shadow(0 0 10px rgb(0 0 0 / 70%))}
+/* Tipografía: serif para titulares, sans para el resto */
+.site-header nav button{font-family:var(--sans)!important;letter-spacing:.02em}
+.text-dialog p,.text-dialog label,.text-dialog input,.text-dialog textarea,.text-dialog a,.text-dialog button,.text-dialog .antetitulo{font-family:var(--sans)!important}
+.text-dialog h2,.text-dialog h2 *,.text-dialog .promise,.text-dialog .services dt,.text-dialog .services dd,.text-dialog #contact-email,.text-dialog #contact-phone{font-family:var(--serif)!important}
+/* Ventanas: menos estilos a la vez, más aire y mismo tamaño */
+.titular em{background:none!important;color:inherit!important;font-style:italic;padding:0}
+.text-dialog .antetitulo{color:var(--muted)!important;font-size:11px;letter-spacing:.18em}
+.text-dialog .promise{color:var(--ink)!important;font-size:clamp(20px,2vw,26px)}
+.text-dialog .servicios-pie{color:var(--muted)!important;font-style:normal!important}
+.text-dialog .services *:hover{color:inherit}
+.text-dialog .gran35{display:none}
+.text-dialog{width:min(1040px,calc(100vw - 48px))!important;min-height:min(640px,calc(100dvh - 48px))}
+.text-dialog .dialog-content{padding:72px 80px 64px;display:flex;flex-direction:column;gap:22px}
+.text-dialog .dialog-content>*{margin:0}
+.boton-hablemos{align-self:flex-start;margin-top:12px!important;padding:12px 26px;border:0;border-radius:999px;background:#9A0015;color:#fff;font:500 14px/1 var(--sans);letter-spacing:.02em;cursor:pointer;transition:background .2s}
+.boton-hablemos:hover{background:#7d0011}
+/* Proyectos: subtítulo en sans, sin cursiva roja */
+.project-dialog header p,.project-dialog header span:not(:first-child){font-family:var(--sans)!important;font-style:normal!important;color:#bdb9b1!important;font-size:13px;letter-spacing:.04em}
+@media(max-width:600px){.text-dialog .dialog-content{padding:64px 24px 32px}}
+.site-header .lema{font:400 11px/1.3 var(--sans)!important;letter-spacing:.18em!important;opacity:.75;top:30px!important}
+.text-dialog .boton-hablemos{color:#fff!important;font-family:var(--sans)!important}
+.text-dialog .dialog-content .promise{color:var(--ink)!important;margin:8px 0 0!important}
+.text-dialog .dialog-content .antetitulo{font-size:11px!important;color:var(--muted)!important}
+.text-dialog .dialog-content .servicios-pie{color:var(--muted)!important;font-family:var(--sans)!important}
+.text-dialog label,.text-dialog label *,.text-dialog form p,.text-dialog form small,.text-dialog form span{font-family:var(--sans)!important}
+.text-dialog form button[type=submit]{padding:12px 26px!important;border:0!important;border-radius:999px;background:#9A0015!important;color:#fff!important;font:500 14px/1 var(--sans)!important;text-decoration:none!important}
+.text-dialog .close{border-radius:50%}
+.text-dialog .dialog-content p.antetitulo{font-size:11px!important;letter-spacing:.18em!important}
+/* ===== FIN FEEDBACK ===== */

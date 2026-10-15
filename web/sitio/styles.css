@@ -445,3 +445,13 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .instagram-flotante{left:auto;right:calc(3cm + env(safe-area-inset-right,0px));bottom:calc(3cm + env(safe-area-inset-bottom,0px));transform:scale(.5);transform-origin:100% 100%}
 .instagram-flotante:hover{transform:scale(1)}
 @media(max-width:600px){.instagram-flotante{left:auto;right:24px;bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
+/* Instagram: más esquinado y un 20% mayor (reposo 48px, cursor 96px) */
+.instagram-flotante{right:calc(24px + env(safe-area-inset-right,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));width:96px;height:96px}
+.instagram-flotante img{width:96px;height:96px}
+/* Móvil fiel al escritorio: el logo flota sobre las fotos y las fotos ocupan toda la altura */
+@media(max-width:600px){
+html:not(.pagina) main{padding-top:12px;padding-bottom:0}
+.project-image{height:calc(var(--alto,520px) - 72px - env(safe-area-inset-bottom,0px))}
+.instagram-flotante{left:auto;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:72px;height:72px}
+.instagram-flotante img{width:72px;height:72px}
+}

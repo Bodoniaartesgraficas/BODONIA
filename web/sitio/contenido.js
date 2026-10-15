@@ -149,9 +149,6 @@ window.CONTENIDO = {
           "fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg",
           "fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg",
           "fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg",
-          "fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg",
         ],
       },
       {

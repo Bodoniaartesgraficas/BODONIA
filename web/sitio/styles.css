@@ -419,3 +419,11 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 
 /* Móvil: las fotos llenan la pantalla hasta los botones de abajo */
 @media(max-width:600px){.project-image{aspect-ratio:auto;height:calc(var(--alto,520px) - 84px - env(safe-area-inset-bottom,0px))}:root{--card:calc(100vw - 2 * var(--gutter) - 28px)}.gallery .project{flex:0 0 var(--card);width:var(--card)}.gallery{grid-auto-columns:var(--card)}}
+
+/* Flechas de la galería: solo la flecha roja, sin círculo */
+.fila-flecha,.fila-flecha:hover{background:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0;color:#9A0015!important;width:44px;height:44px;margin-top:-22px}
+.fila-flecha svg{width:34px;height:34px;stroke:currentColor;stroke-width:1.4;filter:drop-shadow(0 0 6px rgb(0 0 0 / 55
+/* Flechas de la galería: solo la flecha roja, sin círculo */
+.fila-flecha,.fila-flecha:hover{background:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0;color:#9A0015!important;width:44px;height:44px;margin-top:-22px}
+.fila-flecha svg{width:34px;height:34px;stroke:currentColor;stroke-width:1.4;filter:drop-shadow(0 0 6px rgb(0 0 0 / 55%))}
+@media(hover:none){.fila-flecha{width:44px;height:44px;margin-top:-22px}}

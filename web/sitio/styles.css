@@ -459,3 +459,5 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 .instagram-flotante{right:calc(24px + 1cm + env(safe-area-inset-right,0px));bottom:calc(24px + .5cm + env(safe-area-inset-bottom,0px));border-radius:0;overflow:visible;box-shadow:none}
 .instagram-flotante img{border-radius:0;filter:drop-shadow(0 1px 6px rgb(0 0 0 / 55%))}
 @media(max-width:600px){.instagram-flotante{right:calc(16px + 1cm);bottom:calc(84px + .5cm + env(safe-area-inset-bottom,0px))}}
+.instagram-flotante{bottom:calc(24px + env(safe-area-inset-bottom,0px));opacity:.9}
+@media(max-width:600px){.instagram-flotante{bottom:calc(84px + env(safe-area-inset-bottom,0px))}}

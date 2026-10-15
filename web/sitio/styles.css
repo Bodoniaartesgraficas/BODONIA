@@ -430,3 +430,5 @@ html:not(.pagina) main{padding-bottom:var(--gutter)}
 .site-header nav a.nav-instagram{background:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:10px;overflow:hidden;transition:transform .2s}
 .site-header nav a.nav-instagram img{display:block;width:38px;height:38px}
 .site-header nav a.nav-instagram:hover{transform:scale(1.06)}
+.site-header nav a.nav-instagram{border-radius:50%}
+.site-header nav a.nav-instagram img{border-radius:50%;filter:brightness(.82) saturate(.9)}

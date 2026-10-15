@@ -472,8 +472,7 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 /* Cabecera más sencilla: el lema deja de parecer un enlace */
 .lema{font:400 11px/1.3 var(--sans);letter-spacing:.18em;opacity:.75;top:30px}
 /* Sin puntero de la B: cursor normal */
-#cursor-b{display:none!important}
-@media(hover:hover) and (pointer:fine){.gallery .project-image,.gallery.dragging,.gallery.dragging button{cursor:pointer}}
+/* Puntero: vuelve la B roja de Bodonia */
 /* Flechas más visibles */
 .fila-flecha svg{stroke-width:2.2;filter:drop-shadow(0 0 2px rgb(0 0 0 / 90%)) drop-shadow(0 0 10px rgb(0 0 0 / 70%))}
 /* Tipografía: serif para titulares, sans para el resto */
@@ -504,6 +503,8 @@ html:not(.pagina) main{padding-top:12px;padding-bottom:0}
 .text-dialog form button[type=submit]{padding:12px 26px!important;border:0!important;border-radius:999px;background:#9A0015!important;color:#fff!important;font:500 14px/1 var(--sans)!important;text-decoration:none!important}
 .text-dialog .close{border-radius:50%}
 .text-dialog .dialog-content p.antetitulo{font-size:11px!important;letter-spacing:.18em!important}
+/* Logo: «artes gráficas» alineado con la primera caja y algo más separado */
+.intro .logo>span[aria-hidden]:last-of-type{margin-left:.74em;margin-top:.35em}
 /* ===== FIN FEEDBACK ===== */
 /* Móvil: fotos a sangre en toda la pantalla; botones e Instagram flotando encima */
 @media(max-width:600px){

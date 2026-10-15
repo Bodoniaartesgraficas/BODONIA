@@ -9,6 +9,7 @@ Uso:
   python3 web/scripts/libro_3d.py --pdf interior.pdf --dobles 53 57 63 --portada portada.png \
       --paginas 96 --mm 165 235 --salida ../sitio/fotos/proyectos/03-santa-fe-mauthausen-video.mp4
   --dobles: página izquierda de cada doble (se usa esa y la siguiente).
+  --imagenes a.png b.png c.png: en vez de --pdf y --dobles, tres dobles en imagen plana.
   --prueba 0,40,90: solo renderiza esos fotogramas (PNG en --carpeta), para revisar.
 """
 import argparse, math, os, shutil, subprocess, sys, tempfile, time
@@ -46,6 +47,44 @@ def pagina_pdf(pdf, n, carpeta, dpi=200):
     im.crop((s, s, im.width - s, im.height - s)).save(base + ".png")
     return base + ".png"
 
+def aplana_lomo(im):
+    """Quita la sombra del lomo que traen algunos dobles planos. Se mide en el margen de arriba, que es papel liso;
+    si el margen no es liso (una foto a sangre, un titulillo), se deja el doble tal cual."""
+    a = np.asarray(im).astype(float)
+    H, W = a.shape[:2]
+    banda = a[int(H * .01):int(H * .045)].mean(2)
+    perfil = np.median(banda, axis=0)
+    fuera = np.r_[perfil[int(W * .05):int(W * .35)], perfil[int(W * .65):int(W * .95)]]
+    if fuera.std() > 3 or banda.std(axis=0)[int(W * .05):int(W * .95)].mean() > 4:
+        return im
+    r = np.clip(np.convolve(perfil, np.ones(9) / 9, mode="same") / np.median(fuera), .4, 1)
+    r[:5] = r[-5:] = 1
+    if r.min() > .97:
+        return im
+    return Image.fromarray(np.clip(a / r[None, :, None], 0, 255).astype(np.uint8))
+
+def dobles_imagen(ruta, carpeta, i):
+    """Doble de páginas desde una imagen plana: se recorta lo transparente, se parte por el centro (o por el hueco
+    entre las dos páginas, si lo hay) y se quita la sombra del lomo si viene pintada."""
+    im = Image.open(ruta).convert("RGBA")
+    al = np.asarray(im)[..., 3] > 200
+    ys, xs = np.where(al)
+    im = im.crop((xs.min(), ys.min(), xs.max() + 1, ys.max() + 1))
+    al = np.asarray(im)[..., 3] > 200
+    W = im.width
+    centro = al[int(im.height * .2):int(im.height * .8), int(W * .45):int(W * .55)].mean(axis=0) < .5
+    if centro.any():
+        hueco = np.where(centro)[0] + int(W * .45)
+        a0, b0 = hueco.min(), hueco.max() + 1
+    else:
+        a0 = b0 = W // 2
+    fondo = Image.new("RGB", im.size, (255, 255, 255)); fondo.paste(im, (0, 0), im)
+    fondo = aplana_lomo(fondo)
+    out = []
+    for k, caja_ in enumerate([(0, 0, a0, im.height), (b0, 0, W, im.height)]):
+        f = os.path.join(carpeta, f"d{i}{'ab'[k]}.png"); fondo.crop(caja_).save(f); out.append(f)
+    return tuple(out)
+
 def portada_frontal(ruta, carpeta):
     """Cara frontal de la cubierta. Si es la cubierta desplegada (apaisada), se queda con la mitad derecha."""
     im = Image.open(ruta).convert("RGB")
@@ -62,10 +101,10 @@ def portada_frontal(ruta, carpeta):
 # ---------------------------------------------------------------- geometría del libro
 
 class Libro:
-    def __init__(s, W, H, paginas):
+    def __init__(s, W, H, paginas, hoja=.000105):
         s.W, s.H = W, H
         s.c = .00045                         # cubierta: cartulina plastificada
-        s.h = paginas / 4 * .000105          # media tripa (hojas de 0,1 mm)
+        s.h = paginas / 4 * hoja             # media tripa (hoja: grosor de cada hoja, en metros)
         s.a = s.c + s.h
         s.g0 = .2                            # fondo del lomo, en fracción de la media tripa
         s.lam = .3 * s.h + .0045             # cuánto tarda la página en subir desde el lomo
@@ -444,7 +483,9 @@ def encuadres(L, n, lente0=50.0):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--pdf", required=True); ap.add_argument("--dobles", type=int, nargs=3, required=True)
+    ap.add_argument("--pdf"); ap.add_argument("--dobles", type=int, nargs=3, help="con --pdf: página izquierda de cada doble")
+    ap.add_argument("--imagenes", nargs=3, help="en vez de --pdf: tres dobles de páginas en imagen plana")
+    ap.add_argument("--hoja", type=float, default=.105, help="grosor de cada hoja de papel, en mm")
     ap.add_argument("--portada", required=True); ap.add_argument("--paginas", type=int, required=True)
     ap.add_argument("--mm", type=float, nargs=2, required=True); ap.add_argument("--salida", required=True)
     ap.add_argument("--muestras", type=int, default=40); ap.add_argument("--prueba", default="")
@@ -454,9 +495,12 @@ def main():
     a = ap.parse_args()
     tmp = a.carpeta or tempfile.mkdtemp(prefix="libro3d_")
     os.makedirs(tmp, exist_ok=True)
-    S = [(pagina_pdf(a.pdf, n, tmp), pagina_pdf(a.pdf, n + 1, tmp)) for n in a.dobles]
+    if a.imagenes:
+        S = [dobles_imagen(r, tmp, i) for i, r in enumerate(a.imagenes)]
+    else:
+        S = [(pagina_pdf(a.pdf, n, tmp), pagina_pdf(a.pdf, n + 1, tmp)) for n in a.dobles]
     portada, color_lomo = portada_frontal(a.portada, tmp)
-    L = Libro(a.mm[0] / 1000, a.mm[1] / 1000, a.paginas)
+    L = Libro(a.mm[0] / 1000, a.mm[1] / 1000, a.paginas, a.hoja / 1000)
     E = escena(L, {"S": S, "portada": portada}, color_lomo, a.muestras)
     sc = bpy.context.scene
     n = int(TOTAL * FPS)
@@ -489,7 +533,7 @@ def main():
     if a.prueba or a.cada > 1:
         return
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-framerate", str(FPS), "-i", os.path.join(tmp, "f", "%04d.png"),
-                    "-vf", f"scale={VW}:{VH}:flags=lanczos,noise=alls=3:allf=t,format=yuv420p", "-c:v", "libx264", "-crf", "18", "-preset", "slow",
+                    "-vf", f"scale={VW}:{VH}:flags=lanczos,noise=alls=3:allf=t,format=yuv420p", "-c:v", "libx264", "-crf", "22", "-preset", "slow",
                     "-movflags", "+faststart", a.salida], check=True)
     if not a.carpeta:
         shutil.rmtree(tmp, ignore_errors=True)

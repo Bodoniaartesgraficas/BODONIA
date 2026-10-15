@@ -16,6 +16,9 @@ def main(video, fondo, salida, escala=1):
     bg = sf.fondo(fondo).resize((W, H), Image.LANCZOS)
     vw, vh = map(int, subprocess.check_output(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height",
                                                 "-of", "csv=p=0:s=x", video], text=True).strip().split("x"))
+    recorte = ""
+    if vh * 3 > vw * 4:  # vertical más alto que 3:4: se recorta arriba y abajo, centrado
+        ch = vw * 4 // 3; ch -= ch % 2; recorte = f"crop={vw}:{ch}:0:{(vh - ch) // 2},"; vh = ch
     w = round(W * ANCHO); h = round(w * vh / vw)
     if h > H * ANCHO:  # vídeos verticales: limita por el alto
         h = round(H * ANCHO); w = round(h * vw / vh)
@@ -28,7 +31,7 @@ def main(video, fondo, salida, escala=1):
     tmp = Path(tempfile.mkdtemp()) / "fondo.png"; bg.save(tmp)
     out = sf.SITIO / salida
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-loop", "1", "-i", str(tmp), "-i", video,
-        "-filter_complex", f"[1:v]scale={w}:{h}[v];[0:v][v]overlay={x}:{y}:shortest=1,format=yuv420p",
+        "-filter_complex", f"[1:v]{recorte}scale={w}:{h}[v];[0:v][v]overlay={x}:{y}:shortest=1,format=yuv420p",
         "-an", "-c:v", "libx264", "-crf", "30", "-preset", "slow", "-movflags", "+faststart", str(out)], check=True)
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
-"""Genera un vídeo vertical (720x1280) de un libro que se abre en perspectiva y pasa páginas.
+"""Genera un vídeo 3:4 (720x960) de un libro que se abre en perspectiva y pasa páginas.
 
-Es una versión sencilla del mockup 3D: portada que se abre y dos pasos de página sobre un fondo gris de estudio.
+Es una versión sencilla del mockup 3D: portada que se abre y dos pasos de página sobre fondo negro.
 Uso: python3 web/scripts/libro_video.py <portada.png (solo la cara frontal, o desplegada con 2 caras)> <doble1.jpg> <doble2.jpg> <doble3.jpg> <salida.mp4>
 Después se coloca sobre el fondo con en_noir_video.py.
 """
@@ -8,7 +8,7 @@ import sys, math, subprocess
 import numpy as np
 from PIL import Image, ImageFilter
 
-VW, VH, FPS = 720, 1280, 24
+VW, VH, FPS = 720, 960, 24   # formato 3:4
 PW, PH = 1.0, 1.43          # página: ancho y alto en unidades del libro
 PHI = math.radians(52)      # elevación de la cámara
 DIST = 6.0
@@ -83,11 +83,11 @@ def hoja(lienzo, mascara, frente, dorso, ang, cx, zoom):
         sh = .78 + .22 * abs(math.cos(math.radians(ang))) if True else 1
         pinta(lienzo, mascara, sub, [(x0, PH, z0 + .02), (x1, PH, z1 + .02), (x1, 0, z1 + .02), (x0, 0, z0 + .02)], cx, zoom, sh)
 
-def fondo_gris():
+def fondo_negro():
     yy, xx = np.mgrid[0:VH, 0:VW]
     r = np.sqrt(((xx - VW * .45) / VW) ** 2 + ((yy - VH * .42) / VH) ** 2)
-    g = np.clip(222 - 70 * r, 0, 255)
-    img = np.stack([g, g * .975, g * .955], axis=2).astype("uint8")
+    g = np.clip(30 - 34 * r, 4, 255)   # negro con un leve foco en el centro
+    img = np.stack([g, g * .97, g * .94], axis=2).astype("uint8")
     return Image.fromarray(img).convert("RGBA")
 
 def ease(t): return t * t * (3 - 2 * t)
@@ -101,7 +101,7 @@ def main(portada_png, d1, d2, d3, salida):
     frente_cub = cov.resize((360, 515), Image.LANCZOS)
     S = [mitades(recorta_claro(Image.open(p))) for p in (d1, d2, d3)]
     papel = Image.new("RGB", (360, 515), (232, 226, 217))
-    bg = fondo_gris()
+    bg = fondo_negro()
     ff = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{VW}x{VH}", "-r", str(FPS), "-i", "-",
                            "-an", "-c:v", "libx264", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", salida], stdin=subprocess.PIPE)
     total = 11.5
@@ -147,8 +147,8 @@ def main(portada_png, d1, d2, d3, salida):
         if 0 < a2 < 180: hoja(capa, masc, S[1][1], S[2][0], a2, cx, zoom)
         # sombra proyectada
         sh = Image.new("L", (VW, VH), 0); sh.paste(masc.transform((VW, VH), Image.AFFINE, (1, 0, -10, 0, 1, -26)), (0, 0))
-        sh = sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v: int(v * .45))
-        lienzo.paste(Image.new("RGBA", (VW, VH), (30, 24, 18, 255)), (0, 0), sh)
+        sh = sh.filter(ImageFilter.GaussianBlur(16)).point(lambda v: int(v * .6))
+        lienzo.paste(Image.new("RGBA", (VW, VH), (0, 0, 0, 255)), (0, 0), sh)
         lienzo.alpha_composite(capa)
         ff.stdin.write(lienzo.convert("RGB").tobytes())
     ff.stdin.close(); ff.wait()

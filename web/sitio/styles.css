@@ -551,3 +551,9 @@ html:not(.pagina) main{padding:0!important;height:100dvh}
 .vertical .bloque.v1{aspect-ratio:3/4}
 .vertical .bloque.v2{grid-template-columns:1fr 1fr;aspect-ratio:3/2}
 .vertical .bloque.fv .escena{width:100%}
+/* Móvil: el icono de Instagram va a la derecha, en la misma fila que El taller · Qué hacemos · Hablemos */
+@media(max-width:600px){
+.site-header{padding-right:56px!important}
+.instagram-flotante{right:12px!important;left:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;width:36px!important;height:36px!important;transform:none!important}
+.instagram-flotante img{width:36px!important;height:36px!important}
+}

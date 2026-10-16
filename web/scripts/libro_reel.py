@@ -1,4 +1,4 @@
-"""Reel vertical 9:16 (1080x1920) de un libro de tapa dura en 3D, para Instagram.
+"""Reel vertical 9:16 (1080x1920, 12 s) de un libro de tapa dura en 3D, para Instagram.
 
 El libro cerrado descansa sobre una mesa gris oscura con luz lateral de ventana. La cámara se acerca despacio a la
 portada, la tapa se abre girando sobre el cajo y enseña las guardas, y luego pasan las hojas en el orden del libro:
@@ -29,12 +29,12 @@ import bpy  # noqa: E402
 from mathutils import Vector  # noqa: E402
 
 VW, VH, FPS = 1080, 1920, 24
-TOTAL = 15.0
-ACERCA = (0.0, 3.0)        # la cámara se acerca a la portada
-TAPA = (3.0, 5.0)          # se abre la tapa
-PASAN = (5.3, 13.5)        # pasan las hojas; luego plano fijo hasta el final
-DURA = 1.45                # lo que tarda cada paso de hoja
-QUIETO = 14.3              # desde aquí la cámara ya no se mueve
+TOTAL = 12.0
+ACERCA = (0.0, 2.5)        # la cámara se acerca a la portada
+TAPA = (2.5, 4.3)          # se abre la tapa
+PASAN = (4.6, 10.8)        # pasan las hojas; luego plano fijo hasta el final
+DURA = 1.25                # lo que tarda cada paso de hoja
+QUIETO = 11.4              # desde aquí la cámara ya no se mueve
 NS, NY, NV = 90, 16, 6     # resolución: a lo ancho de la hoja, a lo alto, en el grueso
 
 # ---------------------------------------------------------------- utilidades 2D

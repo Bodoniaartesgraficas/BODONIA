@@ -207,7 +207,10 @@ projects.forEach(project => {
   document.addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') return;
     x = e.clientX; y = e.clientY;
-    const sobre = !!e.target.closest('.gallery .project-image') && !document.querySelector('dialog[open]');
+    const visor = document.querySelector('#project-dialog[open]');
+    const anfitrion = visor || document.body;  // dentro del visor la B vive en el propio diálogo, o quedaría tapada
+    if (b.parentElement !== anfitrion) anfitrion.appendChild(b);
+    const sobre = visor ? !!e.target.closest('#project-track .escena') : (!!e.target.closest('.gallery .project-image') && !document.querySelector('dialog[open]'));
     if (sobre !== dentro) { dentro = sobre; b.classList.toggle('visible', sobre); if (sobre && cx < -100) { cx = x; cy = y; } }
     if (!frame) frame = requestAnimationFrame(pinta);
   }, {passive: true});

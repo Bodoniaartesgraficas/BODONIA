@@ -225,32 +225,40 @@ function renderProject(index) {
   document.querySelector('#project-title').textContent = project.dataset.title;
   document.querySelector('#project-type').textContent = project.dataset.type;
   track.textContent = '';
-  const mosaico = movil.matches ? 'vertical' : 'horizontal';  // ordenador: de izquierda a derecha; móvil: hacia abajo
-  track.classList.toggle('mosaico', !!mosaico); track.classList.toggle('vertical', mosaico === 'vertical');
-  // Mosaico: bloques de ángulos rectos (una entera, dos o tres apiladas...) en vez de una fila
-  const PATRON = {horizontal: ['b1','b2','b1','b3'], vertical: ['fa','fd','fc']};
-  const CUANTAS = {b1:1, b2:2, b3:3, fa:3, fd:3, fc:3};
-  let bloque = null, quedan = 0, paso = 0;
-  const destinoDe = (esVideo) => {
-    if (!mosaico) return track;
-    if (!quedan) {
-      const tipo = esVideo ? (mosaico === 'vertical' ? 'fv' : 'b1') : PATRON[mosaico][paso++ % PATRON[mosaico].length];
-      bloque = document.createElement('div'); bloque.className = 'bloque ' + tipo;
-      track.appendChild(bloque); quedan = CUANTAS[tipo] || 1;
-    }
-    quedan--; return bloque;
-  };
-  JSON.parse(project.dataset.escenas).forEach((src, i) => {
+  const vertical = movil.matches;  // ordenador: de izquierda a derecha; móvil: hacia abajo
+  track.classList.add('mosaico'); track.classList.toggle('vertical', vertical);
+  const titulo = project.dataset.title;
+  const todas = JSON.parse(project.dataset.escenas);
+  const esVideo = src => /\.mp4$/.test(src);
+  const fotos = todas.filter(src => !esVideo(src)), videos = todas.filter(esVideo);
+  const figura = (src, i) => {
     const fig = document.createElement('figure'); fig.className = 'escena';
-    if (/\.mp4$/.test(src)) {  // vídeo: se reproduce solo, mudo y en bucle
+    if (esVideo(src)) {  // vídeo: se reproduce solo, mudo y en bucle
       const v = document.createElement('video'); v.src = src;
-      v.autoplay = v.loop = v.muted = v.playsInline = true; v.setAttribute('aria-label', `${project.dataset.title}: vídeo`);
-      fig.appendChild(v); quedan = 0; destinoDe(true).appendChild(fig); return;
+      v.autoplay = v.loop = v.muted = v.playsInline = true; v.setAttribute('aria-label', `${titulo}: vídeo`);
+      fig.appendChild(v); return fig;
     }
     const img = document.createElement('img'); img.src = src; img.draggable = false;
-    img.alt = i ? `${project.dataset.title}: escena ${i + 1}` : project.dataset.title;
-    fig.appendChild(img); destinoDe(false).appendChild(fig);
+    img.alt = i ? `${titulo}: escena ${i + 1}` : titulo;
+    fig.appendChild(img); return fig;
+  };
+  // Mosaico cerrado: cada bloque es un rectángulo completo (1, 2 o 3 fotos), sin huecos ni celdas vacías.
+  // El último bloque se ajusta a las fotos que quedan.
+  const CICLO = vertical ? [3, 2, 3, 1] : [1, 2, 1, 3];
+  const TRES = ['fa', 'fc', 'fd'];
+  let i = 0, vez = 0, tres = 0;
+  while (i < fotos.length) {
+    const n = Math.min(CICLO[vez++ % CICLO.length], fotos.length - i);
+    const clase = vertical ? (n === 1 ? 'v1' : n === 2 ? 'v2' : TRES[tres++ % 3]) : 'b' + n;
+    const bloque = document.createElement('div'); bloque.className = 'bloque ' + clase;
+    for (let k = 0; k < n; k++, i++) bloque.appendChild(figura(fotos[i], i));
+    track.appendChild(bloque);
+  }
+  videos.forEach(src => {  // el vídeo va aparte, al final
+    const bloque = document.createElement('div'); bloque.className = 'bloque ' + (vertical ? 'fv' : 'b1');
+    bloque.appendChild(figura(src, 0)); track.appendChild(bloque);
   });
+
   track.scrollLeft = 0; track.scrollTop = 0;
 }
 function rectDe(el) { const r = el.getBoundingClientRect(); return {left:r.left+'px', top:r.top+'px', width:r.width+'px', height:r.height+'px'}; }

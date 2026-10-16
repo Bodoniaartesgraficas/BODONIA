@@ -524,3 +524,5 @@ html:not(.pagina) main{padding:0!important;height:100dvh}
 /* Escenas en vídeo, con el mismo tamaño que las fotos (3:4) */
 .escena video{height:100%;width:auto;aspect-ratio:3/4;max-width:calc(100vw - 2 * var(--gutter));display:block;pointer-events:none;background:#1a1a1a}
 @media(max-width:600px){.escena video{height:auto;width:calc(100vw - 2 * var(--gutter))}}
+/* Territorios: vídeo real del libro en formato cuadrado */
+.escena video[src*="territorios"]{aspect-ratio:1/1}

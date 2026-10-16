@@ -28,9 +28,9 @@ CATALOGOS = {
         ("61af4831-1489-4214-9d6d-b71583ff5b5f", ["m4", 25]),
         ("ead9bdce-0851-49f4-a38b-0e86c885cadf", [43]),
         ("12d77379-3de9-45b3-b817-49b3f76c5b76", [51, 61]),
-        (None, [31]),
-        (None, [47, 39]),
-        (None, [13, 55, 59]),
+        ("cb8ae9ba-65cb-40a8-a8b2-025c20cf8909", [31]),
+        ("2745314f-c177-430d-92cd-5fa27bd27d66", [47, 39]),
+        ("bb219595-2f42-429c-b41c-4c43874740aa", [13, 55, 59]),
     ]),
     "primitivismo": ("04-primitivismo-y-modernidad", "primitivismo-dobles", PDF_AF, [
         ("18c1e109-4d5f-4784-a830-1dc26dded669", ["m1", "m3"]),
@@ -38,9 +38,9 @@ CATALOGOS = {
         ("aeb6fbea-72d8-4836-bc6b-67b3330e326e", ["m4", 60]),
         ("0a7aca49-6dab-465a-b971-1c54e98fc84f", [66]),
         ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 216]),
-        (None, [142]),
-        (None, [118, 220]),
-        (None, [50, 70, 158]),
+        ("8a83a32c-recorte", [142]),
+        ("1bd9fe0e-2f21-4f0a-8c56-3d9839cb18df", [118, 220]),
+        ("f7e275a1-573f-4df3-9afc-f279a6346b8f", [50, 70, 158]),
     ]),
     # las fotos 1 a 3 salen de otro montaje; aquí se añaden desde la 4 (None = amarillo liso, sin fondo todavía)
     "tortajada": ("01-la-tortajada", "la-tortajada-dobles", None, [

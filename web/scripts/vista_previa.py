@@ -61,7 +61,7 @@ unico = index
 import base64 as _b
 unico = unico.replace('"fotos/instagram.svg"', '"data:image/svg+xml;base64,' + _b.b64encode(open(SITIO / 'fotos/instagram.svg','rb').read()).decode() + '"')
 for rel in sorted(set(re.findall(r'(fotos/[\w./-]+\.(?:jpg|png))', unico))):
-    width = 1800 if rel.endswith("-completa.jpg") else (400 if "logo" in rel else 900)
+    width = 1800 if rel.endswith("-completa.jpg") else (1280 if rel.endswith("-portada.jpg") else (400 if "logo" in rel else 900))
     unico = unico.replace(f'"{rel}"', f'"{data_uri(rel, width)}"')
 # Los vídeos (.mp4) no se incrustan: la vista previa los sirve como archivos aparte (ver publicación con `files`).
 legal_body = re.search(r"<main>(.*)</main>", legal, re.S).group(1)

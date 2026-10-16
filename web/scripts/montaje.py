@@ -18,6 +18,7 @@ PDF_SF = "/mnt/project-files/Santa Fe_Mauthausen_Santa Fe ALTA.pdf"
 PDF_AF = "/mnt/project-files/catálogo ARTE AFRICANO  24nov.pdf"
 PDF_NOIR = "/mnt/user-data/uploads/hearth/71cd65f2-e535-42be-a1e9-27d99062cd95/71cd65f2-e535-42be-a1e9-27d99062cd95.pdf"
 PDF_COIN = "/mnt/project-files/CRÓNICAS DE LA IGLESIA DE SANTA MARÍA DE COÍN ALTA copia.pdf"
+PDF_TERR = "/mnt/project-files/Territorios de la mirada.pdf"
 
 def f(uid): return next((UP / uid).glob("*.jp*g"))
 
@@ -55,6 +56,14 @@ CATALOGOS = {
         ("5b99c650-recorte", [88]),
         ("e31b720e-0e4a-412c-b0cd-057bf5720833", [14, 36, 68]),
     ], 5),
+    # Territorios: las fotos 1 y 2 salen de territorios_fondos.py (dobles 2 y 50); aquí se añaden desde la 3
+    "territorios": ("02-territorios-de-la-mirada", "territorios-dobles", PDF_TERR, [
+        ("76250e24-32cd-445e-9751-1a20f2b95838", [48]),
+        ("1da734c8-982f-4129-a3b8-97714eb70063", [36, 98]),
+        ("1c3410b7-b484-45f0-b9f2-1c1f753b1bc9", [82]),
+        ("38f79aa5-3575-4fd9-9ea7-484398bd1f5e", [26, 112]),
+        ("7a7cc6b6-900f-497d-825e-ee24d741e91b", [74, 124]),
+    ], 3),
     # mezcladas: las del PDF entre los mockups, alternando suelta y doble
     "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", PDF_COIN, [
         ("23d9fb77-4e7c-4720-8d7b-062e5e25e1ee", [93]),

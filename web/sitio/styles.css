@@ -649,3 +649,14 @@ html:not(.pagina) .gallery .project,html:not(.pagina) .project-image{height:100d
 .mosaico .bloque.portada-ancha{aspect-ratio:auto!important;flex:0 0 auto}
 .mosaico .bloque.portada-ancha .escena{width:100%!important}
 .mosaico .bloque.portada-ancha .escena img{width:100%!important;height:100%!important;object-fit:cover!important}
+
+/* Móvil nativo: sin destello gris al tocar, sin retraso del toque, sin rebote de la página, botones sin texto seleccionable */
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;overscroll-behavior:none}
+button,a,[role="button"],.project-image,.filters button{touch-action:manipulation}
+button,[role="button"],.project-image,.filters button,.site-header nav a{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+/* Respuesta inmediata al pulsar (solo transform) */
+.site-header nav button,.site-header nav a,.filters button,.boton-hablemos,.gallery-controls button{transition:transform .16s cubic-bezier(.23,1,.32,1),color .2s ease,background-color .2s ease}
+.site-header nav button:active,.site-header nav a:active,.filters button:active,.boton-hablemos:active,.gallery-controls button:active{transform:scale(.97)}
+/* En pantallas táctiles el hover no se queda pegado tras tocar */
+@media(hover:none){.instagram-flotante:hover,.site-header nav a.nav-instagram:hover{transform:none}.boton-hablemos:hover{background:inherit}}
+@media(prefers-reduced-motion:reduce){.site-header nav button:active,.site-header nav a:active,.filters button:active,.boton-hablemos:active,.gallery-controls button:active{transform:none}}

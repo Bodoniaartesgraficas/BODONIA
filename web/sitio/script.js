@@ -31,6 +31,7 @@ C.filas.forEach((fila, fi) => {
     const article = document.createElement('article');
     article.className = 'project'; article.dataset.title = p.titulo; article.dataset.type = p.tipo;
     article.dataset.full = p.completa || p.portada;
+    if (p.mosaico) article.dataset.mosaico = p.mosaico;
     article.dataset.escenas = JSON.stringify([p.portada].concat(p.escenas || [p.detalle, p.completa]).filter(Boolean));
     const button = document.createElement('button');
     button.className = 'project-image'; button.setAttribute('aria-label', 'Abrir ' + p.titulo);
@@ -223,18 +224,33 @@ function renderProject(index) {
   document.querySelector('#project-title').textContent = project.dataset.title;
   document.querySelector('#project-type').textContent = project.dataset.type;
   track.textContent = '';
+  const mosaico = project.dataset.mosaico || '';
+  track.classList.toggle('mosaico', !!mosaico); track.classList.toggle('vertical', mosaico === 'vertical');
+  // Mosaico: bloques de ángulos rectos (una entera, dos o tres apiladas...) en vez de una fila
+  const PATRON = {horizontal: ['b1','b2','b1','b3'], vertical: ['fa','fd','fc']};
+  const CUANTAS = {b1:1, b2:2, b3:3, fa:3, fd:3, fc:3};
+  let bloque = null, quedan = 0, paso = 0;
+  const destinoDe = (esVideo) => {
+    if (!mosaico) return track;
+    if (!quedan) {
+      const tipo = esVideo ? (mosaico === 'vertical' ? 'fv' : 'b1') : PATRON[mosaico][paso++ % PATRON[mosaico].length];
+      bloque = document.createElement('div'); bloque.className = 'bloque ' + tipo;
+      track.appendChild(bloque); quedan = CUANTAS[tipo] || 1;
+    }
+    quedan--; return bloque;
+  };
   JSON.parse(project.dataset.escenas).forEach((src, i) => {
     const fig = document.createElement('figure'); fig.className = 'escena';
     if (/\.mp4$/.test(src)) {  // vídeo: se reproduce solo, mudo y en bucle
       const v = document.createElement('video'); v.src = src;
       v.autoplay = v.loop = v.muted = v.playsInline = true; v.setAttribute('aria-label', `${project.dataset.title}: vídeo`);
-      fig.appendChild(v); track.appendChild(fig); return;
+      fig.appendChild(v); quedan = 0; destinoDe(true).appendChild(fig); return;
     }
     const img = document.createElement('img'); img.src = src; img.draggable = false;
     img.alt = i ? `${project.dataset.title}: escena ${i + 1}` : project.dataset.title;
-    fig.appendChild(img); track.appendChild(fig);
+    fig.appendChild(img); destinoDe(false).appendChild(fig);
   });
-  track.scrollLeft = 0;
+  track.scrollLeft = 0; track.scrollTop = 0;
 }
 function rectDe(el) { const r = el.getBoundingClientRect(); return {left:r.left+'px', top:r.top+'px', width:r.width+'px', height:r.height+'px'}; }
 function abrirProyecto(project) {
@@ -256,7 +272,7 @@ function cerrarProyecto() {
   if (reducedMotion.matches || !origen || !projectDialog.open) return projectDialog.close();
   const primera = track.querySelector('.escena');
   const r = origen.getBoundingClientRect();
-  if (track.scrollLeft > 10 || r.bottom < 0 || r.top > innerHeight) return projectDialog.close();
+  if (track.scrollLeft > 10 || track.scrollTop > 10 || r.bottom < 0 || r.top > innerHeight) return projectDialog.close();
   const clon = document.createElement('img'); clon.className = 'vuelo'; clon.src = primera.querySelector('img').src; clon.alt = '';
   projectDialog.appendChild(clon); projectDialog.classList.add('volando', 'cerrando');
   clon.animate([rectDe(primera.querySelector('img')), rectDe(origen)], {duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'})

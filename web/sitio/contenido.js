@@ -137,6 +137,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/03-santa-fe-mauthausen-portada.jpg",
         detalle: "fotos/proyectos/03-santa-fe-mauthausen-detalle.jpg",
         completa: "fotos/proyectos/03-santa-fe-mauthausen-completa.jpg",
+        mosaico: "vertical",
         escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-8.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-7.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-5.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-6.jpg","fotos/proyectos/03-santa-fe-mauthausen-video.mp4"],
       },
       {
@@ -145,6 +146,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
+        mosaico: "horizontal",
         escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-7.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-6.jpg","fotos/proyectos/04-primitivismo-y-modernidad-video.mp4"],
         encuadre: "50% 65%",
       },

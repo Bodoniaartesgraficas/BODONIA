@@ -602,9 +602,11 @@ html,body{background:#0b0b0b}
 .project-track.mosaico{padding-block:7vh}
 .mosaico .bloque{transition:width .45s cubic-bezier(.22,1,.36,1)}
 .mosaico .bloque.crece{aspect-ratio:auto!important}
+.mosaico .bloque.crece .escena{width:var(--w);transition:width .45s cubic-bezier(.22,1,.36,1)}
+.mosaico .bloque.crece .escena:hover{width:100%}
 .mosaico .bloque.crece .escena img{width:100%!important;object-fit:cover!important}
 .mosaico .escena img{transition:filter .35s ease}
-.mosaico.con-activo .bloque:not(.crece) .escena img{filter:brightness(.45) saturate(.7)}
+.mosaico.con-activo .escena:not(:hover) img{filter:brightness(.45) saturate(.7)}
 }
 /* Visor de trabajos: las imágenes ocupan toda la pantalla y el título del libro va superpuesto */
 .project-dialog[open]{display:block!important;position:fixed}
@@ -622,6 +624,3 @@ html,body{background:#0b0b0b}
 .project-dialog #project-track.vertical{padding-block:0!important}
 }
 
-/* Separación entre imágenes algo mayor en toda la web */
-:root{--gap:12px}
-@media(max-width:600px){:root{--gap:0px}.project-dialog{--gap:12px}}

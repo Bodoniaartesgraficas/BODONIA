@@ -250,7 +250,7 @@ function renderProject(index) {
     if (!matchMedia('(hover:hover) and (pointer:fine) and (min-width:601px)').matches) return;
     b.addEventListener('mouseenter', () => {
       const w = b.getBoundingClientRect().width;
-      b.style.width = w + 'px'; b.classList.add('crece'); track.classList.add('con-activo');
+      b.style.width = w + 'px'; b.style.setProperty('--w', w + 'px'); b.classList.add('crece'); track.classList.add('con-activo');
       requestAnimationFrame(() => { b.style.width = (w * 1.3) + 'px'; });
       b.dataset.w = w;
     });

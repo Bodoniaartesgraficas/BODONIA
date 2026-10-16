@@ -59,13 +59,13 @@ CATALOGOS = {
     "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", PDF_COIN, [
         ("23d9fb77-4e7c-4720-8d7b-062e5e25e1ee", [93]),
         ("1172d16d-e742-4f7e-9581-373da77dc44a", ["m2", "m3"]),
-        (None, [111]),
+        ("9179e760-a2fa-47d0-b6f0-0f5ae283ab5e", [111]),
         ("8bbeb95b-303d-4154-a944-ff73c45d4b3a", [53, 129]),
         ("997ff50b-a9af-4475-8f22-6175f6e769e1", ["m1"]),
         ("9b9a6fed-841c-4da0-90d0-0737371dce5f", [67, 103]),
         ("00b5d91c-b5b1-4e04-a55e-8d452ca626d9", ["m4"]),
-        (None, [57, 143]),
-        (None, [89, 107, 135]),
+        ("bdcbab72-150f-419a-853e-6d001e2f60b2", [57, 143]),
+        ("6a172977-db44-4ab5-90cd-4bb5c4c1cb15", [89, 107, 135]),
     ]),
 }
 QUITA_ABAJO = {"61af4831-1489-4214-9d6d-b71583ff5b5f": .07}  # marca de agua

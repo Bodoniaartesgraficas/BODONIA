@@ -245,6 +245,20 @@ function renderProject(index) {
     img.alt = i ? `${titulo}: escena ${i + 1}` : titulo;
     fig.appendChild(img); return fig;
   };
+  // Al pasar el ratón el bloque se ensancha un 30% y empuja a los vecinos, como en la portada.
+  function crecer(b, track) {
+    if (!matchMedia('(hover:hover) and (pointer:fine) and (min-width:601px)').matches) return;
+    b.addEventListener('mouseenter', () => {
+      const w = b.getBoundingClientRect().width;
+      b.style.width = w + 'px'; b.classList.add('crece'); track.classList.add('con-activo');
+      requestAnimationFrame(() => { b.style.width = (w * 1.3) + 'px'; });
+      b.dataset.w = w;
+    });
+    b.addEventListener('mouseleave', () => {
+      b.style.width = b.dataset.w + 'px'; track.classList.remove('con-activo');
+      setTimeout(() => { if (!b.matches(':hover')) { b.classList.remove('crece'); b.style.width = ''; } }, 460);
+    });
+  }
   // Mosaico cerrado: cada bloque es un rectángulo completo (1, 2 o 3 fotos), sin huecos ni celdas vacías.
   // El último bloque se ajusta a las fotos que quedan.
   const CICLO = vertical ? [3, 2, 3, 1] : [1, 2, 1, 3];
@@ -256,6 +270,7 @@ function renderProject(index) {
     const bloque = document.createElement('div'); bloque.className = 'bloque ' + clase;
     for (let k = 0; k < n; k++, i++) bloque.appendChild(figura(fotos[i], i));
     track.appendChild(bloque);
+    crecer(bloque, track);
   }
   videos.forEach(src => {  // el vídeo va aparte, al final
     const bloque = document.createElement('div'); bloque.className = 'bloque ' + (vertical ? 'fv' : 'b1');

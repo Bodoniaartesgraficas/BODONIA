@@ -622,14 +622,3 @@ html,body{background:#0b0b0b}
 .project-dialog #project-track.vertical{padding-block:0!important}
 }
 
-
-/* Título del visor dentro del lomo de su libro, en horizontal; entra girando desde vertical */
-.project-dialog header>div.lomo{display:inline-flex;flex-direction:column;gap:3px;padding:12px 30px 11px;max-width:min(78vw,720px);border-radius:3px/10px;
-background:linear-gradient(180deg,rgb(255 255 255 / 16%),rgb(255 255 255 / 0%) 35%,rgb(0 0 0 / 0%) 65%,rgb(0 0 0 / 22%)),var(--lomo);
-box-shadow:inset 6px 0 0 rgb(0 0 0 / 14%),inset -6px 0 0 rgb(0 0 0 / 14%),0 10px 24px rgb(0 0 0 / 45%);text-shadow:none!important;
-transform-origin:0 50%;animation:lomo-entra .9s cubic-bezier(.22,1,.36,1) .25s both}
-.project-dialog header>div.lomo h2,.project-dialog header>div.lomo #project-type{margin:0;color:var(--lomo-tinta)!important}
-.project-dialog header>div.lomo #project-type{font-size:11px;text-transform:uppercase;letter-spacing:.14em;opacity:.8}
-@keyframes lomo-entra{0%{opacity:0;transform:rotate(-90deg) translateX(-30px)}60%{opacity:1}100%{opacity:1;transform:none}}
-@media(max-width:600px){.project-dialog header>div.lomo{padding:9px 20px 8px;max-width:calc(100vw - 90px)}}
-@media(prefers-reduced-motion:reduce){.project-dialog header>div.lomo{animation:none}}

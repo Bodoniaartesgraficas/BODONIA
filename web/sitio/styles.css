@@ -660,3 +660,7 @@ button,[role="button"],.project-image,.filters button,.site-header nav a{user-se
 /* En pantallas táctiles el hover no se queda pegado tras tocar */
 @media(hover:none){.instagram-flotante:hover,.site-header nav a.nav-instagram:hover{transform:none}.boton-hablemos:hover{background:inherit}}
 @media(prefers-reduced-motion:reduce){.site-header nav button:active,.site-header nav a:active,.filters button:active,.boton-hablemos:active,.gallery-controls button:active{transform:none}}
+
+/* Título del visor un 30 % más pequeño */
+.project-dialog h2,#project-title{font-size:25px!important}
+@media(max-width:600px){.project-dialog h2,#project-title{font-size:17px!important}}

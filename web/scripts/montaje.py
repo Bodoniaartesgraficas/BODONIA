@@ -45,8 +45,8 @@ CATALOGOS = {
     # las fotos 1 a 3 salen de otro montaje; aquí se añaden desde la 4 (None = amarillo liso, sin fondo todavía)
     "tortajada": ("01-la-tortajada", "la-tortajada-dobles", None, [
         ("5e750332-124f-4079-a8be-7d5a2a962622", ["m1", "m2"]),
-        (None, ["m3"]),
-        (None, ["m7", "m5", "m6"]),
+        ("a3a68449-3456-46bf-8aec-f2d9c589f4ec", ["m3"]),
+        ("4fe16a7f-f3c3-4856-a9c0-c9c7849fd4cc", ["m7", "m5", "m6"]),
     ], 4),
     # En noir: las fotos 1 a 4 salen de en_noir_fondos.py; aquí se añaden desde la 5
     "en-noir": ("05-pedro-zamora-en-noir", "en-noir-dobles", PDF_NOIR, [

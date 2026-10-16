@@ -50,10 +50,10 @@ CATALOGOS = {
     ], 4),
     # En noir: las fotos 1 a 4 salen de en_noir_fondos.py; aquí se añaden desde la 5
     "en-noir": ("05-pedro-zamora-en-noir", "en-noir-dobles", PDF_NOIR, [
-        (None, [24]),
-        (None, [30, 46]),
-        (None, [88]),
-        (None, [14, 36, 68]),
+        ("aa991160-266a-46ab-b386-7ff18371c72e", [24]),
+        ("d6acb69c-216f-47a8-9ab2-457b8543f74c", [30, 46]),
+        ("5b99c650-recorte", [88]),
+        ("e31b720e-0e4a-412c-b0cd-057bf5720833", [14, 36, 68]),
     ], 5),
     # mezcladas: las del PDF entre los mockups, alternando suelta y doble
     "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", PDF_COIN, [

@@ -31,7 +31,6 @@ C.filas.forEach((fila, fi) => {
     const article = document.createElement('article');
     article.className = 'project'; article.dataset.title = p.titulo; article.dataset.type = p.tipo;
     article.dataset.full = p.completa || p.portada;
-    if (p.mosaico) article.dataset.mosaico = p.mosaico;
     article.dataset.escenas = JSON.stringify([p.portada].concat(p.escenas || [p.detalle, p.completa]).filter(Boolean));
     const button = document.createElement('button');
     button.className = 'project-image'; button.setAttribute('aria-label', 'Abrir ' + p.titulo);
@@ -218,13 +217,15 @@ projects.forEach(project => {
 // Vista de un trabajo: la foto pulsada crece hasta llenar la pantalla y después aparecen sus escenas en fila.
 const track = document.querySelector('#project-track');
 let origen = null;
+const movil = matchMedia('(max-width: 600px)');
+movil.addEventListener('change', () => { if (projectDialog.open) renderProject(selected); });
 function renderProject(index) {
   selected = (index + visible.length) % visible.length;
   const project = visible[selected];
   document.querySelector('#project-title').textContent = project.dataset.title;
   document.querySelector('#project-type').textContent = project.dataset.type;
   track.textContent = '';
-  const mosaico = project.dataset.mosaico || '';
+  const mosaico = movil.matches ? 'vertical' : 'horizontal';  // ordenador: de izquierda a derecha; móvil: hacia abajo
   track.classList.toggle('mosaico', !!mosaico); track.classList.toggle('vertical', mosaico === 'vertical');
   // Mosaico: bloques de ángulos rectos (una entera, dos o tres apiladas...) en vez de una fila
   const PATRON = {horizontal: ['b1','b2','b1','b3'], vertical: ['fa','fd','fc']};
@@ -286,7 +287,7 @@ projects.forEach(project=>project.querySelector('button').addEventListener('clic
 }));
 document.querySelector('#project-prev').addEventListener('click',()=>renderProject(selected-1));
 document.querySelector('#project-next').addEventListener('click',()=>renderProject(selected+1));
-projectDialog.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();track.scrollBy({left:(e.key==='ArrowRight'?1:-1)*track.clientWidth*.6,behavior:'smooth'});} });
+projectDialog.addEventListener('keydown',e=>{ if(e.key==='ArrowRight'||e.key==='ArrowLeft'||e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();const d=(e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1);movil.matches?track.scrollBy({top:d*track.clientHeight*.6,behavior:'smooth'}):track.scrollBy({left:d*track.clientWidth*.6,behavior:'smooth'});} });
 // Arrastrar las escenas con el ratón
 (function(){ let d=null; track.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse')return; d={x:e.clientX,s:track.scrollLeft}; track.setPointerCapture(e.pointerId); });
   track.addEventListener('pointermove',e=>{ if(d) track.scrollLeft=d.s-(e.clientX-d.x); });

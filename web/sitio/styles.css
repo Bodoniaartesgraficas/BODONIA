@@ -633,8 +633,3 @@ transform-origin:0 50%;animation:lomo-entra .9s cubic-bezier(.22,1,.36,1) .25s b
 @keyframes lomo-entra{0%{opacity:0;transform:rotate(-90deg) translateX(-30px)}60%{opacity:1}100%{opacity:1;transform:none}}
 @media(max-width:600px){.project-dialog header>div.lomo{padding:9px 20px 8px;max-width:calc(100vw - 90px)}}
 @media(prefers-reduced-motion:reduce){.project-dialog header>div.lomo{animation:none}}
-/* Lomo y título más pequeños */
-.project-dialog header>div.lomo{padding:5px 14px 4px;gap:1px;border-radius:2px/6px;box-shadow:inset 3px 0 0 rgb(0 0 0 / 14%),inset -3px 0 0 rgb(0 0 0 / 14%),0 6px 14px rgb(0 0 0 / 40%)}
-.project-dialog header>div.lomo h2{font-size:13px!important;line-height:1.2}
-.project-dialog header>div.lomo #project-type{font-size:8px!important;letter-spacing:.12em}
-@media(max-width:600px){.project-dialog header>div.lomo{padding:4px 12px 3px}.project-dialog header>div.lomo h2{font-size:12px!important}}

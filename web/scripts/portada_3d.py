@@ -22,7 +22,8 @@ UP = "/mnt/project-files/uploads/hearth/"
 # Cubiertas: PDF, medidas del libro (mm), lomo (mm) y dónde empieza la trasera dentro de la caja de corte (mm).
 LIBROS = {
     "tortajada": dict(pdf=UP + "199014d9-abc6-475c-8455-fbb4a4f9282d", W=165, H=240, lomo=26, x_trasera=148.7, paginas=320),
-    "territorios": dict(pdf=UP + "a217327d-7950-4580-8ae6-4e8ebd1873ae", W=240, H=208.2, lomo=11.3, x_trasera=0, paginas=144, sin_trim=True),
+    # las líneas de plegado del PDF marcan un lomo de 29,2 mm centrado en la caja de corte (491,3 mm)
+    "territorios": dict(pdf=UP + "a217327d-7950-4580-8ae6-4e8ebd1873ae", W=231.05, H=208.2, lomo=29.2, x_trasera=0, paginas=144),
     "santa-fe": dict(pdf=UP + "2ca113e9-5af3-420e-bb31-f545f81ea725", W=165, H=235, lomo=6, x_trasera=146, paginas=96),
     # tapa dura: W y H son los del cartón con su cajo (171 x 247 para un bloque de 165 x 240); el PDF trae las pestañas
     "primitivismo": dict(pdf=UP + "a77ffdd4-1a92-4357-bb69-8f8d19d8e985", W=170.95, H=247, lomo=23.1, x_trasera=19.86,
@@ -197,7 +198,7 @@ def mat_madera(nombre, oscuro, claro, tabla=.11, anillos=140, barniz=.55):
     ondula = mate("MULTIPLY", mate("SUBTRACT", ruido(estira(P, .7, 2, 2), 1, 2), .5), .035)
     dy = mate("ADD", mate("SUBTRACT", y, y0), ondula)
     # el tablón no va paralelo al eje del tronco: los anillos cortan la cara en arcos (catedrales)
-    inclina = mate("MULTIPLY", x, mate("ADD", .05, mate("MULTIPLY", r4, .12)))
+    inclina = mate("MULTIPLY", x, mate("ADD", .02, mate("MULTIPLY", r4, .05)))
     dz = mate("ADD", mate("SUBTRACT", z, z0), inclina)
     radio = mate("SQRT", mate("ADD", mate("MULTIPLY", dy, dy), mate("MULTIPLY", dz, dz)))
     irreg = mate("MULTIPLY", ruido(estira(P, 1.5, 12, 12), 1, 3), .5)
@@ -317,21 +318,29 @@ def mat_marmol(nombre, base, oscuro, vena):
     nubes = _ruido(nt, P, 3.5, 6, .62, 1.2)
     c = _rampa(nt, salida(nubes, "Factor"), [(.32, oscuro), (.55, base), (.75, [min(1, v * 1.2) for v in base])])
     venas = []
-    for esc, dist, grosor in ((6, 9, .045), (14, 12, .03)):
+    # vetas finas y sin mucho contraste; una máscara de ruido hace que aparezcan y se pierdan como en la piedra
+    for esc, dist, grosor, peso in ((3.2, 7, .022, .75), (9, 10, .013, .45)):
         wv = nodo(nt, "ShaderNodeTexWave"); wv.wave_type = "BANDS"; wv.bands_direction = "DIAGONAL"; wv.wave_profile = "SIN"
         entrada(wv, "Scale").default_value = esc; entrada(wv, "Distortion").default_value = dist
         entrada(wv, "Detail").default_value = 8; entrada(wv, "Detail Roughness").default_value = .62
         nt.links.new(P, entrada(wv, "Vector"))
         r = nodo(nt, "ShaderNodeMapRange"); entrada(r, "From Min").default_value = 1 - grosor; entrada(r, "From Max").default_value = 1
+        entrada(r, "To Max").default_value = peso
         nt.links.new(salida(wv, "Factor"), entrada(r, "Value")); venas.append(salida(r, "Result"))
     vmax = nodo(nt, "ShaderNodeMath"); vmax.operation = "MAXIMUM"
     nt.links.new(venas[0], vmax.inputs[0]); nt.links.new(venas[1], vmax.inputs[1])
+    mascara = _ruido(nt, P, 2.2, 3, .5)
+    mr = nodo(nt, "ShaderNodeMapRange"); entrada(mr, "From Min").default_value = .38; entrada(mr, "From Max").default_value = .62
+    entrada(mr, "To Min").default_value = .2
+    nt.links.new(salida(mascara, "Factor"), entrada(mr, "Value"))
+    vm = nodo(nt, "ShaderNodeMath"); vm.operation = "MULTIPLY"
+    nt.links.new(vmax.outputs[0], vm.inputs[0]); nt.links.new(salida(mr, "Result"), vm.inputs[1]); vmax = vm
     mx = nodo(nt, "ShaderNodeMix"); mx.data_type = "RGBA"
     nt.links.new(vmax.outputs[0], entrada(mx, "Factor", "VALUE"))
     nt.links.new(salida(c, "Color"), entrada(mx, "A", "RGBA")); entrada(mx, "B", "RGBA").default_value = (*vena, 1)
     nt.links.new(salida(mx, "Result", "RGBA"), entrada(bsdf, "Base Color"))
     entrada(bsdf, "Roughness").default_value = .3; entrada(bsdf, "Specular IOR Level").default_value = .5
-    entrada(bsdf, "Coat Weight").default_value = .8; entrada(bsdf, "Coat Roughness").default_value = .06
+    entrada(bsdf, "Coat Weight").default_value = .8; entrada(bsdf, "Coat Roughness").default_value = .12
     return m
 
 def mat_tela_libro(nombre, color):
@@ -481,7 +490,7 @@ def escena_santa_fe(cfg, ruta_cub, carpeta):
     d = direccion(40, 30)
     sol(d, 4.2, (1.0, .87, .72), 1.0)
     gobo(d, [(-.02, -.6), (.9, -.6), (.9, .7), (-.30, .7)], [(.30, -.6, .02, .7, .03)], carpeta=carpeta)
-    camara((0, 0, caja[4] / 2), .78, -26, 33, 58, 8)
+    camara((0, 0, caja[4] / 2), .70, -26, 36, 58, 8)
 
 def escena_primitivismo(cfg, ruta_cub, carpeta):
     w = ajustes(cfg["muestras"]); mundo(w, (.6, .52, .44), .12)
@@ -498,7 +507,7 @@ def escena_primitivismo(cfg, ruta_cub, carpeta):
     d = direccion(15, 32)
     sol(d, 4.0, (1.0, .84, .66), 1.1)
     gobo(d, [(-.13, -.7), (.9, -.7), (.9, .7), (-.30, .7)], carpeta=carpeta)
-    camara((-.01, .03, c2[4] + caja[4] / 2), .80, -30, 34, 60, 8)
+    camara((-.01, .03, c2[4] + caja[4] / 2), .70, -30, 36, 60, 8)
 
 def escena_coin(cfg, ruta_cub, carpeta):
     w = ajustes(cfg["muestras"]); mundo(w, (.5, .47, .44), .1)
@@ -512,11 +521,11 @@ def escena_coin(cfg, ruta_cub, carpeta):
     r1, c1 = libro("libro1", cfg, ruta_cub)
     coloca(r1, c1, 70, (-.045, -.035))
     r2, c2 = libro("libro2", cfg, ruta_cub)
-    coloca(r2, c2, 86, (.06, .075), z=c1[4])
+    coloca(r2, c2, 81, (-.022, -.012), z=c1[4])   # encima del primero, apoyado del todo
     d = direccion(125, 34)
-    sol(d, 4.5, (1.0, .88, .74), 1.0)
+    sol(d, 3.8, (1.0, .88, .74), 1.0)
     gobo(d, [(-.9, -.6), (.25, -.6), (.35, .8), (-.9, .8)], [(-.12, -.6, -.08, .8, .03)], carpeta=carpeta)
-    camara((.005, .02, c1[4]), .86, 14, 40, 56, 8)
+    camara((-.03, -.02, c1[4]), .80, 14, 40, 56, 8)
 
 def escena_en_noir(cfg, ruta_cub, carpeta):
     w = ajustes(cfg["muestras"]); mundo(w, (.55, .55, .55), .22)
@@ -566,9 +575,10 @@ def escena_tortajada(cfg, ruta_cub, carpeta):
     from mathutils import Matrix
     raiz.matrix_world = Matrix.Translation((0, dy, dz)) @ M
     centro = sum(esquinas, Vector()) / len(esquinas) + Vector((0, dy, dz))
-    d = direccion(150, 30)
+    # sol de delante a la izquierda, por encima del brazo, para que entre de lleno en la cubierta
+    d = direccion(205, 38)
     sol(d, 4.2, (1.0, .84, .64), 1.2)
-    gobo(d, [(-.9, -.9), (.16, -.9), (.36, .9), (-.9, .9)], [(-.18, -.9, -.06, .9, .035)], carpeta=carpeta)
+    gobo(d, [(-.9, -.9), (.55, -.9), (.7, .9), (-.9, .9)], [(-.34, -.9, -.26, .9, .035)], carpeta=carpeta)
     camara(centro, 1.0, -24, 14, 62, 6.3)
 
 def escena_territorios(cfg, ruta_cub, carpeta):

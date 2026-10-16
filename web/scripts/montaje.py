@@ -37,9 +37,9 @@ CATALOGOS = {
         ("fe949059-04b5-43a7-861d-51cc584036bd", ["m2"]),
         ("aeb6fbea-72d8-4836-bc6b-67b3330e326e", ["m4", 60]),
         ("0a7aca49-6dab-465a-b971-1c54e98fc84f", [66]),
-        ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 216]),
+        ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 118]),
         ("8a83a32c-recorte", [142]),
-        ("1bd9fe0e-2f21-4f0a-8c56-3d9839cb18df", [118, 220]),
+        ("1bd9fe0e-2f21-4f0a-8c56-3d9839cb18df", [216, 220]),
         ("f7e275a1-573f-4df3-9afc-f279a6346b8f", [50, 70, 158]),
     ]),
     # las fotos 1 a 3 salen de otro montaje; aquí se añaden desde la 4 (None = amarillo liso, sin fondo todavía)

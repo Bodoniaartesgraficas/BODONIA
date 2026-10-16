@@ -252,13 +252,13 @@ function renderProject(index) {
     b.addEventListener('mouseenter', () => {
       const w = b.getBoundingClientRect().width;
       b.style.width = w + 'px'; b.style.setProperty('--w', w + 'px'); b.classList.add('crece'); track.classList.add('con-activo');
-      requestAnimationFrame(() => { b.style.width = (w * 1.21) + 'px'; });
+      requestAnimationFrame(() => { b.style.width = (w * 1.3) + 'px'; });
       b.dataset.w = w;
     });
     // Dentro de la columna, la imagen bajo el ratón gana alto y las otras se encogen (el bloque siempre cabe en pantalla).
     const celdas = [...b.children];
     if (celdas.length > 1) celdas.forEach((c, k) => c.addEventListener('mouseenter', () => {
-      b.style.gridTemplateRows = celdas.map((_, j) => j === k ? '1.7fr' : '1fr').join(' ');
+      b.style.gridTemplateRows = celdas.map((_, j) => j === k ? '2fr' : '1fr').join(' ');
     }));
     b.addEventListener('mouseleave', () => {
       b.style.width = b.dataset.w + 'px'; b.style.gridTemplateRows = ''; track.classList.remove('con-activo');

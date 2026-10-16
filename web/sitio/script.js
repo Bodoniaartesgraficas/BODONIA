@@ -227,6 +227,13 @@ function renderProject(index) {
   const project = visible[selected];
   document.querySelector('#project-title').textContent = project.dataset.title;
   document.querySelector('#project-type').textContent = project.dataset.type;
+  // Lomo del libro, tumbado, con los colores de cada cubierta; se vuelve a animar cada vez que se abre.
+  const LOMOS = {'Tortajada': ['#b5743a', '#f6e7c8'], 'Territorios': ['#e9e6df', '#3a3a3a'], 'Mauthausen': ['#1f4f9c', '#f2f2f2'],
+    'Primitivismo': ['#efe9dc', '#2a2a2a'], 'Zamora': ['#151515', '#e9692c'], 'Coín': ['#7a1f33', '#f1e6d6']};
+  const lomo = document.querySelector('#project-dialog header > div');
+  const par = Object.entries(LOMOS).find(([k]) => project.dataset.title.includes(k));
+  lomo.style.setProperty('--lomo', par ? par[1][0] : '#333'); lomo.style.setProperty('--lomo-tinta', par ? par[1][1] : '#fff');
+  lomo.classList.remove('lomo'); void lomo.offsetWidth; lomo.classList.add('lomo');
   track.textContent = '';
   const vertical = movil.matches;  // ordenador: de izquierda a derecha; móvil: hacia abajo
   track.classList.add('mosaico'); track.classList.toggle('vertical', vertical);

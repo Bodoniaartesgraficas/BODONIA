@@ -33,8 +33,8 @@ def fondo(ruta, quita_abajo=0):
     g = r.normal(0, 2.2, (H, W, 1))
     return Image.fromarray(np.clip(np.asarray(im) + g, 0, 255).astype("uint8"))
 
-def pon(lienzo, spread, cy):
-    w = round(W * ANCHO); h = round(spread.height * w / spread.width)
+def pon(lienzo, spread, cy, ancho=ANCHO):
+    w = round(W * ancho); h = round(spread.height * w / spread.width)
     sp = spread.resize((w, h), Image.LANCZOS)
     x, y = (W - w) // 2, round(cy - h / 2)
     sombra = Image.new("L", (W, H), 0)

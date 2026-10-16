@@ -1,6 +1,7 @@
-"""Fotos interiores de los catálogos, alternando sueltas y dobles (nunca dos sueltas ni dos dobles seguidas).
+"""Fotos interiores de los catálogos: unas con un doble de páginas, otras con dos y una por libro con tres.
 
-Cada foto es un fondo 3:4 (o amarillo liso si aún no hay fondo: None) con uno o dos dobles de páginas apilados. Un doble es un mockup sobre negro
+Cada foto es un fondo 3:4 (o amarillo liso si aún no hay fondo: None) con uno, dos o tres dobles de páginas apilados;
+con tres se reducen para que quepan. Ninguna página se repite entre las fotos ni con el vídeo del libro. Un doble es un mockup sobre negro
 (web/referencias-mockups/<carpeta>/N.jpg) o un par de páginas del PDF de interior (página izquierda N).
 Uso: python3 web/scripts/montaje.py <santa-fe|primitivismo|tortajada|en-noir|coin>
 """
@@ -29,6 +30,7 @@ CATALOGOS = {
         ("12d77379-3de9-45b3-b817-49b3f76c5b76", [51, 61]),
         (None, [31]),
         (None, [47, 39]),
+        (None, [13, 55, 59]),
     ]),
     "primitivismo": ("04-primitivismo-y-modernidad", "primitivismo-dobles", PDF_AF, [
         ("18c1e109-4d5f-4784-a830-1dc26dded669", ["m1", "m3"]),
@@ -38,19 +40,20 @@ CATALOGOS = {
         ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 216]),
         (None, [142]),
         (None, [118, 220]),
+        (None, [50, 70, 158]),
     ]),
     # las fotos 1 a 3 salen de otro montaje; aquí se añaden desde la 4 (None = amarillo liso, sin fondo todavía)
     "tortajada": ("01-la-tortajada", "la-tortajada-dobles", None, [
         ("5e750332-124f-4079-a8be-7d5a2a962622", ["m1", "m2"]),
         (None, ["m3"]),
-        (None, ["m7", "m5"]),
-        (None, ["m6"]),
+        (None, ["m7", "m5", "m6"]),
     ], 4),
     # En noir: las fotos 1 a 4 salen de en_noir_fondos.py; aquí se añaden desde la 5
     "en-noir": ("05-pedro-zamora-en-noir", "en-noir-dobles", PDF_NOIR, [
         (None, [24]),
         (None, [30, 46]),
         (None, [88]),
+        (None, [14, 36, 68]),
     ], 5),
     # mezcladas: las del PDF entre los mockups, alternando suelta y doble
     "coin": ("06-santa-maria-de-coin", "santa-maria-coin-dobles", PDF_COIN, [
@@ -62,6 +65,7 @@ CATALOGOS = {
         ("9b9a6fed-841c-4da0-90d0-0737371dce5f", [67, 103]),
         ("00b5d91c-b5b1-4e04-a55e-8d452ca626d9", ["m4"]),
         (None, [57, 143]),
+        (None, [89, 107, 135]),
     ]),
 }
 QUITA_ABAJO = {"61af4831-1489-4214-9d6d-b71583ff5b5f": .07}  # marca de agua
@@ -78,11 +82,15 @@ def main(nombre):
             ims = [mockup(carpeta, p[1:]) if isinstance(p, str) else dobles_pdf.doble(pdf, p, tmp) for p in piezas]
             # sin fondo todavía: amarillo liso, para ver cuáles faltan
             b = sf.fondo(f(fondo), QUITA_ABAJO.get(fondo, 0)) if fondo else Image.new("RGB", (sf.W, sf.H), (246, 214, 64))
-            hs = [round(p.height * sf.W * sf.ANCHO / p.width) for p in ims]
-            sep = 110
+            sep = 110 if len(ims) < 3 else 80
+            ancho = sf.ANCHO
+            hs = [p.height * sf.W * ancho / p.width for p in ims]
+            libre = sf.H - 2 * 150 - sep * (len(hs) - 1)   # tres dobles no caben a tamaño normal: se reducen
+            if sum(hs) > libre:
+                ancho *= libre / sum(hs); hs = [h * libre / sum(hs) for h in hs]
             y = sf.H / 2 - (sum(hs) + sep * (len(hs) - 1)) / 2
             for p, h in zip(ims, hs):
-                sf.pon(b, p, y + h / 2); y += h + sep
+                sf.pon(b, p, y + h / 2, ancho); y += h + sep
             b.save(sf.SITIO / f"{pref}-interior-{i}.jpg", quality=86, optimize=True, progressive=True)
     print(nombre, len(fotos), "fotos")
 

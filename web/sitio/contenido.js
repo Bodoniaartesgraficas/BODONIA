@@ -146,6 +146,7 @@ window.CONTENIDO = {
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
         escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-7.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-6.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-8.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-video.mp4"],
+        encuadre: "50% 65%",
       },
       {
         titulo: "Pedro Zamora. En noir",

@@ -31,6 +31,7 @@ C.filas.forEach((fila, fi) => {
     const article = document.createElement('article');
     article.className = 'project'; article.dataset.title = p.titulo; article.dataset.type = p.tipo;
     article.dataset.full = p.completa || p.portada;
+    if (p.bloques) article.dataset.bloques = JSON.stringify(p.bloques);
     article.dataset.escenas = JSON.stringify([p.portada].concat(p.escenas || [p.detalle, p.completa]).filter(Boolean));
     const button = document.createElement('button');
     button.className = 'project-image'; button.setAttribute('aria-label', 'Abrir ' + p.titulo);
@@ -268,12 +269,15 @@ function renderProject(index) {
   // El último bloque se ajusta a las fotos que quedan.
   const CICLO = vertical ? [3, 2, 3, 1] : [1, 2, 1, 3];
   const TRES = ['fa', 'fc', 'fd'];
+  // Cada libro puede fijar sus columnas (índices de foto); si no, se usa el ciclo.
+  const fijos = project.dataset.bloques ? JSON.parse(project.dataset.bloques) : null;
+  const orden = fijos ? fijos.flat() : fotos.map((_, k) => k);
   let i = 0, vez = 0, tres = 0;
-  while (i < fotos.length) {
-    const n = Math.min(CICLO[vez++ % CICLO.length], fotos.length - i);
+  while (i < orden.length) {
+    const n = fijos ? fijos[vez++].length : Math.min(CICLO[vez++ % CICLO.length], orden.length - i);
     const clase = vertical ? (n === 1 ? 'v1' : n === 2 ? 'v2' : TRES[tres++ % 3]) : 'b' + n;
     const bloque = document.createElement('div'); bloque.className = 'bloque ' + clase;
-    for (let k = 0; k < n; k++, i++) bloque.appendChild(figura(fotos[i], i));
+    for (let k = 0; k < n; k++, i++) bloque.appendChild(figura(fotos[orden[i]], orden[i]));
     track.appendChild(bloque);
     crecer(bloque, track);
   }

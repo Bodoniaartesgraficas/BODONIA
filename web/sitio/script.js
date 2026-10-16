@@ -266,29 +266,14 @@ function renderProject(index) {
   }
   // Mosaico cerrado: cada bloque es un rectángulo completo (1, 2 o 3 fotos), sin huecos ni celdas vacías.
   // El último bloque se ajusta a las fotos que quedan.
-  // Las fotos con varias dobles páginas van siempre solas y en grande; las pequeñas (2 o 3 por columna)
-  // solo pueden ser de una doble página. Se agrupan las sueltas por orden para cerrar cada columna.
-  const GRANDE = new Set(["01-la-tortajada-interior-4.jpg", "01-la-tortajada-interior-6.jpg", "01-la-tortajada-interior-3.jpg", "02-territorios-de-la-mirada-interior-1.jpg", "02-territorios-de-la-mirada-interior-6.jpg", "02-territorios-de-la-mirada-interior-4.jpg", "02-territorios-de-la-mirada-interior-7.jpg", "03-santa-fe-mauthausen-interior-1.jpg", "03-santa-fe-mauthausen-interior-3.jpg", "03-santa-fe-mauthausen-interior-8.jpg", "03-santa-fe-mauthausen-interior-7.jpg", "03-santa-fe-mauthausen-interior-5.jpg", "04-primitivismo-y-modernidad-interior-1.jpg", "04-primitivismo-y-modernidad-interior-4.jpg", "04-primitivismo-y-modernidad-interior-7.jpg", "04-primitivismo-y-modernidad-interior-3.jpg", "04-primitivismo-y-modernidad-interior-6.jpg", "05-pedro-zamora-en-noir-interior-6.jpg", "05-pedro-zamora-en-noir-interior-7.jpg", "05-pedro-zamora-en-noir-interior-5.jpg", "05-pedro-zamora-en-noir-interior-2.jpg", "05-pedro-zamora-en-noir-interior-4.jpg", "06-santa-maria-de-coin-interior-4.jpg", "06-santa-maria-de-coin-interior-6.jpg", "06-santa-maria-de-coin-interior-9.jpg", "06-santa-maria-de-coin-interior-8.jpg", "06-santa-maria-de-coin-interior-2.jpg"]);
-  const esGrande = src => GRANDE.has(src.split('/').pop());
-  const TAM = vertical ? [3, 2] : [2, 3];
+  const CICLO = vertical ? [3, 2, 3, 1] : [1, 2, 1, 3];
   const TRES = ['fa', 'fc', 'fd'];
-  const cola = fotos.map((src, i) => ({ src, i }));
-  let vez = 0, tres = 0;
-  while (cola.length) {
-    let grupo;
-    if (esGrande(cola[0].src)) grupo = [cola.shift()];
-    else {
-      const sueltas = cola.filter(f => !esGrande(f.src));
-      let n = Math.min(TAM[vez % 2], sueltas.length);
-      if (sueltas.length - n === 1 && n === 2) n = 3;  // no dejar una suelta huérfana si se puede evitar
-      if (n === 3 && sueltas.length === 4) n = 2;
-      grupo = sueltas.slice(0, Math.max(n, 1)); grupo.forEach(f => cola.splice(cola.indexOf(f), 1));
-      if (grupo.length > 1) vez++;
-    }
-    const n = grupo.length;
+  let i = 0, vez = 0, tres = 0;
+  while (i < fotos.length) {
+    const n = Math.min(CICLO[vez++ % CICLO.length], fotos.length - i);
     const clase = vertical ? (n === 1 ? 'v1' : n === 2 ? 'v2' : TRES[tres++ % 3]) : 'b' + n;
     const bloque = document.createElement('div'); bloque.className = 'bloque ' + clase;
-    grupo.forEach(f => bloque.appendChild(figura(f.src, f.i)));
+    for (let k = 0; k < n; k++, i++) bloque.appendChild(figura(fotos[i], i));
     track.appendChild(bloque);
     crecer(bloque, track);
   }

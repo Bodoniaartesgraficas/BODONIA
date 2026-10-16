@@ -557,3 +557,28 @@ html:not(.pagina) main{padding:0!important;height:100dvh}
 .instagram-flotante{right:12px!important;left:auto!important;bottom:calc(14px + env(safe-area-inset-bottom,0px))!important;width:36px!important;height:36px!important;transform:none!important}
 .instagram-flotante img{width:36px!important;height:36px!important}
 }
+/* Móvil: las ventanas de texto se ajustan a la pantalla, con margen alrededor (no la ocupan entera) */
+@media(max-width:600px){
+.text-dialog{width:calc(100vw - 40px)!important;min-height:0!important;max-height:calc(100dvh - 150px)!important;margin:auto;overflow-y:auto}
+.text-dialog .dialog-content{padding:52px 20px 24px!important;gap:14px!important}
+.text-dialog .dialog-content>h2{font-size:24px!important;margin-bottom:0!important}
+.text-dialog .dialog-content>p{font-size:14px!important;line-height:1.55!important;margin:0!important}
+.text-dialog .promise{font-size:18px!important}
+.text-dialog .services>div{padding:12px 0!important;gap:4px!important}
+.text-dialog .services dt{font-size:19px!important}
+.text-dialog .services dd{font-size:13px!important;line-height:1.5!important}
+.text-dialog .contact-grid{gap:18px!important}
+.text-dialog form{gap:12px!important}
+.text-dialog .close{top:8px;right:8px;width:38px;height:38px}
+.text-dialog .antetitulo,.text-dialog .dialog-content p.antetitulo{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:calc(100% - 44px);line-height:1.5!important}
+.text-dialog .services dt{font-size:17px!important}
+.text-dialog .services>div{padding:8px 0!important}
+}
+/* Ordenador: ventanas de texto más pequeñas, con menos gris y el fondo de detrás más visible (misma letra) */
+@media(min-width:601px){
+.text-dialog{width:min(780px,calc(100vw - 48px))!important;min-height:0!important}
+.text-dialog .dialog-content{padding:52px 56px 44px!important;gap:18px!important}
+/* el título no se corta */
+.text-dialog h2,.text-dialog .titular{white-space:normal!important;overflow:visible!important;text-wrap:balance;max-width:calc(100% - 48px)}
+dialog::backdrop{background:rgb(0 0 0 / 22%)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+}

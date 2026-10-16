@@ -622,3 +622,8 @@ html,body{background:#0b0b0b}
 .project-dialog #project-track.vertical{padding-block:0!important}
 }
 
+
+/* Prueba: esquinas redondeadas en las imágenes */
+.project-image,.mosaico .bloque .escena{border-radius:14px;overflow:hidden}
+.mosaico .bloque .escena img{border-radius:inherit}
+@media(max-width:600px){.gallery .project-image{border-radius:0}.mosaico .bloque .escena{border-radius:10px}}

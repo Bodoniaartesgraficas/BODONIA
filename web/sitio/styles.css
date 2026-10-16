@@ -622,3 +622,13 @@ html,body{background:#0b0b0b}
 .project-dialog #project-track.vertical{padding-block:0!important}
 }
 
+
+/* Título del visor dentro de un lomo de libro tumbado: tela oscura, cabezadas a los lados y nervios dorados */
+.project-dialog header>div{display:inline-flex;flex-direction:column;gap:3px;position:relative;padding:12px 34px 11px;max-width:min(78vw,720px);
+background:linear-gradient(180deg,rgb(255 255 255 / 10%),rgb(255 255 255 / 0%) 40%,rgb(0 0 0 / 25%)),#5c1a1d;border-radius:3px 3px 3px 3px / 10px 10px 10px 10px;
+box-shadow:inset 9px 0 0 -6px rgb(214 180 110 / 75%),inset -9px 0 0 -6px rgb(214 180 110 / 75%),inset 0 1px 0 rgb(255 255 255 / 18%),0 8px 22px rgb(0 0 0 / 45%);text-shadow:none!important}
+.project-dialog header>div::before,.project-dialog header>div::after{content:"";position:absolute;top:4px;bottom:4px;width:5px;border-radius:2px;background:repeating-linear-gradient(180deg,#d6b46e 0 2px,#7a2328 2px 4px)}
+.project-dialog header>div::before{left:3px}.project-dialog header>div::after{right:3px}
+.project-dialog header>div h2{margin:0;color:#f3e6c4!important;letter-spacing:.02em}
+.project-dialog header>div #project-type{margin:0;color:#d6b46e!important;font-size:11px;text-transform:uppercase;letter-spacing:.14em}
+@media(max-width:600px){.project-dialog header>div{padding:9px 24px 8px;max-width:calc(100vw - 90px)}}

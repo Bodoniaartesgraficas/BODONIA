@@ -165,7 +165,6 @@ window.CONTENIDO = {
         titulo: "Iglesia y Convento de Santa María de Coín",
         tipo: "Libro",
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
-        margen: true,
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
         bloques: [[0], [1], [3, 4], [5], [2], [7, 8], [6], [9]],

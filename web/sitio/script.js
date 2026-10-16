@@ -38,12 +38,6 @@ C.filas.forEach((fila, fi) => {
     const cover = document.createElement('img');
     cover.className = 'cover mockup'; cover.src = p.portada; cover.alt = p.titulo + ', ' + p.tipo.toLowerCase(); cover.draggable = false;
     if (p.encuadre) cover.style.objectPosition = p.encuadre;
-    if (p.margen) {  // la portada se ve entera, con 1 cm de aire a la derecha; el hueco se rellena con la misma foto desenfocada
-      article.classList.add('con-margen');
-      const fondo = document.createElement('img');
-      fondo.className = 'fondo-margen'; fondo.src = p.portada; fondo.alt = ''; fondo.draggable = false; fondo.loading = 'lazy';
-      button.appendChild(fondo);
-    }
     if (fi === 0 && n < 4) cover.fetchPriority = 'high'; else cover.loading = 'lazy';
     n++;
     button.appendChild(cover);
@@ -293,6 +287,18 @@ function renderProject(index) {
   });
 
   track.scrollLeft = 0; track.scrollTop = 0;
+  // Escritorio: la primera imagen es, como mínimo, tan ancha como el título (+1 cm) para que el nombre nunca se salga de la portada.
+  if (!vertical) {
+    const ajusta = () => {
+      const primero = track.firstElementChild, tit = document.querySelector('#project-title');
+      if (!primero || !tit) return;
+      const hace = tit.getBoundingClientRect().width + 28 + 38;
+      primero.style.removeProperty('width'); primero.classList.remove('portada-ancha');
+      if (primero.getBoundingClientRect().width < hace) { primero.style.width = hace + 'px'; primero.classList.add('portada-ancha'); }
+    };
+    requestAnimationFrame(ajusta);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajusta);
+  }
 }
 function rectDe(el) { const r = el.getBoundingClientRect(); return {left:r.left+'px', top:r.top+'px', width:r.width+'px', height:r.height+'px'}; }
 function abrirProyecto(project) {

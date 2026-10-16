@@ -636,8 +636,16 @@ html,body,html:not(.pagina),html:not(.pagina) body,.project-dialog{background:#f
 #loader{background:#fff!important}
 .loader-pie{color:#202020!important}
 
-/* Portada con 1 cm de margen a la derecha (Iglesia y Convento de Coín) */
-.project.con-margen .fondo-margen{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(22px) brightness(.75);transform:scale(1.15);pointer-events:none}
-.project.con-margen .project-image .cover{inset:auto auto auto 0!important;top:50%!important;width:calc(100% - 1cm)!important;height:auto!important;object-fit:fill!important;transform:translateY(-50%)!important;
--webkit-mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 10px),transparent),linear-gradient(to bottom,transparent,#000 10px,#000 calc(100% - 10px),transparent);-webkit-mask-composite:source-in;
-mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 10px),transparent),linear-gradient(to bottom,transparent,#000 10px,#000 calc(100% - 10px),transparent);mask-composite:intersect}
+/* Portada del front en ordenador: las fotos llegan hasta el borde superior e inferior, sin franjas blancas */
+@media(min-width:601px){
+:root{--card:calc(100dvh * .8)!important}
+html:not(.pagina) main{display:block!important;position:relative;height:100dvh}
+html:not(.pagina) .works,html:not(.pagina) #proyectos{position:absolute!important;inset:0!important;margin:0!important;padding:0!important;align-self:auto!important}
+html:not(.pagina) .gallery{height:100dvh!important;margin-inline:0!important;padding-block:0!important;align-items:stretch}
+html:not(.pagina) .gallery .project,html:not(.pagina) .project-image{height:100dvh!important;max-height:none!important}
+}
+
+/* Primera imagen del visor ensanchada para que quepa el título: cubre todo el bloque */
+.mosaico .bloque.portada-ancha{aspect-ratio:auto!important;flex:0 0 auto}
+.mosaico .bloque.portada-ancha .escena{width:100%!important}
+.mosaico .bloque.portada-ancha .escena img{width:100%!important;height:100%!important;object-fit:cover!important}

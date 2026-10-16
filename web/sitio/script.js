@@ -38,6 +38,12 @@ C.filas.forEach((fila, fi) => {
     const cover = document.createElement('img');
     cover.className = 'cover mockup'; cover.src = p.portada; cover.alt = p.titulo + ', ' + p.tipo.toLowerCase(); cover.draggable = false;
     if (p.encuadre) cover.style.objectPosition = p.encuadre;
+    if (p.margen) {  // la portada se ve entera, con 1 cm de aire a la derecha; el hueco se rellena con la misma foto desenfocada
+      article.classList.add('con-margen');
+      const fondo = document.createElement('img');
+      fondo.className = 'fondo-margen'; fondo.src = p.portada; fondo.alt = ''; fondo.draggable = false; fondo.loading = 'lazy';
+      button.appendChild(fondo);
+    }
     if (fi === 0 && n < 4) cover.fetchPriority = 'high'; else cover.loading = 'lazy';
     n++;
     button.appendChild(cover);

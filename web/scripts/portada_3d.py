@@ -522,9 +522,10 @@ def escena_coin(cfg, ruta_cub, carpeta):
     coloca(r1, c1, 70, (-.045, -.035))
     r2, c2 = libro("libro2", cfg, ruta_cub)
     coloca(r2, c2, 81, (-.022, -.012), z=c1[4])   # encima del primero, apoyado del todo
-    d = direccion(125, 34)
+    # sol de lado (izquierda): así el reflejo del sol en el pulido no cae dentro del encuadre
+    d = direccion(170, 34)
     sol(d, 3.8, (1.0, .88, .74), 1.0)
-    gobo(d, [(-.9, -.6), (.25, -.6), (.35, .8), (-.9, .8)], [(-.12, -.6, -.08, .8, .03)], carpeta=carpeta)
+    gobo(d, [(-.9, -.6), (.18, -.6), (.30, .8), (-.9, .8)], [(-.30, -.6, -.24, .8, .03)], carpeta=carpeta)
     camara((-.03, -.02, c1[4]), .80, 14, 40, 56, 8)
 
 def escena_en_noir(cfg, ruta_cub, carpeta):
@@ -579,7 +580,7 @@ def escena_tortajada(cfg, ruta_cub, carpeta):
     d = direccion(205, 38)
     sol(d, 4.2, (1.0, .84, .64), 1.2)
     gobo(d, [(-.9, -.9), (.55, -.9), (.7, .9), (-.9, .9)], [(-.34, -.9, -.26, .9, .035)], carpeta=carpeta)
-    camara(centro, 1.0, -24, 14, 62, 6.3)
+    camara(centro, .84, -24, 14, 62, 6.3)
 
 def escena_territorios(cfg, ruta_cub, carpeta):
     w = ajustes(cfg["muestras"]); mundo(w, (.5, .52, .5), .14)
@@ -596,7 +597,7 @@ def escena_territorios(cfg, ruta_cub, carpeta):
     d = direccion(130, 33)
     sol(d, 4.4, (1.0, .86, .68), .7)
     gobo(d, [(-.9, -.9), (.9, -.9), (.9, .9), (-.9, .9)], carpeta=carpeta,
-         sombras=hojas(46, (-.5, .25, -.05, .5), semilla=11) + hojas(12, (-.45, -.05, -.4, .1), semilla=5))
+         sombras=hojas(46, (-.5, .25, .2, .55), semilla=11) + hojas(12, (-.5, -.2, -.4, .05), semilla=5))   # alrededor del libro, no encima
     camara((0, .0, caja[4] / 2), .84, -22, 38, 58, 8)
 
 ESCENAS = {"santa-fe": escena_santa_fe, "primitivismo": escena_primitivismo, "coin": escena_coin,

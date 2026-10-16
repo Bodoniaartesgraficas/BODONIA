@@ -382,8 +382,38 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
       loader.classList.add('hecho');
       document.documentElement.classList.remove('cargando');
       document.documentElement.classList.add('entra');
-      setTimeout(() => { loader.remove(); document.documentElement.classList.remove('entra'); }, 1800);
+      setTimeout(() => { loader.remove(); document.documentElement.classList.remove('entra'); document.dispatchEvent(new Event('portada-lista')); }, 1800);
     }, 120);
   }
   requestAnimationFrame(paso);
+})();
+
+
+// Móvil: la portada avanza sola hacia la izquierda, una foto cada pocos segundos, hasta que la persona la toca.
+(function () {
+  const movilFront = matchMedia('(max-width: 600px)');
+  let activo = false;
+  function arranca() {
+    const galeria = document.querySelector('.gallery');
+    if (activo || !galeria || !movilFront.matches || reducedMotion.matches) return;
+    activo = true;
+    let tiempo;
+    const para = () => { clearInterval(tiempo); ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(e => galeria.removeEventListener(e, para)); };
+    ['pointerdown', 'touchstart', 'wheel', 'keydown'].forEach(e => galeria.addEventListener(e, para, { passive: true }));
+    tiempo = setInterval(() => {
+      if (document.hidden || document.querySelector('dialog[open]')) return;
+      const fichas = [...galeria.querySelectorAll('.project:not([hidden])')];
+      const actual = fichas.findIndex(f => f.offsetLeft >= galeria.scrollLeft - 4);
+      const siguiente = fichas[actual + 1];
+      const desde = galeria.scrollLeft, hasta = siguiente ? siguiente.offsetLeft : 0, dur = 800, ini = performance.now();
+      galeria.style.scrollSnapType = 'none';
+      const frame = ahora => {
+        const k = Math.min(1, (ahora - ini) / dur), e = 1 - Math.pow(1 - k, 3);  // ease-out suave
+        galeria.scrollLeft = desde + (hasta - desde) * e;
+        if (k < 1) requestAnimationFrame(frame); else galeria.style.scrollSnapType = '';
+      };
+      requestAnimationFrame(frame);
+    }, 3200);
+  }
+  document.addEventListener('portada-lista', arranca);
 })();

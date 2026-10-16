@@ -600,7 +600,7 @@ html,body{background:#0b0b0b}
 #project-dialog #cursor-b{z-index:60}
 #project-dialog #project-track,#project-dialog #project-track .escena{cursor:none}
 .project-track.mosaico{padding-block:7vh}
-.mosaico .bloque{transition:width .45s cubic-bezier(.22,1,.36,1)}
+.mosaico .bloque{transition:width .45s cubic-bezier(.22,1,.36,1),grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
 .mosaico .bloque.crece{aspect-ratio:auto!important}
 .mosaico .bloque.crece .escena{width:var(--w);transition:width .45s cubic-bezier(.22,1,.36,1)}
 .mosaico .bloque.crece .escena:hover{width:100%}

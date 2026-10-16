@@ -254,8 +254,13 @@ function renderProject(index) {
       requestAnimationFrame(() => { b.style.width = (w * 1.3) + 'px'; });
       b.dataset.w = w;
     });
+    // Dentro de la columna, la imagen bajo el ratón gana alto y las otras se encogen (el bloque siempre cabe en pantalla).
+    const celdas = [...b.children];
+    if (celdas.length > 1) celdas.forEach((c, k) => c.addEventListener('mouseenter', () => {
+      b.style.gridTemplateRows = celdas.map((_, j) => j === k ? '2fr' : '1fr').join(' ');
+    }));
     b.addEventListener('mouseleave', () => {
-      b.style.width = b.dataset.w + 'px'; track.classList.remove('con-activo');
+      b.style.width = b.dataset.w + 'px'; b.style.gridTemplateRows = ''; track.classList.remove('con-activo');
       setTimeout(() => { if (!b.matches(':hover')) { b.classList.remove('crece'); b.style.width = ''; } }, 460);
     });
   }

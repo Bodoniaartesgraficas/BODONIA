@@ -36,8 +36,7 @@ CATALOGOS = {
     "primitivismo": ("04-primitivismo-y-modernidad", "primitivismo-dobles", PDF_AF, [
         ("18c1e109-4d5f-4784-a830-1dc26dded669", ["m1", "m3"]),
         ("fe949059-04b5-43a7-861d-51cc584036bd", ["m2"]),
-        ("aeb6fbea-72d8-4836-bc6b-67b3330e326e", ["m4", 60]),
-        ("0a7aca49-6dab-465a-b971-1c54e98fc84f", [66]),
+        ("aeb6fbea-72d8-4836-bc6b-67b3330e326e", [66, 60]),
         ("e98dba43-383a-495d-9982-79d7d557a24e", [76, 118]),
         ("8a83a32c-recorte", [142]),
         ("1bd9fe0e-2f21-4f0a-8c56-3d9839cb18df", [216, 220]),
@@ -51,9 +50,8 @@ CATALOGOS = {
     ], 4),
     # En noir: las fotos 1 a 4 salen de en_noir_fondos.py; aquí se añaden desde la 5
     "en-noir": ("05-pedro-zamora-en-noir", "en-noir-dobles", PDF_NOIR, [
-        ("aa991160-266a-46ab-b386-7ff18371c72e", [24]),
+        ("aa991160-266a-46ab-b386-7ff18371c72e", [24, 88]),
         ("d6acb69c-216f-47a8-9ab2-457b8543f74c", [30, 46]),
-        ("5b99c650-recorte", [88]),
         ("e31b720e-0e4a-412c-b0cd-057bf5720833", [14, 36, 68]),
     ], 5),
     # Territorios: las fotos 1 y 2 salen de territorios_fondos.py (dobles 2 y 50); aquí se añaden desde la 3

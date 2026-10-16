@@ -129,7 +129,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/02-territorios-de-la-mirada-portada.jpg",
         detalle: "fotos/proyectos/02-territorios-de-la-mirada-detalle.jpg",
         completa: "fotos/proyectos/02-territorios-de-la-mirada-completa.jpg",
-        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-6.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-4.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-7.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-5.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-video.mp4"],
+        escenas: ["fotos/proyectos/02-territorios-de-la-mirada-interior-1.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-6.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-2.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-4.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-7.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-5.jpg","fotos/proyectos/02-territorios-de-la-mirada-interior-3.jpg","fotos/proyectos/02-territorios-de-la-mirada-video.mp4"],
       },
       {
         titulo: "Santa Fe—Mauthausen—Santa Fe",
@@ -137,7 +137,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/03-santa-fe-mauthausen-portada.jpg",
         detalle: "fotos/proyectos/03-santa-fe-mauthausen-detalle.jpg",
         completa: "fotos/proyectos/03-santa-fe-mauthausen-completa.jpg",
-        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-8.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-7.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-5.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-6.jpg","fotos/proyectos/03-santa-fe-mauthausen-video.mp4"],
+        escenas: ["fotos/proyectos/03-santa-fe-mauthausen-interior-1.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-2.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-3.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-8.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-7.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-4.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-5.jpg","fotos/proyectos/03-santa-fe-mauthausen-interior-6.jpg","fotos/proyectos/03-santa-fe-mauthausen-video.mp4"],
       },
       {
         titulo: "Primitivismo y modernidad",
@@ -145,7 +145,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/04-primitivismo-y-modernidad-portada.jpg",
         detalle: "fotos/proyectos/04-primitivismo-y-modernidad-detalle.jpg",
         completa: "fotos/proyectos/04-primitivismo-y-modernidad-completa.jpg",
-        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-6.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-7.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-8.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-video.mp4"],
+        escenas: ["fotos/proyectos/04-primitivismo-y-modernidad-interior-5.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-1.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-4.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-7.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-2.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-3.jpg","fotos/proyectos/04-primitivismo-y-modernidad-interior-6.jpg","fotos/proyectos/04-primitivismo-y-modernidad-video.mp4"],
         encuadre: "50% 65%",
       },
       {
@@ -154,7 +154,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/05-pedro-zamora-en-noir-portada.jpg",
         detalle: "fotos/proyectos/05-pedro-zamora-en-noir-detalle.jpg",
         completa: "fotos/proyectos/05-pedro-zamora-en-noir-completa.jpg",
-        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-8.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-7.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-video.mp4"],
+        escenas: ["fotos/proyectos/05-pedro-zamora-en-noir-interior-6.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-7.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-5.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-1.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-2.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-3.jpg","fotos/proyectos/05-pedro-zamora-en-noir-interior-4.jpg","fotos/proyectos/05-pedro-zamora-en-noir-video.mp4"],
       },
       {
         titulo: "Iglesia y Convento de Santa María de Coín",
@@ -162,7 +162,7 @@ window.CONTENIDO = {
         portada: "fotos/proyectos/06-santa-maria-de-coin-portada.jpg",
         detalle: "fotos/proyectos/06-santa-maria-de-coin-detalle.jpg",
         completa: "fotos/proyectos/06-santa-maria-de-coin-completa.jpg",
-        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-4.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-6.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-7.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-9.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-8.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-5.jpg","fotos/proyectos/06-santa-maria-de-coin-video.mp4"],
+        escenas: ["fotos/proyectos/06-santa-maria-de-coin-interior-4.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-6.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-7.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-5.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-9.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-8.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-1.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-3.jpg","fotos/proyectos/06-santa-maria-de-coin-interior-2.jpg","fotos/proyectos/06-santa-maria-de-coin-video.mp4"],
       },
       ],
     },

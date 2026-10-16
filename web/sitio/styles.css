@@ -589,3 +589,9 @@ dialog::backdrop{background:rgb(0 0 0 / 22%)!important;-webkit-backdrop-filter:n
 .gallery{grid-auto-columns:100vw!important;gap:0!important;scroll-snap-type:x mandatory}
 .gallery .project{scroll-snap-align:center}
 }
+/* Móvil: la foto llega hasta el borde superior (bajo la barra de estado); el logo baja lo justo para no taparse con ella */
+:root{padding:0!important}
+@media(max-width:600px){
+html,body{background:#0b0b0b}
+.intro{top:env(safe-area-inset-top,0px)!important}
+}

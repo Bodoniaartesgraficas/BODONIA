@@ -629,3 +629,9 @@ html,body{background:#0b0b0b}
 @media(max-width:600px){.gallery .project-image{border-radius:0}.mosaico .bloque .escena{border-radius:10px}}
 /* Prueba: fondo blanco en portada y visor */
 html,body,html:not(.pagina),html:not(.pagina) body,.project-dialog{background:#fff!important}
+
+/* Sin "Libro" / "Catálogo" bajo los títulos */
+#project-type,.project-caption>span{display:none!important}
+/* Pantalla de carga en blanco */
+#loader{background:#fff!important}
+.loader-pie{color:#202020!important}

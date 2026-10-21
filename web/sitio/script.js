@@ -439,7 +439,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
     b.addEventListener('click', () => document.querySelector('.site-header [data-dialog="' + id + '"]').click());
     menu.appendChild(b);
   });
-  const ig = document.createElement('a'); ig.href = 'https://www.instagram.com/bodonia.artesgraficas/'; ig.target = '_blank'; ig.rel = 'noopener'; ig.textContent = 'Instagram';
+  const ig = document.createElement('a'); ig.href = 'https://www.instagram.com/bodonia.artesgraficas/'; ig.target = '_blank'; ig.rel = 'noopener'; ig.className = 'ondas-ig'; ig.setAttribute('aria-label', 'Instagram de Bodonia'); ig.innerHTML = '<img src="' + (document.querySelector('.instagram-flotante img')?.getAttribute('src') || 'fotos/instagram.svg') + '" alt="">';
   menu.appendChild(ig);
   caja.append(svg, logo, menu); document.body.appendChild(caja);
 
@@ -486,8 +486,8 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
       let x0 = W, x1 = 0, y0 = H, y1 = 0, fx0 = W, fx1 = 0, fy0 = H, fy1 = 0;
       for (let y = paso / 2; y < H; y += paso) for (let x = paso / 2; x < W; x += paso) if (dentro(poly, x, y)) {
         celdas.push([x, y]); fx0 = Math.min(fx0, x); fx1 = Math.max(fx1, x); fy0 = Math.min(fy0, y); fy1 = Math.max(fy1, y);
-        // Para no dejar huecos basta cubrir lo que se ve: fuera quedan la punta bajo el logo y la franja de los botones.
-        if (y < abajo && Math.hypot(x - cx, y - cy) > 70) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+        // Para no dejar huecos basta cubrir lo que se ve: queda fuera la punta que tapa el logo.
+        if (Math.hypot(x - cx, y - cy) > 60) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
       }
       x0 = Math.max(0, x0 - paso); y0 = Math.max(0, y0 - paso); x1 = Math.min(W, x1 + paso); y1 = Math.min(H, y1 + paso);
       // El rectángulo más grande con la proporción del libro que cabe entero en la onda (sin tapar los botones).
@@ -517,29 +517,29 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
       const img = document.createElementNS(NS, 'image');
       img.setAttribute('href', art.querySelector('img.cover').getAttribute('src'));
       img.setAttribute('preserveAspectRatio', 'none');
-      // El libro llena el rectángulo libre de su onda. Si así la foto no cubre toda la onda,
-      // detrás va la misma foto ampliada y desenfocada, y la nítida se funde con ella por los bordes.
-      const sLibro = (rmax * 2 * 1.2) / ((by1 - by0) * ih), sCubre = Math.max((x1 - x0) / iw, (y1 - y0) / ih);
-      const sc = Math.max(sLibro, sCubre * .82);
-      const coloca = (el, sx, cxp, cyp, bx, by, bw, bh) => {
-        let ix = cxp - (bx0 + bx1) / 2 * iw * sx, iy = cyp - (by0 + by1) / 2 * ih * sx;
-        if (iw * sx >= bw) ix = Math.min(bx, Math.max(bx + bw - iw * sx, ix)); else ix = bx + (bw - iw * sx) / 2;
-        if (ih * sx >= bh) iy = Math.min(by, Math.max(by + bh - ih * sx, iy)); else iy = by + (bh - ih * sx) / 2;
-        el.setAttribute('x', ix.toFixed(1)); el.setAttribute('y', iy.toFixed(1)); el.setAttribute('width', (iw * sx).toFixed(1)); el.setAttribute('height', (ih * sx).toFixed(1));
-        return [ix, iy, iw * sx, ih * sx];
+      // El libro va centrado en el hueco más holgado de la onda; la foto se amplía lo que haga falta
+      // para cubrir la onda entera sin mover el libro de su sitio (se pierde fondo, nunca libro).
+      const fx = x0, fy = y0, fx2 = x1, fy2 = y1;
+      const ncx = (bx0 + bx1) / 2, ncy = (by0 + by1) / 2;
+      // Centro de la onda: el centro de gravedad de lo que se ve de ella (sin la punta del logo ni la franja de botones).
+      let sx = 0, sy = 0, nn = 0;
+      celdas.forEach(([x, y]) => { if (y < abajo && Math.hypot(x - cx, y - cy) > 60) { sx += x; sy += y; nn++; } });
+      const [mx, my] = nn ? [sx / nn, sy / nn] : mejor;
+      // Escala mínima que cubre la onda dejando el libro centrado (se tolera moverlo un poco, hasta un 12 % de su tamaño).
+      const bw = (bx1 - bx0) * iw, bh = (by1 - by0) * ih;
+      const holgura = (sz, m, a0, a1, n, tam, t) => { // desplazamiento posible en un eje para la escala t, o null
+        const lo = a1 - m - (1 - n) * tam * t, hi = n * tam * t - (m - a0), lim = .12 * (tam === iw ? bw : bh) * t;
+        const d0 = Math.max(lo, -lim), d1 = Math.min(hi, lim);
+        return d0 <= d1 ? (d0 <= 0 && d1 >= 0 ? 0 : (Math.abs(d0) < Math.abs(d1) ? d0 : d1)) : null;
       };
-      const fx = Math.max(0, fx0 - paso), fy = Math.max(0, fy0 - paso), fw = Math.min(W, fx1 + paso) - fx, fh = Math.min(H, fy1 + paso) - fy;
-      const caja2 = coloca(img, sc, mejor[0], mejor[1], fx, fy, fw, fh);
-      if (caja2[0] > fx + 1 || caja2[1] > fy + 1 || caja2[0] + caja2[2] < fx + fw - 1 || caja2[1] + caja2[3] < fy + fh - 1) {
-        const tras = img.cloneNode(); tras.setAttribute('class', 'onda-tras');
-        coloca(tras, Math.max(fw / iw, fh / ih) * 1.1, mejor[0], mejor[1], fx, fy, fw, fh);
-        const m = document.createElementNS(NS, 'mask'); m.id = 'funde-' + k;
-        const mr = document.createElementNS(NS, 'rect'); const pad = 18;
-        mr.setAttribute('x', caja2[0] + pad); mr.setAttribute('y', caja2[1] + pad); mr.setAttribute('width', Math.max(0, caja2[2] - 2 * pad)); mr.setAttribute('height', Math.max(0, caja2[3] - 2 * pad));
-        mr.setAttribute('fill', '#fff'); mr.setAttribute('filter', 'url(#suave)'); m.appendChild(mr); defs.appendChild(m);
-        img.setAttribute('mask', `url(#funde-${k})`);
-        g.append(tras);
+      let sc = (rmax * 2 * 1.1) / bh, dx = null, dy = null;
+      for (let it = 0; it < 60; it++) {
+        dx = holgura(0, mx, fx, fx2, ncx, iw, sc); dy = holgura(0, my, fy, fy2, ncy, ih, sc);
+        if (dx !== null && dy !== null) break;
+        sc *= 1.04;
       }
+      img.setAttribute('x', (mx + (dx || 0) - ncx * iw * sc).toFixed(1)); img.setAttribute('y', (my + (dy || 0) - ncy * ih * sc).toFixed(1));
+      img.setAttribute('width', (iw * sc).toFixed(1)); img.setAttribute('height', (ih * sc).toFixed(1));
       g.insertBefore(fondo, g.firstChild); g.append(img); svg.appendChild(g);
       g.addEventListener('click', () => art.querySelector('button').click());
     });

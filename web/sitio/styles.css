@@ -741,16 +741,57 @@ html.ondas main,html.ondas .site-header,html.ondas .instagram-flotante{display:n
 html.ondas #ondas{display:block;position:fixed;inset:0;height:100dvh;background:#e9e6df;z-index:5}
 #ondas svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 #ondas .onda{cursor:pointer}
-#ondas .onda-fondo{fill:#d9d4ca}
+#ondas .onda-fondo{fill:#24201c}
 #ondas .onda image{transition:transform .5s cubic-bezier(.22,1,.36,1)}
 #ondas .onda:active image{transform:scale(1.03);transform-origin:center}
 #ondas .onda-borde{fill:none;stroke:#fff;stroke-width:2.5;stroke-linejoin:round;pointer-events:none}
 .ondas-logo{position:absolute;left:50%;transform:translate(-50%,-50%);pointer-events:none;--logo:30px;filter:drop-shadow(0 2px 10px rgb(0 0 0 / 35%))}
 .ondas-logo .logo{font-size:var(--logo)}
-.ondas-logo .logo>span[aria-hidden]:last-of-type{margin-left:.74em;margin-top:.35em;color:#fff!important;text-shadow:0 1px 6px rgb(0 0 0 / 60%)}
+.ondas-logo .logo>span[aria-hidden]:last-of-type{margin-left:.74em;margin-top:.35em;color:#d8344a!important}
 .ondas-menu{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px max(12px,env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-bottom,0px))}
 .ondas-menu button,.ondas-menu a{display:grid;place-items:center;min-height:46px;padding:6px 4px;border-radius:999px;border:1px solid rgb(255 255 255 / 70%);background:rgb(20 18 16 / 72%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font:500 13px/1.15 var(--sans);text-align:center;text-decoration:none}
 }
 .site-header nav .modo-oscuro,html.oscuro .site-header nav .modo-oscuro{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;color:#cfccc6!important;opacity:.9}
 .modo-oscuro svg{stroke:#cfccc6;filter:drop-shadow(0 1px 2px rgb(0 0 0 / 45%))}
 #ondas .onda-tras{filter:url(#desenfoca) brightness(.8)}
+@media(max-width:600px){
+.ondas-menu{grid-template-columns:1fr 1fr 1fr 46px;align-items:center}
+.ondas-menu .ondas-ig{width:46px;height:46px;min-height:0;padding:0;border-radius:50%}
+.ondas-menu .ondas-ig img{width:24px;height:24px;display:block;filter:brightness(0) invert(1)}
+}
+/* Móvil: el contenido de El taller, Qué hacemos y Hablemos cabe entero dentro de su ventana, sin desplazarse. */
+@media(max-width:600px){
+html body .text-dialog{max-height:calc(100dvh - 24px)!important;height:fit-content!important}
+html body .text-dialog .dialog-content{padding:26px 20px 22px!important;overflow:visible!important}
+html body .text-dialog{overflow-y:auto!important}
+html body .text-dialog .antetitulo{font-size:10.5px!important;line-height:1.35!important;margin:0 52px 8px 0!important;letter-spacing:.12em!important}
+html body .text-dialog h2,html body .text-dialog h2 span,html body .text-dialog h2 em{font-size:24px!important;line-height:1.12!important}
+html body .text-dialog h2{margin:0 0 12px!important}
+html body #about-dialog .dialog-content>p:not(.antetitulo):not(.promise){font-size:14.5px!important;line-height:1.45!important;margin:0 0 12px!important}
+html body #about-dialog .promise{font-size:18px!important;line-height:1.25!important;margin:4px 0 14px!important}
+html body #services-dialog .services{display:grid!important;grid-template-columns:1fr 1fr;column-gap:14px;row-gap:2px;margin:0 0 12px!important}
+html body #services-dialog dt{font-size:16px!important;line-height:1.5!important;margin:0!important;padding:0!important}
+html body #services-dialog dd{display:none!important}
+html body #services-dialog .servicios-pie{font-size:15px!important;margin:0 0 12px!important}
+html body .text-dialog .boton-hablemos{font-size:14px!important;padding:9px 18px!important;margin:0!important}
+html body #contact-dialog .contact-grid{display:flex!important;flex-direction:column;gap:12px!important}
+html body #contact-dialog .contact-details{display:grid!important;gap:3px!important}
+html body #contact-dialog #contact-email,html body #contact-dialog #contact-phone{font-size:20px!important;line-height:1.2!important}
+html body #contact-dialog .contact-details p,html body #contact-dialog .map-link,html body #contact-dialog .legal-links a{font-size:12.5px!important;line-height:1.35!important;margin:0!important}
+html body #contact-dialog .legal-links{display:flex;gap:12px;margin-top:2px!important}
+html body #contact-dialog form{display:grid!important;gap:7px!important}
+html body #contact-dialog form label{font-size:12px!important;display:grid;gap:2px}
+html body #contact-dialog form input,html body #contact-dialog form textarea{font-size:15px!important;padding:6px 10px!important;min-height:0!important}
+html body #contact-dialog form input{height:34px!important}
+html body #contact-dialog form textarea{height:58px!important;resize:none}
+html body #contact-dialog form button{font-size:14px!important;margin:2px 0 0!important}
+html body #contact-dialog form small{font-size:10.5px!important;line-height:1.3!important}
+html body .text-dialog .marq{display:none!important}
+}
+@media(max-width:600px){html body #contact-dialog .dialog-content p.antetitulo{font-size:10.5px!important;letter-spacing:.12em!important}}
+@media(max-width:600px) and (max-height:760px){
+html body .text-dialog h2,html body .text-dialog h2 span,html body .text-dialog h2 em{font-size:21px!important}
+html body #services-dialog dt{font-size:15px!important;line-height:1.32!important}
+html body #about-dialog .dialog-content>p:not(.antetitulo):not(.promise){font-size:13.5px!important}
+html body .text-dialog .dialog-content{padding:22px 18px 18px!important}
+}

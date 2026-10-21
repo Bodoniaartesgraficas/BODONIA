@@ -727,3 +727,4 @@ html.oscuro .site-header nav .modo-oscuro{background:rgb(0 0 0 / 45%)!important;
 #services-dialog dt{font-size:30px!important}
 #services-dialog .servicios-pie{font-size:21px!important}
 .text-dialog .boton-hablemos{font-size:15px!important}
+#services-dialog dt{font-family:"DM Sans",Arial,sans-serif!important;font-weight:500!important;font-style:normal!important;letter-spacing:0!important}

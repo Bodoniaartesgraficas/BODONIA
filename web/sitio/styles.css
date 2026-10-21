@@ -733,3 +733,24 @@ html.oscuro .site-header nav .modo-oscuro{background:rgb(0 0 0 / 45%)!important;
 .project-dialog .close{width:38px!important;height:38px!important}
 .project-dialog .close svg{width:16px!important;height:16px!important}
 #about-dialog .promise{font-style:italic!important}
+/* Propuesta móvil «ondas» */
+#ondas{display:none}
+@media(max-width:600px){
+html.ondas body{overflow:hidden}
+html.ondas main,html.ondas .site-header,html.ondas .instagram-flotante{display:none!important}
+html.ondas #ondas{display:block;position:fixed;inset:0;height:100dvh;background:#e9e6df;z-index:5}
+#ondas svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+#ondas .onda{cursor:pointer}
+#ondas .onda-fondo{fill:#d9d4ca}
+#ondas .onda image{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+#ondas .onda:active image{transform:scale(1.03);transform-origin:center}
+#ondas .onda-borde{fill:none;stroke:#fff;stroke-width:2.5;stroke-linejoin:round;pointer-events:none}
+.ondas-logo{position:absolute;left:50%;transform:translate(-50%,-50%);pointer-events:none;--logo:30px;filter:drop-shadow(0 2px 10px rgb(0 0 0 / 35%))}
+.ondas-logo .logo{font-size:var(--logo)}
+.ondas-logo .logo>span[aria-hidden]:last-of-type{margin-left:.74em;margin-top:.35em;color:#fff!important;text-shadow:0 1px 6px rgb(0 0 0 / 60%)}
+.ondas-menu{position:absolute;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:14px max(12px,env(safe-area-inset-left,0px)) calc(14px + env(safe-area-inset-bottom,0px))}
+.ondas-menu button,.ondas-menu a{display:grid;place-items:center;min-height:46px;padding:6px 4px;border-radius:999px;border:1px solid rgb(255 255 255 / 70%);background:rgb(20 18 16 / 72%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font:500 13px/1.15 var(--sans);text-align:center;text-decoration:none}
+}
+.site-header nav .modo-oscuro,html.oscuro .site-header nav .modo-oscuro{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none;-webkit-backdrop-filter:none;color:#cfccc6!important;opacity:.9}
+.modo-oscuro svg{stroke:#cfccc6;filter:drop-shadow(0 1px 2px rgb(0 0 0 / 45%))}
+#ondas .onda-tras{filter:url(#desenfoca) brightness(.8)}

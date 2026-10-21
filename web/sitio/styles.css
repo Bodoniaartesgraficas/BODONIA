@@ -830,3 +830,6 @@ html.oscuro .modo-oscuro .sol{display:block!important;fill:none!important}
 
 /* Sobre el logo también va la B roja en vez de la mano */
 @media(hover:hover) and (pointer:fine){.intro .brand,.intro .brand *{cursor:none!important}}
+
+/* Móvil: la X de los modales va solo en rojo, sin círculo ni fondo. */
+@media(max-width:600px){.text-dialog .close,.project-dialog .close{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#9A0015!important}}

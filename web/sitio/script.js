@@ -446,7 +446,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   // Seis bordes ondulados que salen del centro hacia puntos del contorno de la pantalla
   // (0 a 4 recorre el borde en el sentido del reloj desde la esquina de arriba a la izquierda).
   const SALIDAS = [0.18, 0.80, 1.38, 2.15, 2.80, 3.55];
-  const ONDA = [[24, .75, 1], [-22, .8, 1], [26, .7, 1], [-24, .75, 1], [22, .8, 1], [-26, .7, 1]];
+  const ONDA = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]; // bordes rectos: triángulos
   // Dónde está el libro dentro de cada foto de portada (x0, y0, x1, y1 en tanto por uno), en el orden de contenido.js.
   const LIBRO = [[.17, .22, .87, .82], [.10, .30, .87, .80], [.24, .37, .62, .68], [.20, .23, .83, .93], [.13, .25, .85, .75], [.18, .18, .98, .92]];
   const perimetro = (q, W, H) => q < 1 ? [q * W, 0] : q < 2 ? [W, (q - 1) * H] : q < 3 ? [(3 - q) * W, H] : [0, (4 - q) * H];

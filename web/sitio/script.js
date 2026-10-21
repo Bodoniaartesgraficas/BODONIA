@@ -20,6 +20,7 @@ if (piePalabras && C.pie) C.pie.palabras.forEach(t => { const li = document.crea
 const filasEl = document.querySelector('#filas');
 const galleries = [];
 const projects = [];
+const clones = [];
 let n = 0;
 C.filas.forEach((fila, fi) => {
   const section = document.createElement('section');
@@ -49,6 +50,12 @@ C.filas.forEach((fila, fi) => {
     }
     article.appendChild(button); galleryEl.appendChild(article); projects.push(article);
   });
+  // Copias de la fila al final: al llegar a Convento sigue Tortajada (bucle infinito).
+  const copias = [...galleryEl.children].map(a => {
+    const c = a.cloneNode(true); c.dataset.clon = '1'; c.setAttribute('aria-hidden', 'true');
+    c.querySelectorAll('button,img').forEach(x => { x.tabIndex = -1; x.removeAttribute('loading'); });
+    galleryEl.appendChild(c); clones.push({copia: c, original: a}); return c;
+  });
   const flecha = (clase, texto) => { const b = document.createElement('button'); b.className = 'fila-flecha ' + clase; b.setAttribute('aria-label', texto); b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'; return b; };
   section.append(galleryEl, flecha('atras', 'Trabajos anteriores'), flecha('adelante', 'Trabajos siguientes')); filasEl.appendChild(section);
   galleries.push(galleryEl);
@@ -62,7 +69,11 @@ const projectDialog = document.querySelector('#project-dialog');
 
 // Cada fila se desplaza sola: arrastrando, con las flechas del teclado o con el gesto horizontal del trackpad.
 function initGallery(gallery, speed) {
-  const cards = [...gallery.querySelectorAll('.project')];
+  const cards = [...gallery.querySelectorAll('.project:not([data-clon])')];
+  const primeraCopia = () => gallery.querySelector('.project[data-clon]');
+  const largo = () => { const c = primeraCopia(); return c ? c.offsetLeft - cards[0].offsetLeft : 0; };
+  let pos = 0;
+  function vuelta() { const L = largo(); if (L > 0 && gallery.scrollLeft >= L) { gallery.scrollLeft -= L; targetScroll -= L; pos -= L; if (drag) drag.scroll -= L; } }
   let drag = null, targetScroll = 0, animation = 0, paintFrame = 0;
   const photoLayers = cards.map(p => ({card:p, image:p.querySelector('.mockup')})).filter(p => p.image);
   function updatePhotos() {
@@ -94,7 +105,7 @@ function initGallery(gallery, speed) {
     animation = requestAnimationFrame(frame);
   }
   function step(direction, smooth) { move(direction * (cards[0].offsetWidth + parseFloat(getComputedStyle(gallery).gap)), smooth); }
-  gallery.addEventListener('scroll', schedulePhotos, {passive:true});
+  gallery.addEventListener('scroll', () => { vuelta(); schedulePhotos(); }, {passive:true});
   window.addEventListener('resize', () => { stopMotion(); schedulePhotos(); });
   reducedMotion.addEventListener('change', () => { stopMotion(); photoLayers.forEach(({image}) => image.style.transform = 'none'); schedulePhotos(); });
   // La rueda del ratón baja la página; con Mayús recorre la fila.
@@ -137,7 +148,7 @@ function initGallery(gallery, speed) {
   gallery.addEventListener('pointercancel',endDrag);
   gallery.addEventListener('lostpointercapture',endDrag);
   // Deslizamiento lento y continuo (de ida y vuelta); se detiene con el ratón encima, al arrastrar o con una ventana abierta.
-  let pos = 0, dir = 1, last = 0, hold = 0, hovering = false, focused = false;
+  let dir = 1, last = 0, hold = 0, hovering = false, focused = false;
   gallery.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
   gallery.addEventListener('pointerleave', () => { hovering = false; });
   gallery.addEventListener('focusin', () => { focused = true; });
@@ -149,8 +160,9 @@ function initGallery(gallery, speed) {
     else if (hold > 0) { hold -= dt; }
     else {
       if (Math.abs(gallery.scrollLeft - pos) > 1.5) pos = gallery.scrollLeft;
-      pos += dir * speed * dt;
-      if (pos >= max) { pos = max; dir = -1; hold = 1.5; } else if (pos <= 0) { pos = 0; dir = 1; hold = 1.5; }
+      pos += (largo() > 0 ? 1 : dir) * speed * dt;
+      const L = largo();
+      if (L > 0) { if (pos >= L) pos -= L; } else if (pos >= max) { pos = max; dir = -1; hold = 1.5; } else if (pos <= 0) { pos = 0; dir = 1; hold = 1.5; }
       gallery.scrollLeft = pos;
     }
     requestAnimationFrame(drift);
@@ -301,11 +313,11 @@ function renderProject(index) {
   }
 }
 function rectDe(el) { const r = el.getBoundingClientRect(); return {left:r.left+'px', top:r.top+'px', width:r.width+'px', height:r.height+'px'}; }
-function abrirProyecto(project) {
+function abrirProyecto(project, copiaOrigen) {
   controls.forEach(c => c.stop());
   document.querySelectorAll('dialog[open]').forEach(d => d.close());
   renderProject(visible.indexOf(project));
-  origen = project.querySelector('.cover');
+  origen = (copiaOrigen || project).querySelector('.cover');
   projectDialog.showModal();
   if (reducedMotion.matches) return;
   const destino = track.querySelector('.escena img');
@@ -326,6 +338,14 @@ function cerrarProyecto() {
   clon.animate([rectDe(primera.querySelector('img')), rectDe(origen)], {duration: 700, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards'})
     .finished.then(() => { projectDialog.close(); projectDialog.classList.remove('volando', 'cerrando'); clon.remove(); });
 }
+clones.forEach(({copia, original}) => {
+  const escenas = JSON.parse(original.dataset.escenas).slice(1);
+  if (escenas.length) {
+    copia.addEventListener('pointerenter', e => { if (e.pointerType !== 'mouse' || !puedeHover.matches || document.querySelector('.gallery.dragging')) return; copia.classList.add('activo'); copia.parentElement.classList.add('con-activo'); });
+    copia.addEventListener('pointerleave', () => { copia.classList.remove('activo'); copia.parentElement.classList.remove('con-activo'); });
+  }
+  copia.querySelector('button').addEventListener('click', e => { if (dragged && e.detail) { dragged = false; return; } abrirProyecto(original, copia); });
+});
 projectDialog.querySelector('.close').addEventListener('click', e => { e.stopImmediatePropagation(); cerrarProyecto(); }, true);
 projectDialog.addEventListener('cancel', e => { e.preventDefault(); cerrarProyecto(); });
 projects.forEach(project=>project.querySelector('button').addEventListener('click',e=>{

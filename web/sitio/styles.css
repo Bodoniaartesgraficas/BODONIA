@@ -813,10 +813,10 @@ html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!import
 }
 
 /* Flechas de las filas: gris sutil, más pequeñas y discretas */
-.fila-flecha,.fila-flecha:hover{color:#cfccc6!important;width:36px;height:36px;margin-top:-18px}
+@media(max-width:600px){.fila-flecha,.fila-flecha:hover{color:#cfccc6!important;width:36px;height:36px;margin-top:-18px}
 .fila-flecha svg{width:22px!important;height:22px!important;stroke-width:1.4!important;opacity:.75;filter:drop-shadow(0 1px 2px rgb(0 0 0 / 45%))!important}
 .fila-flecha:hover svg{opacity:1}
-@media(hover:none){.fila-flecha{width:36px;height:36px;margin-top:-18px}}
+@media(hover:none){.fila-flecha{width:36px;height:36px;margin-top:-18px}}}
 /* Móvil: el bloque de textos de la cabecera un poco más abajo */
 @media(max-width:600px){.site-header nav{margin-bottom:-8px}}
 

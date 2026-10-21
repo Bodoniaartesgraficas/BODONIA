@@ -358,15 +358,14 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
     .finally(() => { button.disabled = false; });
 });
 
-// Pantalla de carga: el logo, un contador de 000 a 100 y, al terminar, una cortina que sube y descubre las fotos.
+// Pantalla de carga: las piezas del logo caen una a una (3,5 s) y, al terminar, una cortina que sube y descubre las fotos.
 (function () {
   const loader = document.querySelector('#loader');
   if (!loader) return;
-  const cuenta = loader.querySelector('.loader-cuenta'), barra = loader.querySelector('.loader-barra');
   const imgs = [...document.querySelectorAll('#proyectos img.cover')].slice(0, 3);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 1150, maximo = 5000;
+  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 3500, maximo = 6000;
   let mostrado = 0;
   document.documentElement.classList.add('cargando');
   function paso(now) {
@@ -375,8 +374,6 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
     const objetivo = Math.min(t / minimo, t > maximo ? 1 : real, 1);
     mostrado += (objetivo - mostrado) * .2;
     if (objetivo === 1 && 1 - mostrado < .004) mostrado = 1;
-    cuenta.textContent = String(Math.round(mostrado * 100)).padStart(3, '0');
-    barra.style.transform = `scaleX(${mostrado})`;
     if (mostrado < 1) return requestAnimationFrame(paso);
     setTimeout(() => {
       loader.classList.add('hecho');

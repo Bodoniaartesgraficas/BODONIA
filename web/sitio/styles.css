@@ -678,3 +678,21 @@ button,[role="button"],.project-image,.filters button,.site-header nav a{user-se
 }
 /* Móvil: con el texto más grande, los botones del menú siguen en una línea */
 @media(max-width:600px){.site-header nav{gap:6px!important}.site-header nav button,.site-header nav a:not(.nav-instagram){white-space:nowrap;padding-inline:10px!important;font-size:14px!important}}
+
+/* Pantalla de carga: las piezas del logo caen una a una con rebotes; la A cae recta y gira a su sitio. Dura 3,5 s. */
+#loader .pieza{animation:cae .9s both;animation-delay:calc(var(--i) * .32s)}
+#loader .pieza:last-child{animation:cae-a .6s both,gira .55s cubic-bezier(.34,1.56,.64,1) both;animation-delay:1.95s,2.55s}
+@keyframes cae{
+  0%{translate:0 -120vh;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  45%{translate:0 0;animation-timing-function:cubic-bezier(0,.55,.45,1)}
+  62%{translate:0 -.2em;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  76%{translate:0 0;animation-timing-function:cubic-bezier(0,.55,.45,1)}
+  86%{translate:0 -.06em;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  94%,100%{translate:0 0}}
+@keyframes cae-a{
+  0%{translate:0 -120vh;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  70%{translate:0 0;animation-timing-function:cubic-bezier(0,.55,.45,1)}
+  85%{translate:0 -.08em;animation-timing-function:cubic-bezier(.55,0,1,.45)}
+  100%{translate:0 0}}
+@keyframes gira{from{rotate:-10deg}to{rotate:0deg}}
+@media(prefers-reduced-motion:reduce){#loader .pieza,#loader .pieza:last-child{animation:none}}

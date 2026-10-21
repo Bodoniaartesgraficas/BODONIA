@@ -414,3 +414,12 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   }
   document.addEventListener('portada-lista', arranca);
 })();
+
+// Versión oscura: el botón de la luna cambia el fondo blanco por negro y lo recuerda.
+(function () {
+  const b = document.querySelector('.modo-oscuro');
+  if (!b) return;
+  const pon = on => { document.documentElement.classList.toggle('oscuro', on); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Versión clara' : 'Versión oscura'); };
+  try { pon(localStorage.getItem('bodonia-oscuro') === '1'); } catch (e) {}
+  b.addEventListener('click', () => { const on = !document.documentElement.classList.contains('oscuro'); pon(on); try { localStorage.setItem('bodonia-oscuro', on ? '1' : '0'); } catch (e) {} });
+})();

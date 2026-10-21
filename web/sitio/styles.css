@@ -696,3 +696,17 @@ button,[role="button"],.project-image,.filters button,.site-header nav a{user-se
   100%{translate:0 0}}
 @keyframes gira{from{rotate:-10deg}to{rotate:0deg}}
 @media(prefers-reduced-motion:reduce){#loader .pieza,#loader .pieza:last-child{animation:none}}
+
+/* Visor de trabajos: X grande en rojo dentro de un círculo con degradado; título más pequeño y más aire en los bordes. */
+.project-dialog .close{width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e0434f,#9A0015 70%);color:#fff!important;box-shadow:0 4px 14px rgb(0 0 0 / 35%)}
+.project-dialog .close svg{width:26px;height:26px;stroke-width:2.2}
+.project-dialog header{padding:34px 48px 56px!important}
+.project-dialog h2,#project-title{font-size:23px!important}
+@media(max-width:600px){.project-dialog header{padding:22px 24px 44px!important}.project-dialog h2,#project-title{font-size:16px!important}.project-dialog .close{width:44px;height:44px}}
+/* Botón de la luna y versión oscura */
+.site-header nav .modo-oscuro{display:grid;place-items:center;width:40px;height:40px;border-radius:50%}
+.modo-oscuro svg{width:22px;height:22px;stroke-width:1.6}
+html.oscuro,html.oscuro body,html.oscuro:not(.pagina),html.oscuro:not(.pagina) body,html.oscuro .project-dialog,html.oscuro #loader{background:#0b0b0b!important;color:#f4f2ee}
+html.oscuro{--ink:#f4f2ee;--paper:#0b0b0b;--line:#333;--muted:#a9a6a0}
+html.oscuro .modo-oscuro svg{fill:currentColor}
+@media(hover:hover) and (pointer:fine){html.oscuro .site-header nav button:hover{background:#262626;color:#f4f2ee}}

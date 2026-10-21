@@ -420,7 +420,10 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const b = document.querySelector('.modo-oscuro');
   if (!b) return;
   const pon = on => { document.documentElement.classList.toggle('oscuro', on); b.setAttribute('aria-pressed', on); b.setAttribute('aria-label', on ? 'Versión clara' : 'Versión oscura'); };
-  try { pon(localStorage.getItem('bodonia-oscuro') === '1'); } catch (e) {}
+  let guardado = null;
+  try { guardado = localStorage.getItem('bodonia-oscuro'); } catch (e) {}
+  // En el móvil el modo oscuro es el de partida; si la persona lo cambia, se respeta su elección.
+  pon(guardado === null ? matchMedia('(max-width: 600px)').matches : guardado === '1');
   b.addEventListener('click', () => { const on = !document.documentElement.classList.contains('oscuro'); pon(on); try { localStorage.setItem('bodonia-oscuro', on ? '1' : '0'); } catch (e) {} });
 })();
 

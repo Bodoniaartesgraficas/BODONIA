@@ -803,3 +803,11 @@ html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!import
 .site-header nav button:not(.modo-oscuro){background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#cfccc6!important;text-shadow:0 1px 2px rgb(0 0 0 / 45%)}
 .site-header nav button.contact-chip:not(.modo-oscuro){color:#d4182b!important;text-shadow:0 1px 2px rgb(0 0 0 / 35%)}
 @media(hover:hover) and (pointer:fine){.site-header nav button:not(.modo-oscuro):hover,html.oscuro .site-header nav button:not(.modo-oscuro):hover{background:none!important;color:#fff!important}.site-header nav button.contact-chip:not(.modo-oscuro):hover{color:#ff3347!important}}
+
+/* Móvil: los textos de la cabecera en columna a la izquierda y la luna debajo */
+@media(max-width:600px){
+  .site-header{justify-content:flex-start!important;padding-left:max(18px,env(safe-area-inset-left,0px))!important;padding-right:84px!important}
+  .site-header nav{flex-direction:column!important;align-items:flex-start!important;gap:0!important}
+  .site-header nav button:not(.modo-oscuro){padding:6px 0!important;height:auto!important;min-height:0!important;text-align:left;font-size:16px!important}
+  .site-header nav .modo-oscuro{width:34px!important;height:34px!important;justify-content:flex-start;place-items:center start;margin-top:2px}
+}

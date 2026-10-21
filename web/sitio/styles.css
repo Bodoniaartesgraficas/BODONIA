@@ -827,3 +827,6 @@ html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!import
 .modo-oscuro .sol{display:none!important}
 html.oscuro .modo-oscuro svg:not(.sol){display:none!important}
 html.oscuro .modo-oscuro .sol{display:block!important;fill:none!important}
+
+/* Sobre el logo también va la B roja en vez de la mano */
+@media(hover:hover) and (pointer:fine){.intro .brand,.intro .brand *{cursor:none!important}}

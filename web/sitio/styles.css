@@ -822,3 +822,8 @@ html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!import
 
 /* Móvil: el logo sube a la esquina de arriba a la izquierda y se agranda un poco */
 @media(max-width:600px){.intro .brand{margin:0!important;position:relative;top:-4px;left:12px}.intro .logo{font-size:23px!important}}
+
+/* Luna en modo claro (pasa a oscuro); sol en modo oscuro (pasa a claro) */
+.modo-oscuro .sol{display:none!important}
+html.oscuro .modo-oscuro svg:not(.sol){display:none!important}
+html.oscuro .modo-oscuro .sol{display:block!important;fill:none!important}

@@ -424,7 +424,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   b.addEventListener('click', () => { const on = !document.documentElement.classList.contains('oscuro'); pon(on); try { localStorage.setItem('bodonia-oscuro', on ? '1' : '0'); } catch (e) {} });
 })();
 
-// Propuesta móvil «ondas»: el logo en el centro y las portadas repartidas en ondas a su alrededor.
+// Propuesta móvil «ondas» (ahora un mosaico de rectángulos): el logo en el centro y las portadas alrededor.
 // Solo se ve en móvil cuando <html> lleva la clase «ondas». Al tocar una onda se abre ese trabajo.
 (() => {
   const NS = 'http://www.w3.org/2000/svg';
@@ -443,111 +443,58 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   menu.appendChild(ig);
   caja.append(svg, logo, menu); document.body.appendChild(caja);
 
-  // Seis bordes ondulados que salen del centro hacia puntos del contorno de la pantalla
-  // (0 a 4 recorre el borde en el sentido del reloj desde la esquina de arriba a la izquierda).
-  const SALIDAS = [0.18, 0.80, 1.38, 2.15, 2.80, 3.55];
-  const ONDA = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]; // bordes rectos: triángulos
+  // Mosaico de seis rectángulos que llenan la pantalla (x0, y0, x1, y1 en tanto por uno) y el trabajo que va en cada uno.
+  // Hay horizontales y verticales de tamaños parecidos; el logo queda en el cruce del centro.
+  const MOSAICO = [
+    [[0, 0, 1, .25], 1],       // Territorios, horizontal arriba
+    [[0, .25, .52, .5], 0],    // Tortajada
+    [[.52, .25, 1, .5], 5],    // Coín
+    [[0, .5, .56, .75], 2],    // Santa Fe, horizontal
+    [[0, .75, .56, 1], 4],     // Noir, horizontal
+    [[.56, .5, 1, 1], 3],      // Primitivismo, vertical alto
+  ];
   // Dónde está el libro dentro de cada foto de portada (x0, y0, x1, y1 en tanto por uno), en el orden de contenido.js.
   const LIBRO = [[.17, .22, .87, .82], [.10, .30, .87, .80], [.24, .37, .62, .68], [.20, .23, .83, .93], [.13, .25, .85, .75], [.18, .18, .98, .92]];
-  const perimetro = (q, W, H) => q < 1 ? [q * W, 0] : q < 2 ? [W, (q - 1) * H] : q < 3 ? [(3 - q) * W, H] : [0, (4 - q) * H];
-  const borde = (k, cx, cy, W, H) => {
-    const [ex, ey] = perimetro(SALIDAS[k], W, H), L = Math.hypot(ex - cx, ey - cy), ux = (ex - cx) / L, uy = (ey - cy) / L;
-    const [amp, f, ph] = ONDA[k], pts = [];
-    for (let s = 0; s <= 80; s++) {
-      const t = s / 80 * 1.35, w = amp * ph * Math.sin(t * f * Math.PI * 2) * Math.min(1, t * 4);
-      pts.push([cx + ux * t * L - uy * w, cy + uy * t * L + ux * w]);
-    }
-    return pts;
-  };
-  const dentro = (poly, x, y) => { let c = false; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [xi, yi] = poly[i], [xj, yj] = poly[j]; if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) c = !c; } return c; };
   const tamano = {};
   projects.forEach((art, k) => { const im = new Image(); im.onload = () => { tamano[k] = [im.naturalWidth, im.naturalHeight]; dibuja(); }; im.src = art.querySelector('img.cover').getAttribute('src'); });
   const dibuja = () => {
     const W = caja.clientWidth, H = caja.clientHeight;
     if (!W || !H) return;
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.innerHTML = '';
-    const cx = W / 2, cy = H * .47, R = Math.hypot(W, H) * 2;
-    const bordes = SALIDAS.map((_, k) => borde(k, cx, cy, W, H));
-    const angulo = k => { const b = bordes[k], e = b[b.length - 1]; return Math.atan2(e[1] - cy, e[0] - cx); };
     const defs = document.createElementNS(NS, 'defs'); svg.appendChild(defs);
-    defs.innerHTML = '<filter id="suave" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="12"/></filter><filter id="desenfoca"><feGaussianBlur stdDeviation="10"/></filter>';
-    const abajo = H - (menu.offsetHeight || 0);
-    projects.slice(0, SALIDAS.length).forEach((art, k) => {
-      const k2 = (k + 1) % SALIDAS.length;
-      let a0 = angulo(k), a1 = angulo(k2); while (a1 <= a0) a1 += Math.PI * 2;
-      const arco = [];
-      for (let s = 0; s <= 24; s++) { const a = a0 + (a1 - a0) * s / 24; arco.push([cx + Math.cos(a) * R, cy + Math.sin(a) * R]); }
-      const poly = bordes[k].concat(arco, bordes[k2].slice().reverse());
-      const d = 'M' + poly.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('L') + 'Z';
-      const cp = document.createElementNS(NS, 'clipPath'); cp.id = 'onda-' + k;
-      const pa = document.createElementNS(NS, 'path'); pa.setAttribute('d', d); cp.appendChild(pa); defs.appendChild(cp);
-      // Zona visible de la onda (rejilla gruesa) y su punto más holgado, lejos de los bordes y de los botones.
-      const paso = 6, celdas = [];
-      let x0 = W, x1 = 0, y0 = H, y1 = 0, fx0 = W, fx1 = 0, fy0 = H, fy1 = 0;
-      for (let y = paso / 2; y < H; y += paso) for (let x = paso / 2; x < W; x += paso) if (dentro(poly, x, y)) {
-        celdas.push([x, y]); fx0 = Math.min(fx0, x); fx1 = Math.max(fx1, x); fy0 = Math.min(fy0, y); fy1 = Math.max(fy1, y);
-        // Para no dejar huecos basta cubrir lo que se ve: queda fuera la punta que tapa el logo.
-        if (Math.hypot(x - cx, y - cy) > 60) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
-      }
-      x0 = Math.max(0, x0 - paso); y0 = Math.max(0, y0 - paso); x1 = Math.min(W, x1 + paso); y1 = Math.min(H, y1 + paso);
-      // El rectángulo más grande con la proporción del libro que cabe entero en la onda (sin tapar los botones).
+    const abajo = H - (menu.offsetHeight || 0), G = 1.5; // medio grosor de la línea blanca entre fotos
+    MOSAICO.forEach(([[u0, v0, u1, v1], k]) => {
+      const art = projects[k]; if (!art) return;
+      const x0 = u0 * W + (u0 > 0 ? G : 0), y0 = v0 * H + (v0 > 0 ? G : 0), x1 = u1 * W - (u1 < 1 ? G : 0), y1 = v1 * H - (v1 < 1 ? G : 0);
+      const cp = document.createElementNS(NS, 'clipPath'); cp.id = 'tesela-' + k;
+      const r = document.createElementNS(NS, 'rect'); r.setAttribute('x', x0); r.setAttribute('y', y0); r.setAttribute('width', x1 - x0); r.setAttribute('height', y1 - y0);
+      cp.appendChild(r); defs.appendChild(cp);
+      // El libro va centrado en la parte que se ve (sin la franja de los botones) y la foto cubre todo el rectángulo.
+      const vy1 = Math.min(y1, abajo), mx = (x0 + x1) / 2, my = (y0 + vy1) / 2, tw = x1 - x0, th = vy1 - y0;
       const [iw, ih] = tamano[k] || [1200, 1500], [bx0, by0, bx1, by1] = LIBRO[k] || [.2, .2, .8, .8];
-      const asp = ((bx1 - bx0) * iw) / ((by1 - by0) * ih);
-      const cabe = (x, y, hh) => {
-        const hw = hh * asp;
-        if (x - hw < 0 || x + hw > W || y - hh < 0 || y + hh > abajo) return false;
-        for (let q = 0; q < 16; q++) {
-          const t = (q % 4) / 4, lado = q >> 2;
-          const px = lado === 0 ? x - hw + 2 * hw * t : lado === 1 ? x + hw : lado === 2 ? x + hw - 2 * hw * t : x - hw;
-          const py = lado === 0 ? y - hh : lado === 1 ? y - hh + 2 * hh * t : lado === 2 ? y + hh : y + hh - 2 * hh * t;
-          if (!dentro(poly, px, py)) return false;
-        }
-        return true;
-      };
-      let mejor = [(x0 + x1) / 2, (y0 + y1) / 2], hmax = 0;
-      celdas.forEach(([x, y], n) => {
-        if (n % 4 || !cabe(x, y, hmax + 1)) return;
-        let lo = hmax, hi = H;
-        while (hi - lo > 1) { const m = (lo + hi) / 2; if (cabe(x, y, m)) lo = m; else hi = m; }
-        hmax = lo; mejor = [x, y];
-      });
-      const rmax = hmax;
-      const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'onda'); g.setAttribute('clip-path', `url(#onda-${k})`);
-      const fondo = document.createElementNS(NS, 'rect'); fondo.setAttribute('width', W); fondo.setAttribute('height', H); fondo.setAttribute('class', 'onda-fondo');
-      const img = document.createElementNS(NS, 'image');
-      img.setAttribute('href', art.querySelector('img.cover').getAttribute('src'));
-      img.setAttribute('preserveAspectRatio', 'none');
-      // El libro va centrado en el hueco más holgado de la onda; la foto se amplía lo que haga falta
-      // para cubrir la onda entera sin mover el libro de su sitio (se pierde fondo, nunca libro).
-      const fx = x0, fy = y0, fx2 = x1, fy2 = y1;
-      const ncx = (bx0 + bx1) / 2, ncy = (by0 + by1) / 2;
-      // Centro de la onda: el centro de gravedad de lo que se ve de ella (sin la punta del logo ni la franja de botones).
-      let sx = 0, sy = 0, nn = 0;
-      celdas.forEach(([x, y]) => { if (y < abajo && Math.hypot(x - cx, y - cy) > 60) { sx += x; sy += y; nn++; } });
-      const [mx, my] = nn ? [sx / nn, sy / nn] : mejor;
-      // Escala mínima que cubre la onda dejando el libro centrado (se tolera moverlo un poco, hasta un 12 % de su tamaño).
-      const bw = (bx1 - bx0) * iw, bh = (by1 - by0) * ih;
-      const holgura = (sz, m, a0, a1, n, tam, t) => { // desplazamiento posible en un eje para la escala t, o null
-        const lo = a1 - m - (1 - n) * tam * t, hi = n * tam * t - (m - a0), lim = .12 * (tam === iw ? bw : bh) * t;
+      const bw = (bx1 - bx0) * iw, bh = (by1 - by0) * ih, ncx = (bx0 + bx1) / 2, ncy = (by0 + by1) / 2;
+      // desplazamiento posible del libro en un eje para la escala t (hasta un 10 % de su tamaño), o null si no cubre
+      const holgura = (m, a0, a1, n, tam, lado, t) => {
+        const lo = a1 - m - (1 - n) * tam * t, hi = n * tam * t - (m - a0), lim = .1 * lado * t;
         const d0 = Math.max(lo, -lim), d1 = Math.min(hi, lim);
         return d0 <= d1 ? (d0 <= 0 && d1 >= 0 ? 0 : (Math.abs(d0) < Math.abs(d1) ? d0 : d1)) : null;
       };
-      let sc = (rmax * 2 * 1.1) / bh, dx = null, dy = null;
-      for (let it = 0; it < 60; it++) {
-        dx = holgura(0, mx, fx, fx2, ncx, iw, sc); dy = holgura(0, my, fy, fy2, ncy, ih, sc);
+      let sc = Math.min(tw * .9 / bw, th * .9 / bh), dx = null, dy = null;
+      for (let it = 0; it < 80; it++) {
+        dx = holgura(mx, x0, x1, ncx, iw, bw, sc); dy = holgura(my, y0, y1, ncy, ih, bh, sc);
         if (dx !== null && dy !== null) break;
-        sc *= 1.04;
+        sc *= 1.03;
       }
+      const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'onda'); g.setAttribute('clip-path', `url(#tesela-${k})`);
+      const img = document.createElementNS(NS, 'image');
+      img.setAttribute('href', art.querySelector('img.cover').getAttribute('src'));
+      img.setAttribute('preserveAspectRatio', 'none');
       img.setAttribute('x', (mx + (dx || 0) - ncx * iw * sc).toFixed(1)); img.setAttribute('y', (my + (dy || 0) - ncy * ih * sc).toFixed(1));
       img.setAttribute('width', (iw * sc).toFixed(1)); img.setAttribute('height', (ih * sc).toFixed(1));
-      g.insertBefore(fondo, g.firstChild); g.append(img); svg.appendChild(g);
+      g.append(img); svg.appendChild(g);
       g.addEventListener('click', () => art.querySelector('button').click());
     });
-    bordes.forEach(b => {
-      const l = document.createElementNS(NS, 'path'); l.setAttribute('class', 'onda-borde');
-      l.setAttribute('d', 'M' + b.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join('L')); svg.appendChild(l);
-    });
-    logo.style.top = cy + 'px';
+    logo.style.top = H / 2 + 'px';
   };
   new ResizeObserver(dibuja).observe(caja); dibuja();
 })();

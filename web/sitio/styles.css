@@ -738,7 +738,7 @@ html.oscuro .site-header nav .modo-oscuro{background:rgb(0 0 0 / 45%)!important;
 @media(max-width:600px){
 html.ondas body{overflow:hidden}
 html.ondas main,html.ondas .site-header,html.ondas .instagram-flotante{display:none!important}
-html.ondas #ondas{display:block;position:fixed;inset:0;height:100dvh;background:#e9e6df;z-index:5}
+html.ondas #ondas{display:block;position:fixed;inset:0;height:100dvh;background:#fff;z-index:5}
 #ondas svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 #ondas .onda{cursor:pointer}
 #ondas .onda-fondo{fill:#24201c}

@@ -796,8 +796,5 @@ html body #about-dialog .dialog-content>p:not(.antetitulo):not(.promise){font-si
 html body .text-dialog .dialog-content{padding:22px 18px 18px!important}
 }
 
-/* Formulario de contacto: recuadro rojo con el botón de enviar en blanco */
-html body #contact-dialog form{background:#9A0015;color:#fff;padding:18px 20px!important;border-radius:4px}
-html body #contact-dialog form label,html body #contact-dialog form small,html body #contact-dialog form small a,html body #contact-dialog form .form-status{color:#fff!important}
-html body #contact-dialog form input,html body #contact-dialog form textarea{background:#fff!important;color:#1a1a1a!important;border:0!important;border-radius:3px}
-html body #contact-dialog form button[type=submit]{background:#fff!important;color:#9A0015!important;border:0!important;justify-self:start}
+/* Formulario de contacto: envuelto en una línea roja fina */
+html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!important;border-radius:4px}

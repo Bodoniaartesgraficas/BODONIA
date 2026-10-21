@@ -819,3 +819,6 @@ html body #contact-dialog form{border:1px solid #9A0015;padding:18px 20px!import
 @media(hover:none){.fila-flecha{width:36px;height:36px;margin-top:-18px}}
 /* Móvil: el bloque de textos de la cabecera un poco más abajo */
 @media(max-width:600px){.site-header nav{margin-bottom:-8px}}
+
+/* Móvil: el logo sube a la esquina de arriba a la izquierda y se agranda un poco */
+@media(max-width:600px){.intro .brand{margin:0!important;position:relative;top:-4px;left:12px}.intro .logo{font-size:23px!important}}

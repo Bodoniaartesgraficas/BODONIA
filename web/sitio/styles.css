@@ -24,7 +24,7 @@ dialog{color:var(--ink);border:0;background:var(--paper);padding:0;max-height:ca
 /* Supplied photography fills the existing 4:5 grid without the composite-sheet zoom. */
 .project-image.book .cover.mockup{object-fit:cover;object-position:center;transform:none}
 .project[data-index="0"] .cover.mockup{object-position:50% 72%}
-.project[data-index="3"] .cover.mockup{object-position:50% 65%}
+
 
 /* Larger editorial grid: the available height determines the 4:5 frames. */
 :root{--gutter:24px;--gap:16px;--card:min(calc((100vw - 2 * var(--gutter) - 2 * var(--gap))/3),calc((100dvh - 276px)*.8))}

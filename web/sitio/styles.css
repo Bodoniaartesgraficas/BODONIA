@@ -680,9 +680,9 @@ button,[role="button"],.project-image,.filters button,.site-header nav a{user-se
 @media(max-width:600px){.site-header nav{gap:6px!important}.site-header nav button,.site-header nav a:not(.nav-instagram){white-space:nowrap;padding-inline:10px!important;font-size:14px!important}}
 
 /* Pantalla de carga: las piezas del logo caen una a una con rebotes; la A cae recta y gira a su sitio. Dura 3 s; las que ya han caído siguen botando. */
-#loader .pieza{animation:cae 1.05s both,bota .5s ease-in-out infinite alternate;animation-delay:calc(var(--i) * .27s),calc(var(--i) * .27s + 1.05s)}
-#loader .pieza:last-child{animation:cae-a .8s both,gira .4s cubic-bezier(.34,1.56,.64,1) both;animation-delay:1.75s,2.6s}
-@keyframes bota{from{translate:0 0}to{translate:0 -.05em}}
+#loader .pieza{animation:cae 1.4s both,bota .6s ease-in-out infinite alternate;animation-delay:calc(var(--i) * .2s),calc(var(--i) * .2s + 1.4s)}
+#loader .pieza:last-child{animation:cae-a 1.1s both,gira .6s cubic-bezier(.34,1.8,.64,1) both;animation-delay:1.3s,2.4s}
+@keyframes bota{from{translate:0 0}to{translate:0 -.07em}}
 @keyframes cae{
   0%{translate:0 -120vh;animation-timing-function:cubic-bezier(.55,0,1,.45)}
   45%{translate:0 0;animation-timing-function:cubic-bezier(0,.55,.45,1)}
@@ -695,7 +695,7 @@ button,[role="button"],.project-image,.filters button,.site-header nav a{user-se
   70%{translate:0 0;animation-timing-function:cubic-bezier(0,.55,.45,1)}
   85%{translate:0 -.08em;animation-timing-function:cubic-bezier(.55,0,1,.45)}
   100%{translate:0 0}}
-@keyframes gira{from{rotate:-10deg}to{rotate:0deg}}
+@keyframes gira{from{rotate:-45deg}to{rotate:0deg}}
 @media(prefers-reduced-motion:reduce){#loader .pieza,#loader .pieza:last-child{animation:none}}
 
 /* Visor de trabajos: X grande en rojo dentro de un círculo con degradado; título más pequeño y más aire en los bordes. */
@@ -711,3 +711,19 @@ html.oscuro,html.oscuro body,html.oscuro:not(.pagina),html.oscuro:not(.pagina) b
 html.oscuro{--ink:#f4f2ee;--paper:#0b0b0b;--line:#333;--muted:#a9a6a0}
 html.oscuro .modo-oscuro svg{fill:currentColor}
 @media(hover:hover) and (pointer:fine){html.oscuro .site-header nav button:hover{background:#262626;color:#f4f2ee}}
+/* Menú dos cuerpos más pequeño; luna centrada con fondo translúcido */
+.site-header nav button{font-size:15px!important;padding:7px 14px!important;height:32px!important}
+.site-header nav .modo-oscuro{padding:0!important;width:34px!important;height:34px!important;display:grid!important;place-items:center;background:rgb(255 255 255 / 55%)!important;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+html.oscuro .site-header nav .modo-oscuro{background:rgb(0 0 0 / 45%)!important;color:#f4f2ee}
+.modo-oscuro svg{width:18px;height:18px;margin:0;display:block}
+/* Modales del taller y de qué hacemos: dos cuerpos más pequeños y todo dentro del recuadro */
+.text-dialog,.text-dialog *{overflow-wrap:break-word}
+.text-dialog .dialog-content{overflow:hidden}
+.text-dialog .dialog-content *{max-width:100%;white-space:normal!important}
+#about-dialog h2 span,#about-dialog h2 em{font-size:31px!important}
+#about-dialog .dialog-content>p:not(.antetitulo):not(.promise){font-size:20px!important}
+#about-dialog .promise{font-size:30px!important}
+#services-dialog h2 span,#services-dialog h2 em{font-size:38px!important}
+#services-dialog dt{font-size:30px!important}
+#services-dialog .servicios-pie{font-size:21px!important}
+.text-dialog .boton-hablemos{font-size:15px!important}

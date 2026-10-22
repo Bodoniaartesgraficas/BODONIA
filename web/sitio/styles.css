@@ -849,3 +849,5 @@ html body #contact-dialog form{border-width:2px!important}
 
 /* Menú de ordenador un poco más junto */
 @media(min-width:601px){.site-header nav{gap:4px!important}.site-header nav button:not(.modo-oscuro){padding-inline:9px!important}}
+/* Móvil: menú en columna más apretado */
+@media(max-width:600px){.site-header nav button:not(.modo-oscuro){height:24px!important;padding-block:0!important;line-height:24px!important}}

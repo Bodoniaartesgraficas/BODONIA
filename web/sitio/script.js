@@ -149,14 +149,28 @@ function initGallery(gallery, speed) {
   gallery.addEventListener('lostpointercapture',endDrag);
   // Deslizamiento lento y continuo (de ida y vuelta); se detiene con el ratón encima, al arrastrar o con una ventana abierta.
   let dir = 1, last = 0, hold = 0, hovering = false, focused = false;
+  let borde = 0;  // -1…1: ratón cerca del borde izquierdo o derecho de la fila
   gallery.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hovering = true; });
-  gallery.addEventListener('pointerleave', () => { hovering = false; });
+  gallery.addEventListener('pointerleave', () => { hovering = false; borde = 0; });
+  gallery.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const r = gallery.getBoundingClientRect(), Z = 320, izq = e.clientX - r.left, der = r.right - e.clientX;
+    borde = izq < Z ? -((1 - izq / Z) ** 2) : der < Z ? (1 - der / Z) ** 2 : 0;
+  });
   gallery.addEventListener('focusin', () => { focused = true; });
   gallery.addEventListener('focusout', () => { focused = false; });
   function drift(now) {
     const dt = Math.min(now - (last || now), 50) / 1000; last = now;
     const max = gallery.scrollWidth - gallery.clientWidth;
-    if (animation || drag || hovering || focused || document.querySelector('dialog[open]') || reducedMotion.matches || max <= 0) { pos = gallery.scrollLeft; }
+    if (hovering && borde && !animation && !drag && !document.querySelector('dialog[open]') && !reducedMotion.matches && max > 0) {
+      // Ratón pegado a un borde: la fila avanza hacia ese lado, más deprisa cuanto más cerca (hasta 140 px/s).
+      if (Math.abs(gallery.scrollLeft - pos) > 1.5) pos = gallery.scrollLeft;
+      pos += borde * 140 * dt;
+      const L = largo();
+      if (L > 0) { if (pos >= L) pos -= L; else if (pos < 0) pos += L; } else pos = Math.max(0, Math.min(max, pos));
+      gallery.scrollLeft = pos;
+    }
+    else if (animation || drag || hovering || focused || document.querySelector('dialog[open]') || reducedMotion.matches || max <= 0) { pos = gallery.scrollLeft; }
     else if (hold > 0) { hold -= dt; }
     else {
       if (Math.abs(gallery.scrollLeft - pos) > 1.5) pos = gallery.scrollLeft;

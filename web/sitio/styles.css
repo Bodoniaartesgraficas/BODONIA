@@ -941,3 +941,4 @@ html.oscuro body #services-dialog .servicios-pie{color:#e0485c!important}
 @media(min-width:601px){#project-track img{filter:brightness(1.12)}}
 /* Versión oscura: el fondo claro de cada tarjeta asomaba como un filo blanco en los bordes de las fotos */
 html.oscuro .project-image,html.oscuro .project-image *:not(img){background-color:#0b0b0b!important}
+@media(hover:hover) and (pointer:fine){.instagram-flotante:hover{transform:scale(.78125)!important}}  /* 96 px × .78 = 75 px con el ratón encima */

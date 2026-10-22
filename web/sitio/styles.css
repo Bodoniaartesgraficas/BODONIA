@@ -939,3 +939,5 @@ html.oscuro #contact-dialog #contact-email,html.oscuro .text-dialog .servicios-p
 html.oscuro body #services-dialog .servicios-pie{color:#e0485c!important}
 /* Ordenador: imágenes dentro de los trabajos también un 12 % más luminosas */
 @media(min-width:601px){#project-track img{filter:brightness(1.12)}}
+/* Versión oscura: el fondo claro de cada tarjeta asomaba como un filo blanco en los bordes de las fotos */
+html.oscuro .project-image,html.oscuro .project-image *:not(img){background-color:#0b0b0b!important}

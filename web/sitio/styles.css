@@ -895,3 +895,7 @@ dialog #cursor-b{z-index:60}
 }
 
 #contact-email,#contact-dialog #contact-email{color:#9A0015!important}
+
+/* Contacto: título, correo y teléfono con la tipografía del resto del texto */
+#contact-dialog h2,#contact-dialog h2 *,#contact-dialog #contact-email,#contact-dialog #contact-phone{font-family:var(--sans)!important}
+#contact-dialog h2{font-weight:500!important;letter-spacing:-.01em}

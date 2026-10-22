@@ -914,3 +914,7 @@ html body .project-dialog .close svg{width:32px!important;height:32px!important;
 html body .project-dialog header{align-items:flex-start}
 html body .project-dialog .close{margin-top:-17px!important;margin-right:-8px!important}
 }
+@media(max-width:600px){
+html body .project-dialog .close{width:40px!important;height:40px!important;margin-top:-11px!important;margin-right:-9px!important}
+html body .project-dialog .close svg{width:22px!important;height:22px!important}
+}

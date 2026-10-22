@@ -857,3 +857,13 @@ html body #contact-dialog form{border-width:2px!important}
 #about-dialog .promise{font-style:italic;margin-top:-14px!important}
 @media(min-width:601px){#about-dialog .promise{font-size:28px!important}}
 #about-dialog .boton-hablemos{display:table!important;margin-left:auto!important;margin-right:0!important}
+
+/* Modales en móvil: ajuste fino */
+@media(max-width:600px){
+  .text-dialog .close:focus,.text-dialog .close:focus-visible{outline:none!important}
+  .text-dialog .dialog-content{padding:28px 22px 26px!important}
+  #about-dialog .promise{max-width:none!important;font-size:21px!important;margin-top:-6px!important}
+  html body #services-dialog .services>div{padding:5px 0!important}
+  #services-dialog .servicios-pie{margin-top:14px!important}
+  #contact-dialog .legal-links{left:20px!important}
+}

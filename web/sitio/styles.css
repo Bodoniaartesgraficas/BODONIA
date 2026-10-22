@@ -899,3 +899,7 @@ dialog #cursor-b{z-index:60}
 /* Contacto: título, correo y teléfono con la tipografía del resto del texto */
 #contact-dialog h2,#contact-dialog h2 *,#contact-dialog #contact-email,#contact-dialog #contact-phone{font-family:var(--sans)!important}
 #contact-dialog h2{font-weight:500!important;letter-spacing:-.01em}
+
+/* De la idea al papel: interlineado del título más cerrado */
+#services-dialog h2.titular{line-height:.9!important}
+#services-dialog h2.titular *{line-height:1.05!important}

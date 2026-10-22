@@ -389,8 +389,8 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const imgs = [...document.querySelectorAll('#proyectos img.cover')].slice(0, 3);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  // La A termina de girar a los 3 s; la pantalla se quita medio segundo después.
-  const inicio = performance.now(), maximo = 6500; let minimo = reducedMotion.matches ? 300 : 3250;
+  // La A termina de girar a los 3 s; la pantalla se quita una décima después.
+  const inicio = performance.now(), maximo = 6500; let minimo = reducedMotion.matches ? 300 : 2800;
   loader.style.cursor = 'pointer'; loader.addEventListener('click', () => { minimo = Math.min(minimo, Math.max(performance.now() - inicio, 300)); }, {once: true});
   let mostrado = 0;
   document.documentElement.classList.add('cargando');
@@ -549,4 +549,27 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   projectDialog.addEventListener('pointermove', mueve); track.addEventListener('wheel', mueve, {passive: true});
   track.addEventListener('scroll', estado, {passive: true});
   new MutationObserver(() => requestAnimationFrame(estado)).observe(track, {childList: true});
+})();
+
+// Ordenador: dentro de un trabajo, al acercar el ratón a un borde las imágenes se deslizan solas hacia ese lado.
+(function () {
+  if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const ZONA = 160, MAX = 900;  // px desde el borde; velocidad máxima en px/s
+  let v = 0, last = 0, frame = 0, pos = 0;
+  function mueve(now) {
+    const dt = Math.min(now - (last || now), 50) / 1000; last = now;
+    if (!v || !projectDialog.open || movil.matches) { frame = 0; last = 0; track.style.removeProperty('scroll-snap-type'); track.style.removeProperty('scroll-behavior'); return; }
+    if (!last || dt === 0) { track.style.scrollSnapType = 'none'; track.style.scrollBehavior = 'auto'; pos = track.scrollLeft; }  // el ajuste a imágenes frenaría el deslizamiento
+    pos = Math.max(0, Math.min(track.scrollWidth - track.clientWidth, pos + v * dt)); track.scrollLeft = pos;
+    frame = requestAnimationFrame(mueve);
+  }
+  projectDialog.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse' || reducedMotion.matches) return;
+    const r = track.getBoundingClientRect();
+    const izq = e.clientX - r.left, der = r.right - e.clientX;
+    v = izq < ZONA ? -MAX * (1 - izq / ZONA) ** 2 : der < ZONA ? MAX * (1 - der / ZONA) ** 2 : 0;
+    if (v && !frame) frame = requestAnimationFrame(mueve);
+  });
+  projectDialog.addEventListener('pointerleave', () => { v = 0; });
+  projectDialog.addEventListener('close', () => { v = 0; });
 })();

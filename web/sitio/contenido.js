@@ -30,7 +30,7 @@ window.CONTENIDO = {
   // Botones de arriba a la derecha
   menu: {
     taller: "Nosotros",
-    servicios: "Del diseño a la tinta",
+    servicios: "De la idea al papel",
     contacto: "Contacto",
   },
 

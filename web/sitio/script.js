@@ -389,8 +389,8 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const imgs = [...document.querySelectorAll('#proyectos img.cover')].slice(0, 3);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  let visto = false; try { visto = sessionStorage.getItem('bodonia-visto') === '1'; sessionStorage.setItem('bodonia-visto', '1'); } catch (e) {}
-  const inicio = performance.now(), maximo = 6000; let minimo = reducedMotion.matches ? 300 : visto ? 1200 : 3000;
+  // La A termina de girar a los 3 s; la pantalla se quita medio segundo después.
+  const inicio = performance.now(), maximo = 6500; let minimo = reducedMotion.matches ? 300 : 3250;
   loader.style.cursor = 'pointer'; loader.addEventListener('click', () => { minimo = Math.min(minimo, Math.max(performance.now() - inicio, 300)); }, {once: true});
   let mostrado = 0;
   document.documentElement.classList.add('cargando');

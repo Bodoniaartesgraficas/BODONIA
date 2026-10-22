@@ -929,3 +929,13 @@ html:not(.pagina) body::before{background:linear-gradient(to bottom,rgb(11 11 11
 .gallery.con-activo .project:not(.activo) .cover{filter:brightness(1.04) saturate(.96)}
 }
 .escena-flecha{display:none!important}  /* flechas rojas dentro del trabajo retiradas: se desliza con el ratón en los bordes */
+
+/* Versión oscura: los modales de texto también en oscuro */
+html.oscuro .text-dialog{--paper:#171717;--ink:#f4f2ee;--muted:#b4b0a8;--line:#3a3a3a;--red:#e0485c;--rojo:#e0485c;background:#171717!important;color:#f4f2ee!important;border-color:#2c2c2c!important}
+html.oscuro .text-dialog :is(p,h2,h2 *,dt,dd,li,label,address,a:not(.boton-hablemos),span):not(.servicios-pie):not(#contact-email){color:inherit}
+html.oscuro .text-dialog .antetitulo,html.oscuro .text-dialog .muted{color:#b4b0a8!important}
+html.oscuro .text-dialog input,html.oscuro .text-dialog textarea{background:transparent!important;color:#f4f2ee!important;border-color:#555!important}
+html.oscuro #contact-dialog #contact-email,html.oscuro .text-dialog .servicios-pie,html.oscuro #about-dialog .promise{color:#e0485c!important}
+html.oscuro body #services-dialog .servicios-pie{color:#e0485c!important}
+/* Ordenador: imágenes dentro de los trabajos también un 12 % más luminosas */
+@media(min-width:601px){#project-track img{filter:brightness(1.12)}}

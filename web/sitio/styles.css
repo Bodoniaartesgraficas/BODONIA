@@ -867,3 +867,10 @@ html body #contact-dialog form{border-width:2px!important}
   #services-dialog .servicios-pie{margin-top:14px!important}
   #contact-dialog .legal-links{left:20px!important}
 }
+
+/* Modales: fundido breve de entrada y X algo mayor */
+@keyframes modal-entra{from{opacity:0}to{opacity:1}}
+.text-dialog[open]{animation:modal-entra .18s ease-out}
+.text-dialog[open]::backdrop{animation:modal-entra .18s ease-out}
+.text-dialog .close svg{width:26px!important;height:26px!important}
+@media(max-width:600px){.text-dialog .close{width:44px!important;height:44px!important}.text-dialog .close svg{width:28px!important;height:28px!important}}

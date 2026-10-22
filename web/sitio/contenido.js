@@ -66,7 +66,7 @@ window.CONTENIDO = {
       { nombre: "Diseño editorial" },
       { nombre: "Maquetación" },
     ],
-    pie: "Y lo que se te ocurra…",
+    pie: "¿Tienes otra idea? Cuéntanosla.",
   },
 
   // Ventana «Hablemos»

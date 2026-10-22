@@ -182,7 +182,9 @@ document.querySelector('.brand').addEventListener('click',e => {
 function showDialog(dialog) {
   controls.forEach(c => c.stop());
   document.querySelectorAll('dialog[open]').forEach(d=>d.close());
+  const abre = document.activeElement;
   dialog.showModal();
+  if (abre && abre !== document.body) dialog.addEventListener('close', () => { if (abre.isConnected) abre.focus({preventScroll: true}); }, {once: true});
 }
 document.querySelectorAll('[data-dialog]').forEach(button=>button.addEventListener('click',()=>showDialog(document.getElementById(button.dataset.dialog))));
 document.querySelectorAll('dialog').forEach(dialog=>{
@@ -385,7 +387,9 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const imgs = [...document.querySelectorAll('#proyectos img.cover')].slice(0, 3);
   let cargadas = 0;
   imgs.forEach(i => { if (i.complete) cargadas++; else { const ok = () => cargadas++; i.addEventListener('load', ok, {once:true}); i.addEventListener('error', ok, {once:true}); } });
-  const inicio = performance.now(), minimo = reducedMotion.matches ? 300 : 3000, maximo = 6000;
+  let visto = false; try { visto = sessionStorage.getItem('bodonia-visto') === '1'; sessionStorage.setItem('bodonia-visto', '1'); } catch (e) {}
+  const inicio = performance.now(), maximo = 6000; let minimo = reducedMotion.matches ? 300 : visto ? 1200 : 3000;
+  loader.style.cursor = 'pointer'; loader.addEventListener('click', () => { minimo = Math.min(minimo, Math.max(performance.now() - inicio, 300)); }, {once: true});
   let mostrado = 0;
   document.documentElement.classList.add('cargando');
   function paso(now) {

@@ -893,3 +893,5 @@ html:not(.cargando) *,html:not(.cargando) *::before{cursor:none!important}
 html:not(.cargando) input,html:not(.cargando) textarea,html:not(.cargando) select{cursor:text!important}
 dialog #cursor-b{z-index:60}
 }
+
+#contact-email,#contact-dialog #contact-email{color:#9A0015!important}

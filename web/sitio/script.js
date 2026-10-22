@@ -554,7 +554,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
 // Ordenador: dentro de un trabajo, al acercar el ratón a un borde las imágenes se deslizan solas hacia ese lado.
 (function () {
   if (!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-  const ZONA = 160, MAX = 300;  // px desde el borde; velocidad máxima en px/s
+  const ZONA = 320, MAX = 300;  // px desde el borde; velocidad máxima en px/s
   let v = 0, last = 0, frame = 0, pos = 0;
   function mueve(now) {
     const dt = Math.min(now - (last || now), 50) / 1000; last = now;

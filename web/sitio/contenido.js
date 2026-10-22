@@ -29,9 +29,9 @@ window.CONTENIDO = {
 
   // Botones de arriba a la derecha
   menu: {
-    taller: "El taller",
-    servicios: "Qué hacemos",
-    contacto: "Hablemos",
+    taller: "Nosotros",
+    servicios: "Del diseño a la tinta",
+    contacto: "Contacto",
   },
 
   // Ventana «El taller»

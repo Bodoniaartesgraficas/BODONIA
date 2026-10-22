@@ -846,3 +846,6 @@ html.oscuro .modo-oscuro .sol{display:block!important;fill:none!important}
 #contact-dialog #contact-form small{font-size:11px!important;line-height:1.4;margin-top:auto;padding-top:14px;opacity:.85}
 html body #contact-dialog form{border-width:2px!important}
 @media(max-width:600px){#contact-dialog .legal-links{left:24px;bottom:18px}#contact-dialog #contact-form small{font-size:9.5px!important}}
+
+/* Menú de ordenador un poco más junto */
+@media(min-width:601px){.site-header nav{gap:4px!important}.site-header nav button:not(.modo-oscuro){padding-inline:9px!important}}

@@ -457,7 +457,7 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   const h1 = document.querySelector('.intro .logo');
   if (h1) { const c = h1.cloneNode(true); c.removeAttribute('id'); logo.appendChild(c); }
   const menu = document.createElement('nav'); menu.className = 'ondas-menu';
-  [['El taller', 'about-dialog'], ['Qué hacemos', 'services-dialog'], ['Hablemos', 'contact-dialog']].forEach(([t, id]) => {
+  [['Nosotros', 'about-dialog'], ['Del diseño a la tinta', 'services-dialog'], ['Contacto', 'contact-dialog']].forEach(([t, id]) => {
     const b = document.createElement('button'); b.type = 'button'; b.textContent = t;
     b.addEventListener('click', () => document.querySelector('.site-header [data-dialog="' + id + '"]').click());
     menu.appendChild(b);

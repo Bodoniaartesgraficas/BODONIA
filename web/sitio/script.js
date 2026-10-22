@@ -542,6 +542,9 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   };
   const atras = haz('atras', 'Imagen anterior', -1), adelante = haz('adelante', 'Imagen siguiente', 1);
   const estado = () => { const tope = track.scrollWidth - track.clientWidth; atras.disabled = track.scrollLeft < 4; adelante.disabled = track.scrollLeft > tope - 4; };
+  let quieto;
+  const mueve = () => { projectDialog.classList.add('moviendo'); clearTimeout(quieto); quieto = setTimeout(() => projectDialog.classList.remove('moviendo'), 1800); };
+  projectDialog.addEventListener('pointermove', mueve); track.addEventListener('wheel', mueve, {passive: true});
   track.addEventListener('scroll', estado, {passive: true});
   new MutationObserver(() => requestAnimationFrame(estado)).observe(track, {childList: true});
 })();

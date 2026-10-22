@@ -265,7 +265,7 @@ html:not(.pagina) main{padding-top:calc(var(--logo) * 2.3 + 22px);padding-bottom
 .gallery .project.activo{flex-basis:calc(var(--card) * 1.24)}
 }
 .project-image .cover{transition:filter .5s ease}
-.gallery.con-activo .project:not(.activo) .cover{filter:brightness(.78) saturate(.9)}
+.gallery.con-activo .project:not(.activo) .cover{filter:brightness(.92) saturate(.96)}
 .project-image .alternate{display:none}
 .carrusel{position:absolute;left:50%;top:50%;width:34%;aspect-ratio:3/4;transform:translate(-50%,-50%) scale(.6);opacity:0;overflow:hidden;box-shadow:0 18px 40px rgb(0 0 0 / 35%);transition:opacity .35s ease,transform .6s cubic-bezier(.22,1,.36,1);pointer-events:none;z-index:2;background:#eae9e5}
 .carrusel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -877,7 +877,9 @@ html body #contact-dialog form{border-width:2px!important}
 
 /* Flechas dentro del trabajo (solo ordenador) */
 .escena-flecha{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:52px;height:52px;margin-top:-26px;padding:0;border:0;background:none;color:#9A0015;cursor:pointer;transition:opacity .2s}
-.escena-flecha svg{width:38px;height:38px;stroke:currentColor;stroke-width:1.4;filter:drop-shadow(0 0 6px rgb(0 0 0 / 55%))}
+.escena-flecha svg{width:34px;height:34px;stroke:currentColor;stroke-width:2.2;filter:drop-shadow(0 0 2px rgb(0 0 0 / 90%)) drop-shadow(0 0 10px rgb(0 0 0 / 70%));transition:transform .2s ease}
+.escena-flecha{opacity:0;transition:opacity .25s ease}
+.project-dialog.moviendo .escena-flecha:not(:disabled),.escena-flecha:focus-visible{opacity:1}
 .escena-flecha.atras{left:14px}.escena-flecha.atras svg{transform:rotate(180deg)}
 .escena-flecha.adelante{right:14px}
 .escena-flecha:disabled{opacity:0;pointer-events:none}

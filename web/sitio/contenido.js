@@ -60,6 +60,7 @@ window.CONTENIDO = {
       { nombre: "Folletos" },
       { nombre: "Trípticos" },
       { nombre: "Tarjetas" },
+      { nombre: "Calendarios" },
       { nombre: "Postales" },
       { nombre: "Papelería" },
       { nombre: "Diseño gráfico" },

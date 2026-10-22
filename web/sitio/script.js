@@ -525,3 +525,23 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   };
   new ResizeObserver(dibuja).observe(caja); dibuja();
 })();
+
+// Flechas dentro del trabajo (ordenador): pasan a la imagen anterior o siguiente sin tener que hacer scroll.
+(function () {
+  const svg = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const haz = (clase, texto, dir) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'escena-flecha ' + clase; b.setAttribute('aria-label', texto); b.innerHTML = svg;
+    b.addEventListener('click', () => {
+      const bloques = [...track.children], x = track.scrollLeft, tope = track.scrollWidth - track.clientWidth;
+      const izq = el => el.offsetLeft - bloques[0].offsetLeft;
+      let destino = dir > 0 ? bloques.map(izq).find(l => l > x + 4) : bloques.map(izq).reverse().find(l => l < x - 4);
+      if (destino === undefined) destino = dir > 0 ? tope : 0;
+      track.scrollTo({left: Math.min(destino, tope), behavior: reducedMotion.matches ? 'auto' : 'smooth'});
+    });
+    projectDialog.appendChild(b); return b;
+  };
+  const atras = haz('atras', 'Imagen anterior', -1), adelante = haz('adelante', 'Imagen siguiente', 1);
+  const estado = () => { const tope = track.scrollWidth - track.clientWidth; atras.disabled = track.scrollLeft < 4; adelante.disabled = track.scrollLeft > tope - 4; };
+  track.addEventListener('scroll', estado, {passive: true});
+  new MutationObserver(() => requestAnimationFrame(estado)).observe(track, {childList: true});
+})();

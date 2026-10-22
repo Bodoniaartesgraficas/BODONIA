@@ -928,3 +928,4 @@ html:not(.pagina) body::before{background:linear-gradient(to bottom,rgb(11 11 11
 .gallery .project-image .cover{filter:brightness(1.12)}
 .gallery.con-activo .project:not(.activo) .cover{filter:brightness(1.04) saturate(.96)}
 }
+.escena-flecha{display:none!important}  /* flechas rojas dentro del trabajo retiradas: se desliza con el ratón en los bordes */

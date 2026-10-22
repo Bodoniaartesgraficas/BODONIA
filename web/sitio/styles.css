@@ -833,3 +833,16 @@ html.oscuro .modo-oscuro .sol{display:block!important;fill:none!important}
 
 /* Móvil: la X de los modales va solo en rojo, sin círculo ni fondo. */
 @media(max-width:600px){.text-dialog .close,.project-dialog .close{background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;color:#9A0015!important}}
+
+/* Hablemos: textos dos cuerpos más pequeños, legales abajo a la izquierda, nota del formulario mínima, borde 2 px. */
+@media(min-width:601px){
+#contact-dialog .antetitulo{font-size:16px!important}
+#contact-dialog #contact-dialog-title{font-size:41.2px!important}
+#contact-dialog .contact-details p,#contact-dialog .map-link{font-size:16px!important}
+}
+#contact-dialog .dialog-content{position:relative;padding-bottom:64px!important}
+#contact-dialog .legal-links{position:absolute;left:var(--pad-modal,56px);bottom:22px;margin:0!important;gap:14px}
+#contact-dialog .legal-links a{font-size:12px!important}
+#contact-dialog #contact-form small{font-size:11px!important;line-height:1.4;margin-top:auto;padding-top:14px;opacity:.85}
+html body #contact-dialog form{border-width:2px!important}
+@media(max-width:600px){#contact-dialog .legal-links{left:24px;bottom:18px}#contact-dialog #contact-form small{font-size:9.5px!important}}

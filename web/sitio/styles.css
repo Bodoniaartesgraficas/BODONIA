@@ -886,3 +886,10 @@ html body #contact-dialog form{border-width:2px!important}
 .escena-flecha:hover svg{transform:translateX(3px)}.escena-flecha.atras:hover svg{transform:rotate(180deg) translateX(3px)}
 .project-dialog.volando .escena-flecha{opacity:0}
 @media(max-width:600px){.escena-flecha{display:none}}
+
+/* Ordenador: la B de Bodonia es el puntero en toda la página (logo, modales, flechas…); en los campos de texto vuelve el cursor normal */
+@media(hover:hover) and (pointer:fine) and (min-width:601px){
+html:not(.cargando) *,html:not(.cargando) *::before{cursor:none!important}
+html:not(.cargando) input,html:not(.cargando) textarea,html:not(.cargando) select{cursor:text!important}
+dialog #cursor-b{z-index:60}
+}

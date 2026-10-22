@@ -216,16 +216,18 @@ projects.forEach(project => {
   function pinta() {
     const dx = x - cx; cx += dx * .22; cy += (y - cy) * .22;
     const giro = Math.max(-25, Math.min(25, dx * .6));
-    b.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%) rotate(${giro}deg) scale(${dentro ? 1 : .2})`;
+    b.style.transform = `translate3d(${cx}px,${cy}px,0) translate(-50%,-50%) rotate(${giro}deg) scale(${dentro ? (b.dataset.boton ? 1.25 : 1) : .2})`;
     frame = (Math.abs(dx) > .3 || Math.abs(y - cy) > .3 || dentro) ? requestAnimationFrame(pinta) : 0;
   }
   document.addEventListener('pointermove', e => {
     if (e.pointerType !== 'mouse') return;
     x = e.clientX; y = e.clientY;
-    const visor = document.querySelector('#project-dialog[open]');
-    const anfitrion = visor || document.body;  // dentro del visor la B vive en el propio diálogo, o quedaría tapada
+    const abierto = document.querySelector('dialog[open]');
+    const anfitrion = abierto || document.body;  // dentro de un diálogo la B vive en él, o quedaría tapada
     if (b.parentElement !== anfitrion) anfitrion.appendChild(b);
-    const sobre = visor ? !!e.target.closest('#project-track .escena') : ((!!e.target.closest('.gallery .project-image') || !!e.target.closest('.intro .brand')) && !document.querySelector('dialog[open]'));
+    const sobre = !e.target.closest('input,textarea,select');  // en los campos de texto vuelve el cursor normal
+    const boton = !!e.target.closest('button,a,summary,[role=button]');
+    b.dataset.boton = boton ? '1' : '';
     if (sobre !== dentro) { dentro = sobre; b.classList.toggle('visible', sobre); if (sobre && cx < -100) { cx = x; cy = y; } }
     if (!frame) frame = requestAnimationFrame(pinta);
   }, {passive: true});

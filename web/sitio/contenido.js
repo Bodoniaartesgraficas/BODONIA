@@ -36,9 +36,9 @@ window.CONTENIDO = {
 
   // Ventana «El taller»
   taller: {
-    antetitulo: "Imprenta en Granada desde hace más de 35 años",
-    titulo: "De la idea al papel,",
-    subtitulo: "más de 35 años de experiencia.",
+    antetitulo: "Bodonia Artes Gráficas",
+    titulo: "",
+    subtitulo: "Más de 35 años de experiencia.",
     texto: "Somos Bodonia Artes Gráficas. Estamos en Granada, pero trabajamos para cualquier lugar. Cada encargo es personalizado: tú nos dices lo que quieres y nosotros te orientamos hasta conseguirlo. Te ayudamos a elegir formato, papel y acabado, y nosotros lo diseñamos, lo maquetamos y lo imprimimos en offset o en digital, según lo que pida tu trabajo.",
     frase: "Lo que entregamos es lo que nos gustaría recibir.",
     enlace: "Contacta con el taller",
@@ -46,9 +46,9 @@ window.CONTENIDO = {
 
   // Ventana «Qué hacemos»: un producto por línea: { nombre }
   servicios: {
-    antetitulo: "Diseño · Maquetación · Impresión",
+    antetitulo: "De la idea al papel",
     titulo: "Todo lo que",
-    subtitulo: "diseñamos e imprimimos.",
+    subtitulo: "diseñamos, maquetamos e imprimimos:",
     lista: [
       { nombre: "Libros" },
       { nombre: "Catálogos" },
@@ -66,7 +66,7 @@ window.CONTENIDO = {
       { nombre: "Diseño editorial" },
       { nombre: "Maquetación" },
     ],
-    pie: "Y lo que se te ocurra.",
+    pie: "Y lo que se te ocurra…",
   },
 
   // Ventana «Hablemos»

@@ -39,7 +39,7 @@ window.CONTENIDO = {
     antetitulo: "Bodonia Artes Gráficas",
     titulo: "",
     subtitulo: "Más de 35 años de experiencia.",
-    texto: "Cada encargo es personalizado: tú nos cuentas lo que quieres y nosotros te orientamos hasta conseguirlo. Te ayudamos a elegir formato, papel y acabado. Nos encargamos del diseño, la maquetación y la impresión, en offset o en digital,\nsegún lo que pida tu trabajo.",
+    texto: "Cada encargo es personalizado: tú nos cuentas lo que quieres y nosotros te orientamos hasta conseguirlo. Te ayudamos a elegir formato, papel y acabado.\nNos encargamos del diseño, la maquetación y la impresión, en offset o en digital, según lo que pida tu trabajo.",
     frase: "Lo que entregamos es lo que nos gustaría recibir.",
     enlace: "Contacta con el taller",
   },

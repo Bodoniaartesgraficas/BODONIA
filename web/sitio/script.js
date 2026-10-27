@@ -390,8 +390,8 @@ document.querySelector('#contact-form').addEventListener('submit',e=>{
   e.preventDefault();
   const form = e.currentTarget, status = document.querySelector('#form-status'), button = form.querySelector('button[type=submit]');
   button.disabled = true; status.textContent = C.formulario.enviando;
-  fetch('/', {method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body:new URLSearchParams(new FormData(form)).toString()})
-    .then(r => { if(!r.ok) throw new Error(r.status); form.reset(); status.textContent = C.formulario.enviado; })
+  fetch('https://api.web3forms.com/submit', {method:'POST', headers:{'Content-Type':'application/json', 'Accept':'application/json'}, body:JSON.stringify(Object.fromEntries(new FormData(form)))})
+    .then(r => r.json()).then(r => { if(!r.success) throw new Error(r.message); form.reset(); status.textContent = C.formulario.enviado; })
     .catch(() => { status.textContent = C.formulario.error; })
     .finally(() => { button.disabled = false; });
 });

@@ -88,10 +88,13 @@
           <a href="legal.html#politica-de-cookies">Cookies</a>
         </nav>
       </div>
-      <!-- El formulario lo recibe Netlify; los nombres de los campos no se cambian. -->
-      <form id="contact-form" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="contacto">
-        <p hidden><label>No rellenar: <input name="bot-field"></label></p>
+      <!-- El formulario lo recibe Web3Forms y lo reenvía a info@bodonia.es; los nombres de los campos no se cambian. -->
+      <form id="contact-form" name="contacto" method="POST" action="https://api.web3forms.com/submit">
+        <input type="hidden" name="access_key" value="e85455a5-5402-416b-8d9d-557733cf69ee">
+        <input type="hidden" name="subject" value="Nuevo mensaje desde la web de Bodonia">
+        <input type="hidden" name="from_name" value="Web Bodonia">
+        <input type="hidden" name="redirect" value="https://bodonia.es/gracias.html">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" hidden>
         <label><span data-texto="formulario.nombre"></span><input name="name" autocomplete="name" required></label>
         <label><span data-texto="formulario.correo"></span><input name="email" type="email" autocomplete="email" required></label>
         <label><span data-texto="formulario.mensaje"></span><textarea name="message" rows="3" required></textarea></label>

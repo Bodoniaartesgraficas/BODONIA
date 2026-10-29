@@ -947,7 +947,3 @@ html.oscuro .project-image,html.oscuro .project-image *:not(img){background-colo
 .fila-flecha{transition:opacity .25s ease,background .2s ease,color .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
 .fila-flecha:active{transform:scale(.96)}
 @media(prefers-reduced-motion:reduce){.fila-flecha:active{transform:none}}
-
-/* Cabecera sobre fotos: sombra suave para que el texto se lea en cualquier fondo */
-.site-header{text-shadow:0 1px 10px rgb(0 0 0 / 35%)}
-.site-header .contact-chip{text-shadow:none}

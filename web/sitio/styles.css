@@ -226,7 +226,7 @@ dialog::backdrop{background:rgb(255 255 255 / 25%);-webkit-backdrop-filter:blur(
 .project-dialog.volando .escena:first-child img{opacity:0}
 .project-dialog.volando header,.project-dialog.volando footer,.project-dialog.volando .escena:not(:first-child){animation:aparece-v .6s ease .55s both}
 .project-dialog.volando{background:transparent;animation:fondo-v .5s ease both}
-.project-dialog.cerrando{animation:fondo-out .3s ease both}
+.project-dialog.cerrando{animation:fondo-out .6s ease both}
 .project-dialog.cerrando header,.project-dialog.cerrando footer,.project-dialog.cerrando .escena:not(:first-child){animation:none;opacity:0}
 @keyframes fondo-v{from{background:rgb(255 255 255 / 0)}to{background:var(--paper)}}
 @keyframes fondo-out{from{background:var(--paper)}to{background:rgb(255 255 255 / 0)}}
@@ -261,7 +261,7 @@ html:not(.pagina) main{padding-top:calc(var(--logo) * 2.3 + 22px);padding-bottom
 /* Efecto al pasar el ratón (como la referencia): crece, los demás se oscurecen y dentro pasan las escenas */
 @media(min-width:601px){
 .gallery{display:flex}
-.gallery .project{flex:0 0 var(--card);transition:flex-basis .3s var(--ease)}
+.gallery .project{flex:0 0 var(--card);transition:flex-basis .45s var(--ease)}
 .gallery .project.activo{flex-basis:calc(var(--card) * 1.24)}
 }
 .project-image .cover{transition:filter .5s ease}
@@ -877,7 +877,7 @@ html body #contact-dialog form{border-width:2px!important}
 
 /* Flechas dentro del trabajo (solo ordenador) */
 .escena-flecha{position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:52px;height:52px;margin-top:-26px;padding:0;border:0;background:none;color:#9A0015;cursor:pointer;transition:opacity .2s}
-.escena-flecha svg{width:34px;height:34px;stroke:currentColor;stroke-width:2.2;filter:drop-shadow(0 0 2px rgb(0 0 0 / 90%)) drop-shadow(0 0 10px rgb(0 0 0 / 70%));transition:transform .2s cubic-bezier(.23,1,.32,1)}
+.escena-flecha svg{width:34px;height:34px;stroke:currentColor;stroke-width:2.2;filter:drop-shadow(0 0 2px rgb(0 0 0 / 90%)) drop-shadow(0 0 10px rgb(0 0 0 / 70%));transition:transform .2s ease}
 .escena-flecha{opacity:0;transition:opacity .25s ease}
 .project-dialog.moviendo .escena-flecha:not(:disabled),.escena-flecha:focus-visible{opacity:1}
 .escena-flecha.atras{left:14px}.escena-flecha.atras svg{transform:rotate(180deg)}
@@ -942,8 +942,3 @@ html.oscuro body #services-dialog .servicios-pie{color:#e0485c!important}
 /* Versión oscura: el fondo claro de cada tarjeta asomaba como un filo blanco en los bordes de las fotos */
 html.oscuro .project-image,html.oscuro .project-image *:not(img){background-color:#0b0b0b!important}
 @media(hover:hover) and (pointer:fine){.instagram-flotante:hover{transform:scale(.78125)!important}}  /* 96 px × .78 = 75 px con el ratón encima */
-
-/* Pulsar: respuesta inmediata al apretar la flecha de la fila */
-.fila-flecha{transition:opacity .25s ease,background .2s ease,color .2s ease,transform .16s cubic-bezier(.23,1,.32,1)}
-.fila-flecha:active{transform:scale(.96)}
-@media(prefers-reduced-motion:reduce){.fila-flecha:active{transform:none}}

@@ -1,0 +1,8 @@
+BODONIA · Posts "Lo que hacemos" (1080x1350)
+
+- Bodonia_lo_que_hacemos_4_posts.idml: un único IDML con 4 páginas (tinta, papel, blanco y rojo).
+- Links: todas las fotos y logos usados. Déjala junto al IDML y no cambies su nombre.
+- Fuente_Bodoni_Moda: la tipografía. Instálala antes de abrir el IDML.
+- Vista_previa: PNG de cada página.
+
+Las cajas punteadas son huecos para stickers de Instagram, en la capa "Stickers (ocultar al exportar)". Oculta esa capa antes de exportar.
